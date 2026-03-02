@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public static Character Instance;
+    [SerializeField] private float health = 50.0f;
+    [SerializeField] private float stamina = 50.0f;
     [SerializeField] private float speed = 2.0f;
 
 
@@ -16,7 +19,14 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.Move();
+        Move();
+        Regen();
+    }
+
+    // sort of like a Unity-specific constructor
+    private void Awake()
+    {
+        Instance = this;
     }
 
     public void Move() {
@@ -27,10 +37,13 @@ public class Character : MonoBehaviour
         float turnLeft = Input.GetAxis("Horizontal") * -100f * Time.deltaTime;
 
         // sprint mechanics --> make the forward/backward vectors a higher value
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        // When sprinting, 10 stamina is lost per second (because of Time.deltaTime
+        // --> without time.deltaTime, 10 stamina would be lost per frame instead).
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && stamina > 0)
         {
             forward = forward * 3f;
             backward = backward * 1.5f;
+            stamina -= 10 * Time.deltaTime;
         }
 
 
@@ -52,4 +65,26 @@ public class Character : MonoBehaviour
             transform.Rotate(0, -turnLeft, 0);
         }
     }
+
+    public void Regen() {
+        // Stamina regens @ 2 per second when not sprinting,
+        // and not @ max stamina
+        if (!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && stamina < 50)
+        {
+            stamina += 2 * Time.deltaTime;
+        }
+
+        // Health regen could go here later
+    }
+
+    // Getter for character's health stat
+    public float Health() {
+        return health; 
+    }
+
+    // Getter for character's stamina stat
+    public float Stamina() { 
+        return stamina;
+    }
 }
+
