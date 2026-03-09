@@ -4555,7 +4555,7 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "99b55e234e39408991cf4be5c6d03e54",
-    "m_Name": "Category",
+    "m_Name": "MS",
     "m_ChildObjectList": [
         {
             "m_Id": "b8ad642750ee450f85f4936441e74d51"
@@ -5395,7 +5395,7 @@
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": true,
-    "m_CastShadows": true,
+    "m_CastShadows": false,
     "m_ReceiveShadows": true,
     "m_DisableTint": false,
     "m_Sort3DAs2DCompatible": false,
