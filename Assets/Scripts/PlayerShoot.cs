@@ -5,6 +5,7 @@ public class PlayerShoot : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
+    public float bulletLifetime = 3f;
 
     void Update()
     {
@@ -19,8 +20,8 @@ public class PlayerShoot : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.linearVelocity = firePoint.forward * bulletSpeed;
+        rb.linearVelocity = firePoint.forward.normalized * bulletSpeed;
 
-        Destroy(bullet, 3f);
+        Destroy(bullet, bulletLifetime);
     }
 }
