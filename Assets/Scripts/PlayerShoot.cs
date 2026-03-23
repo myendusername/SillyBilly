@@ -1,21 +1,27 @@
 using System.Collections;
-using System.Data.SqlTypes;
 using UnityEngine;
+using TMPro;
 
 public class PlayerShoot : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public GameObject flameBulletPrefab;
     public GameObject muzzleFlarePrefab;
 
     public float bulletLifetime = 3f;
     public float bulletSpeed = 30f;
     public float shootingDelay = 0.2f;
-    [Tooltip("In degrees, used for both left and right separately.")]
+
+    // shotgun setting
     public float horizontalSpread = 0f;
-    [Tooltip("In degrees, used for both up and down separately.")]
     public float verticalSpread = 0f;
     public int bulletAmount = 1;
+
+    // flamethrower setting
+    public float flameSpeed = 15f;
+    public float flameLifetime = 0.5f;
+
     public bool allowHold = false;
 
     private bool isShooting;
@@ -24,16 +30,67 @@ public class PlayerShoot : MonoBehaviour
     private GameObject muzzleFlareObject;
     private ParticleSystem muzzleFlare;
 
+    public ParticleSystem flameEffect; // bruh, flame is hard to make
 
-    private void Awake()
+    int currentGun = 1; // 1, 2 , 3 keybinds for gun switch
+
+    // ammo
+    public int currentAmmo;
+    public int maxAmmo;
+    public float reloadTime = 1.5f;
+    bool isReloading = false;
+
+    // bad Ui cause i don't know how to do it
+    public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI reloadText;
+
+    // each gun fire rate
+    private float currentShootingDelay;
+
+
+    void Awake()
     {
         readyToShoot = true;
+
         muzzleFlareObject = Instantiate(muzzleFlarePrefab, firePoint.position, firePoint.rotation, firePoint);
         muzzleFlare = muzzleFlareObject.GetComponent<ParticleSystem>();
+
+        SetWeaponStats();
+        UpdateUI();
     }
 
     void Update()
     {
+        // switch weapon
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currentGun = 1;
+            StopAllCoroutines();
+            SetWeaponStats();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentGun = 2;
+            StopAllCoroutines();
+            SetWeaponStats();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            currentGun = 3;
+            StopAllCoroutines();
+            SetWeaponStats();
+        }
+
+        //switch guns
+        if (isReloading) return;
+
+        // reload
+        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo)
+        {
+            StartCoroutine(Reload());
+        }
+
+        // shooting
         if (allowHold)
         {
             isShooting = Input.GetKey(KeyCode.Mouse0);
@@ -43,42 +100,163 @@ public class PlayerShoot : MonoBehaviour
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
+        // auto reload when empty
+        if (currentAmmo <= 0 && !isReloading)
+        {
+            StartCoroutine(Reload());
+        }
+
         if (readyToShoot && isShooting)
         {
             Shoot();
         }
+
+        // 🔥 flamethrower visual (NEW)
+        if (currentGun == 3 && isShooting && !isReloading)
+        {
+            if (flameEffect != null && !flameEffect.isPlaying)
+            {
+                flameEffect.Play();
+            }
+        }
+        else
+        {
+            if (flameEffect != null && flameEffect.isPlaying)
+            {
+                flameEffect.Stop();
+            }
+        }
+    }
+
+    void SetWeaponStats()
+    {
+        // Normal gun
+        if (currentGun == 1)
+        {
+            maxAmmo = 30;
+            reloadTime = 1.5f;
+            allowHold = true;
+            currentShootingDelay = 0.2f;
+        }
+
+        // Shotgun
+        if (currentGun == 2)
+        {
+            maxAmmo = 8;
+            reloadTime = 2f;
+            allowHold = false;
+            currentShootingDelay = 0.6f;
+        }
+
+        // Flamethrower
+        if (currentGun == 3)
+        {
+            maxAmmo = 120;
+            reloadTime = 2.5f;
+            allowHold = true;
+            currentShootingDelay = 0.05f;
+        }
+
+        currentAmmo = maxAmmo;
+        isReloading = false;
+        readyToShoot = true;
+        if (reloadText != null) reloadText.text = "";
+        UpdateUI();
     }
 
     void Shoot()
     {
         readyToShoot = false;
 
+        // Normal gun
+        if (currentGun == 1)
+        {
+            bulletAmount = 1;
+            horizontalSpread = 0f;
+            verticalSpread = 0f;
+            allowHold = true;
+        }
+
+        // Shotgun
+        if (currentGun == 2)
+        {
+            bulletAmount = 8;
+            horizontalSpread = 10f;
+            verticalSpread = 5f;
+            allowHold = false;
+        }
+
+        // Flamethrower
+        if (currentGun == 3)
+        {
+            bulletAmount = 1;
+            horizontalSpread = 15f;
+            verticalSpread = 15f;
+            allowHold = true;
+        }
+
+        // reduce ammo
+        if (currentGun == 3)
+        {
+            currentAmmo -= 2; // flame uses ammo faster cause maybe it op ?
+        }
+        else
+        {
+            currentAmmo -= 1;
+        }
+
+        UpdateUI();
+
         for (int i = 0; i < bulletAmount; i++)
         {
-            // Spread
             float x = Random.Range(-horizontalSpread, horizontalSpread);
             float y = Random.Range(-verticalSpread, verticalSpread);
 
             Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(y, x, 0);
 
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.linearVelocity = bullet.transform.forward * bulletSpeed;
+            // 🔥 DO NOT SPAWN BULLETS FOR FLAME
+            if (currentGun != 3)
+            {
+                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
 
-            StartCoroutine(DestroyBullet(bullet, bulletLifetime));
+                Rigidbody rb = bullet.GetComponent<Rigidbody>();
+                rb.linearVelocity = bullet.transform.forward * bulletSpeed;
+
+                StartCoroutine(DestroyBullet(bullet, bulletLifetime));
+            }
         }
 
         muzzleFlare.Play(true);
 
-        Invoke("ResetShot", shootingDelay);
+        Invoke("ResetShot", currentShootingDelay);
     }
 
-    private void ResetShot()
+    void ResetShot()
     {
         readyToShoot = true;
     }
 
-    private IEnumerator DestroyBullet(GameObject bullet, float time)
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        if (reloadText != null) reloadText.text = "Reloading...";
+
+        yield return new WaitForSeconds(reloadTime);
+
+        currentAmmo = maxAmmo;
+        isReloading = false;
+
+        if (reloadText != null) reloadText.text = "";
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        if (ammoText != null)
+            ammoText.text = currentAmmo + " / " + maxAmmo;
+    }
+
+    IEnumerator DestroyBullet(GameObject bullet, float time)
     {
         yield return new WaitForSeconds(time);
         Destroy(bullet);
