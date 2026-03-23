@@ -18,7 +18,7 @@ public class PlayerShoot : MonoBehaviour
     public float verticalSpread = 0f;
     public int bulletAmount = 1;
 
-    // flamethrower setting
+    // flamethrower setting 🔥
     public float flameSpeed = 15f;
     public float flameLifetime = 0.5f;
 
@@ -30,7 +30,7 @@ public class PlayerShoot : MonoBehaviour
     private GameObject muzzleFlareObject;
     private ParticleSystem muzzleFlare;
 
-    public ParticleSystem flameEffect; // bruh, flame is hard to make
+    public ParticleSystem flameEffect; // bruh, flame is hard to make.
 
     int currentGun = 1; // 1, 2 , 3 keybinds for gun switch
 
@@ -111,7 +111,7 @@ public class PlayerShoot : MonoBehaviour
             Shoot();
         }
 
-        // flame visuals but shit
+        // flame visuals but shit 🔥
         if (currentGun == 3 && isShooting && !isReloading)
         {
             if (flameEffect != null && !flameEffect.isPlaying)
@@ -148,7 +148,7 @@ public class PlayerShoot : MonoBehaviour
             currentShootingDelay = 0.6f;
         }
 
-        // Flamethrower
+        // Flamethrower 🔥
         if (currentGun == 3)
         {
             maxAmmo = 120;
@@ -186,7 +186,7 @@ public class PlayerShoot : MonoBehaviour
             allowHold = false;
         }
 
-        // Flamethrower
+        // Flamethrower 🔥
         if (currentGun == 3)
         {
             bulletAmount = 1;
@@ -214,7 +214,7 @@ public class PlayerShoot : MonoBehaviour
 
             Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(y, x, 0);
 
-            // spawn
+            // spawn 🔥
             if (currentGun != 3)
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
