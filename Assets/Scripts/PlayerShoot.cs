@@ -111,7 +111,7 @@ public class PlayerShoot : MonoBehaviour
             Shoot();
         }
 
-        // 🔥 flamethrower visual (NEW)
+        // flame visuals but shit
         if (currentGun == 3 && isShooting && !isReloading)
         {
             if (flameEffect != null && !flameEffect.isPlaying)
@@ -214,7 +214,7 @@ public class PlayerShoot : MonoBehaviour
 
             Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(y, x, 0);
 
-            // 🔥 DO NOT SPAWN BULLETS FOR FLAME
+            // spawn
             if (currentGun != 3)
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
