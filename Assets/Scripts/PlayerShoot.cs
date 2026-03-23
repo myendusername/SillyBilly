@@ -18,7 +18,7 @@ public class PlayerShoot : MonoBehaviour
     public float verticalSpread = 0f;
     public int bulletAmount = 1;
 
-    // flamethrower setting 🔥
+    // flamethrower setting 🔥 (new fire rate changes)
     public float flameSpeed = 15f;
     public float flameLifetime = 0.5f;
 
@@ -148,7 +148,7 @@ public class PlayerShoot : MonoBehaviour
             currentShootingDelay = 0.6f;
         }
 
-        // Flamethrower 🔥
+        // Flamethrower 🔥 (change to liking)
         if (currentGun == 3)
         {
             maxAmmo = 120;
@@ -186,7 +186,7 @@ public class PlayerShoot : MonoBehaviour
             allowHold = false;
         }
 
-        // Flamethrower 🔥
+        // Flamethrower 🔥 (chnage to liking mabe more spread cause fire)
         if (currentGun == 3)
         {
             bulletAmount = 1;
@@ -198,7 +198,7 @@ public class PlayerShoot : MonoBehaviour
         // reduce ammo
         if (currentGun == 3)
         {
-            currentAmmo -= 2; // flame uses ammo faster cause maybe it op ?
+            currentAmmo -= 2; // flame uses ammo faster cause maybe it op ? or causes burn to enviorment or enemy.
         }
         else
         {
