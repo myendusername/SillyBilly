@@ -34,15 +34,9 @@ public class PlayerShoot : MonoBehaviour
 
     int currentGun = 1; // 1, 2 , 3 keybinds for gun switch
 
-    // ammo
-    public int currentAmmo;
-    public int maxAmmo;
-    public float reloadTime = 1.5f;
-    bool isReloading = false;
-
     // bad Ui cause i don't know how to do it
     public TextMeshProUGUI ammoText;
-    public TextMeshProUGUI reloadText;
+    public TextMeshProUGUI weaponText;
 
     // each gun fire rate
     private float currentShootingDelay;
@@ -56,7 +50,6 @@ public class PlayerShoot : MonoBehaviour
         muzzleFlare = muzzleFlareObject.GetComponent<ParticleSystem>();
 
         SetWeaponStats();
-        UpdateUI();
     }
 
     void Update()
@@ -81,15 +74,6 @@ public class PlayerShoot : MonoBehaviour
             SetWeaponStats();
         }
 
-        //switch guns
-        if (isReloading) return;
-
-        // reload
-        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo)
-        {
-            StartCoroutine(Reload());
-        }
-
         // shooting
         if (allowHold)
         {
@@ -100,19 +84,13 @@ public class PlayerShoot : MonoBehaviour
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-        // auto reload when empty. "was bugged when switching"
-        if (currentAmmo <= 0 && !isReloading)
-        {
-            StartCoroutine(Reload());
-        }
-
         if (readyToShoot && isShooting)
         {
             Shoot();
         }
 
         // flame visuals but it not bad now.
-        if (currentGun == 3 && isShooting && !isReloading)
+        if (currentGun == 3 && isShooting)
         {
             if (flameEffect != null && !flameEffect.isPlaying)
             {
@@ -133,8 +111,6 @@ public class PlayerShoot : MonoBehaviour
         // Normal gun
         if (currentGun == 1)
         {
-            maxAmmo = 30;
-            reloadTime = 1.5f;
             allowHold = true;
             currentShootingDelay = 0.2f;
         }
@@ -142,8 +118,6 @@ public class PlayerShoot : MonoBehaviour
         // Shotgun
         if (currentGun == 2)
         {
-            maxAmmo = 8;
-            reloadTime = 2f;
             allowHold = false;
             currentShootingDelay = 0.6f;
         }
@@ -151,17 +125,22 @@ public class PlayerShoot : MonoBehaviour
         // Flamethrower (change to liking cause i never made this before)
         if (currentGun == 3)
         {
-            maxAmmo = 120;
-            reloadTime = 2.5f;
             allowHold = true;
             currentShootingDelay = 0.05f;
         }
 
-        currentAmmo = maxAmmo;
-        isReloading = false;
         readyToShoot = true;
-        if (reloadText != null) reloadText.text = "";
-        UpdateUI();
+        if (ammoText != null) ammoText.text = "∞";
+        UpdateWeaponText();
+    }
+
+    void UpdateWeaponText()
+    {
+        if (weaponText == null) return;
+
+        if (currentGun == 1) weaponText.text = "Rifle";
+        if (currentGun == 2) weaponText.text = "Shotgun";
+        if (currentGun == 3) weaponText.text = "Flamethrower";
     }
 
     void Shoot()
@@ -195,18 +174,6 @@ public class PlayerShoot : MonoBehaviour
             allowHold = true;
         }
 
-        // reduce ammo
-        if (currentGun == 3)
-        {
-            currentAmmo -= 2; // flame uses ammo faster cause maybe it op ? or causes burn to enviorment or enemy.
-        }
-        else
-        {
-            currentAmmo -= 1;
-        }
-
-        UpdateUI();
-
         for (int i = 0; i < bulletAmount; i++)
         {
             float x = Random.Range(-horizontalSpread, horizontalSpread);
@@ -215,7 +182,7 @@ public class PlayerShoot : MonoBehaviour
             Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(y, x, 0);
 
             // spawn
-            if (currentGun != 3)
+            if (currentGun == 1 || currentGun == 2)
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
 
@@ -223,6 +190,15 @@ public class PlayerShoot : MonoBehaviour
                 rb.linearVelocity = bullet.transform.forward * bulletSpeed;
 
                 StartCoroutine(DestroyBullet(bullet, bulletLifetime));
+            }
+            else if (currentGun == 3)
+            {
+                GameObject flame = Instantiate(flameBulletPrefab, firePoint.position, spreadRotation);
+
+                Rigidbody rb = flame.GetComponent<Rigidbody>();
+                rb.linearVelocity = spreadRotation * Vector3.forward * flameSpeed;
+
+                StartCoroutine(DestroyBullet(flame, flameLifetime));
             }
         }
 
@@ -234,26 +210,6 @@ public class PlayerShoot : MonoBehaviour
     void ResetShot()
     {
         readyToShoot = true;
-    }
-
-    IEnumerator Reload()
-    {
-        isReloading = true;
-        if (reloadText != null) reloadText.text = "Reloading...";
-
-        yield return new WaitForSeconds(reloadTime);
-
-        currentAmmo = maxAmmo;
-        isReloading = false;
-
-        if (reloadText != null) reloadText.text = "";
-        UpdateUI();
-    }
-
-    void UpdateUI()
-    {
-        if (ammoText != null)
-            ammoText.text = currentAmmo + " / " + maxAmmo;
     }
 
     IEnumerator DestroyBullet(GameObject bullet, float time)
