@@ -8,22 +8,22 @@ public class UiManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText, staminaText;
 
     public GameObject player;
-    private PlayerHealth playerHealth;
+    private Health playerHealth;
     private PlayerMovement playerMovement;
 
     private void Awake()
     {
-        playerHealth = player.GetComponent<PlayerHealth>();
+        playerHealth = player.GetComponent<Health>();
         playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        trackPlayer();
+        TrackPlayer();
     }
 
-    public void trackPlayer()
+    public void TrackPlayer()
     {
         // these set the health and stamina stats in the UI
         // to the player's current health and stamina stats.

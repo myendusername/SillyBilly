@@ -559,13 +559,13 @@ GameObject:
   - component: {fileID: 3927295834232155120}
   - component: {fileID: 7799518634112593567}
   - component: {fileID: 70455706278859150}
-  - component: {fileID: 7208516772023887812}
+  - component: {fileID: 2250537251999533950}
   - component: {fileID: 5989823699742937091}
   - component: {fileID: 3509616580681786582}
   - component: {fileID: 8619096538599971388}
   m_Layer: 6
   m_Name: Serious Bobert
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccbd67d89fec6140bd0289eac13ad85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
---- !u!114 &7208516772023887812
+--- !u!114 &2250537251999533950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -658,8 +658,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c5e82bfdddf51140a430e3c80c0eff5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  health: 50
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  health: 100
 --- !u!114 &5989823699742937091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,6 +711,7 @@ MonoBehaviour:
   muzzleFlarePrefab: {fileID: 2206460110862230408, guid: 44179346dd09fb145806c353456f5d95, type: 3}
   bulletLifetime: 3
   bulletSpeed: 30
+  bulletDamage: 2
   shootingDelay: 0.1
   horizontalSpread: 0
   verticalSpread: 0

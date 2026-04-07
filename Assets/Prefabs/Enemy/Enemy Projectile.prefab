@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4706042686504646845}
   - component: {fileID: 4049053521165149671}
   - component: {fileID: 1304996322484750926}
-  m_Layer: 8
-  m_Name: Bullet
+  m_Layer: 11
+  m_Name: Enemy Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.075
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4049053521165149671
 MonoBehaviour:
@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   impactPrefab: {fileID: 2777990026923898669, guid: 8dd3106d1c3133549a67c6f338f7f678, type: 3}
-  impactLifetime: 3
+  projectileLifetime: 0
   damage: 10
+  tagToDetect: Enemy
 --- !u!96 &1304996322484750926
 TrailRenderer:
   serializedVersion: 4
@@ -152,7 +153,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.14
+    widthMultiplier: 0.19
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -188,8 +189,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.9019608, b: 0.3137255, a: 1}
-      key1: {r: 1, g: 0.9019608, b: 0.3137255, a: 1}
+      key0: {r: 1, g: 0.05882353, b: 0.039215688, a: 1}
+      key1: {r: 1, g: 0.05882353, b: 0.039215688, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -255,7 +256,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7486115942456091548}
@@ -293,7 +294,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eaab105d286cf8946bb8256d93333935, type: 2}
+  - {fileID: 2100000, guid: c2c256029321221488f47e12d801b89a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

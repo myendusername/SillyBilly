@@ -1,9 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDamageable
 {
-    private CharacterController controller;
+    private CharacterController charController;
     private Vector3 playerVelocity;
     private float speed;
     [Header("Horizontal Movement")]
@@ -18,17 +17,19 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        charController = GetComponent<CharacterController>();
+    }
+
     void Start()
     {
         speed = walkSpeed;
-        controller = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        isGrounded = controller.isGrounded;
+        isGrounded = charController.isGrounded;
     }
 
     // Receive the inputs for our InputManager and apply them to our chracter controller.
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDirection = new Vector3(input.x, 0, input.y).normalized;
 
         Vector3 targetVelocity = transform.TransformDirection(moveDirection) * speed;
-        Vector3 currentVelocity = new Vector3(controller.velocity.x, 0, controller.velocity.z);
+        Vector3 currentVelocity = new Vector3(charController.velocity.x, 0, charController.velocity.z);
 
         Vector3 horizontalVelocity = Vector3.Lerp(currentVelocity, targetVelocity, movementSmoothing * Time.deltaTime);
 
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity.y = -2f;
         }
 
-        controller.Move(playerVelocity * Time.deltaTime);
+        charController.Move(playerVelocity * Time.deltaTime);
     }
 
     public void Jump()
@@ -71,5 +72,15 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = walkSpeed;
         }
+    }
+
+    public void OnHurt()
+    {
+        // Unused for now
+    }
+
+    public void OnDead()
+    {
+        // Usused for now
     }
 }

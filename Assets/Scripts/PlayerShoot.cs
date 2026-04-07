@@ -10,6 +10,7 @@ public class PlayerShoot : MonoBehaviour
 
     public float bulletLifetime = 3f;
     public float bulletSpeed = 30f;
+    public int bulletDamage = 2;
     public float shootingDelay = 0.2f;
     [Tooltip("In degrees, used for both left and right separately.")]
     public float horizontalSpread = 0f;
@@ -27,9 +28,13 @@ public class PlayerShoot : MonoBehaviour
 
     private void Awake()
     {
-        readyToShoot = true;
         muzzleFlareObject = Instantiate(muzzleFlarePrefab, firePoint.position, firePoint.rotation, firePoint);
         muzzleFlare = muzzleFlareObject.GetComponent<ParticleSystem>();
+    }
+
+    private void Start()
+    {
+        readyToShoot = true;
     }
 
     void Update()
@@ -62,10 +67,12 @@ public class PlayerShoot : MonoBehaviour
             Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(y, x, 0);
 
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
+
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.linearVelocity = bullet.transform.forward * bulletSpeed;
 
-            StartCoroutine(DestroyBullet(bullet, bulletLifetime));
+            Projectile projectile = bullet.GetComponent<Projectile>();
+            projectile.Setup(bulletLifetime, bulletDamage, "Enemy");
         }
 
         muzzleFlare.Play(true);
@@ -76,11 +83,5 @@ public class PlayerShoot : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
-    }
-
-    private IEnumerator DestroyBullet(GameObject bullet, float time)
-    {
-        yield return new WaitForSeconds(time);
-        Destroy(bullet);
     }
 }

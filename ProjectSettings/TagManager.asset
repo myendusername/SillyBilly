@@ -15,9 +15,9 @@ TagManager:
   - Player
   - Weapon
   - Bullet
-  - 
-  - 
-  - 
+  - PlayerDamage
+  - Enemy
+  - EnemyDamage
   - 
   - 
   - 
