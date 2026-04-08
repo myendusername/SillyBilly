@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b6b796d510e484616b13630c1d9ea768, type: 2}
+  - {fileID: 2100000, guid: 4fea4b6333ea64624a8ea79a97b71094, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,8 +121,8 @@ Transform:
   m_Children:
   - {fileID: 2859041898589961371}
   - {fileID: 4345619343336162320}
-  - {fileID: 507463207597594315}
   - {fileID: 153366480516717579}
+  - {fileID: 507463207597594315}
   m_Father: {fileID: 5533633406683239585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4099174291162026221
@@ -210,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 6250988290457670880}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.0999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 3509616580681786582}
   - component: {fileID: 8619096538599971388}
   m_Layer: 6
-  m_Name: Serious Bobert
+  m_Name: BBb
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
