@@ -18,7 +18,7 @@ public class PlayerShoot : MonoBehaviour
     public float verticalSpread = 0f;
     public int bulletAmount = 1;
 
-    // flamethrower setting 🔥 (new fire rate changes)
+    // flamethrower setting (new fire rate changes)
     public float flameSpeed = 15f;
     public float flameLifetime = 0.5f;
 
@@ -84,27 +84,13 @@ public class PlayerShoot : MonoBehaviour
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-<<<<<<< HEAD
-=======
-        // auto reload when empty
-        if (currentAmmo <= 0 && !isReloading)
-        {
-            StartCoroutine(Reload());
-        }
-
->>>>>>> parent of d268552 (Update PlayerShoot.cs)
         if (readyToShoot && isShooting)
         {
             Shoot();
         }
 
-<<<<<<< HEAD
         // flame visuals but it not bad now.
         if (currentGun == 3 && isShooting)
-=======
-        // flame visuals but shit 🔥
-        if (currentGun == 3 && isShooting && !isReloading)
->>>>>>> parent of d268552 (Update PlayerShoot.cs)
         {
             if (flameEffect != null && !flameEffect.isPlaying)
             {
@@ -136,7 +122,7 @@ public class PlayerShoot : MonoBehaviour
             currentShootingDelay = 0.6f;
         }
 
-        // Flamethrower 🔥 (change to liking)
+        // Flamethrower (change to liking cause i never made this before)
         if (currentGun == 3)
         {
             allowHold = true;
@@ -179,7 +165,7 @@ public class PlayerShoot : MonoBehaviour
             allowHold = false;
         }
 
-        // Flamethrower 🔥 (chnage to liking mabe more spread cause fire)
+        // Flamethrower (chnage to liking mabe more spread cause fire)
         if (currentGun == 3)
         {
             bulletAmount = 1;
@@ -195,13 +181,8 @@ public class PlayerShoot : MonoBehaviour
 
             Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(y, x, 0);
 
-<<<<<<< HEAD
             // spawn
             if (currentGun == 1 || currentGun == 2)
-=======
-            // spawn 🔥
-            if (currentGun != 3)
->>>>>>> parent of d268552 (Update PlayerShoot.cs)
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
 
