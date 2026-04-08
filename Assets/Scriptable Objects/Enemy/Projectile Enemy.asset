@@ -19,7 +19,7 @@ MonoBehaviour:
   meleeDelay: 0.3
   meleeDamage: 4
   projectileAttack: 1
-  projectileMaxRange: 14
+  projectileMaxRange: 16
   projectileMinRange: 0.5
   projectileLifetime: 3
   projectileDelay: 0.3
@@ -31,7 +31,7 @@ MonoBehaviour:
   constantFire: 0
   constantFireDelay: 0.1
   projectilePrefab: {fileID: 8100077576245143569, guid: 857adb3505e90c24eb0b5f21937350dc, type: 3}
-  cardinalMoveChance: 0.45
+  cardinalMoveChance: 0.5
   diagonalMoveChance: 0.3
   updateRate: 0.2
   speed: 4
@@ -41,5 +41,5 @@ MonoBehaviour:
   baseOffset: 1
   radius: 0.5
   height: 2
-  avoidancePriority: 50
+  avoidancePriority: 55
   areaMask: -1

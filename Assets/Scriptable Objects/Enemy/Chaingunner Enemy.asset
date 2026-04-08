@@ -19,7 +19,7 @@ MonoBehaviour:
   meleeDelay: 0.3
   meleeDamage: 4
   projectileAttack: 1
-  projectileMaxRange: 10
+  projectileMaxRange: 12
   projectileMinRange: 0.5
   projectileLifetime: 3
   projectileDelay: 0.5
@@ -41,5 +41,5 @@ MonoBehaviour:
   baseOffset: 1
   radius: 0.5
   height: 2
-  avoidancePriority: 50
+  avoidancePriority: 45
   areaMask: -1

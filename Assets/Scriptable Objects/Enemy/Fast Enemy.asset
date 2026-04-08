@@ -41,5 +41,5 @@ MonoBehaviour:
   baseOffset: 1
   radius: 0.5
   height: 2
-  avoidancePriority: 50
+  avoidancePriority: 40
   areaMask: -1

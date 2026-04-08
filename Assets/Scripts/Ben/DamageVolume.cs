@@ -85,7 +85,6 @@ public class DamageVolume : MonoBehaviour
     private IEnumerator RemoveAfterLifetime()
     {
         WaitForSeconds wait = new WaitForSeconds(lifetime);
-
         yield return wait;
 
         Destroy(gameObject);
