@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c33122b6edf80394ba1ce75e1d0e3f4d, type: 3}
-  m_Name: Fast Enemy
+  m_Name: Chaingunner Enemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  health: 10
-  meleeAttack: 1
+  health: 18
+  meleeAttack: 0
   meleeRange: 1.4
   meleeRadiusSize: 0.5
-  meleeDelay: 0.2
-  meleeDamage: 2
-  projectileAttack: 0
-  projectileMaxRange: 8
+  meleeDelay: 0.3
+  meleeDamage: 4
+  projectileAttack: 1
+  projectileMaxRange: 10
   projectileMinRange: 0.5
   projectileLifetime: 3
-  projectileDelay: 0.3
-  projectileDamage: 2
+  projectileDelay: 0.5
+  projectileDamage: 1
   projectileSpeed: 20
-  horizontalSpread: 0
-  verticalSpread: 0
+  horizontalSpread: 4
+  verticalSpread: 4
   projectileAmount: 1
-  constantFire: 0
+  constantFire: 1
   constantFireDelay: 0.1
-  projectilePrefab: {fileID: 0}
-  cardinalMoveChance: 0
-  diagonalMoveChance: 0.3
+  projectilePrefab: {fileID: 8100077576245143569, guid: 857adb3505e90c24eb0b5f21937350dc, type: 3}
+  cardinalMoveChance: 0.35
+  diagonalMoveChance: 0.35
   updateRate: 0.2
-  speed: 8
-  angularSpeed: 270
-  acceleration: 14
+  speed: 4
+  angularSpeed: 180
+  acceleration: 18
   stoppingDistance: 1.2
   baseOffset: 1
   radius: 0.5
