@@ -19,7 +19,7 @@ public class PlayerShoot : MonoBehaviour
     public int bulletAmount = 1;
     public bool allowHold = false;
 
-    private bool isShooting;
+    private bool activeShooter;
     private bool readyToShoot;
 
     private GameObject muzzleFlareObject;
@@ -41,16 +41,18 @@ public class PlayerShoot : MonoBehaviour
     {
         if (allowHold)
         {
-            isShooting = Input.GetKey(KeyCode.Mouse0);
+            if (readyToShoot && activeShooter)
+            {
+                Shoot();
+            }
         }
         else
         {
-            isShooting = Input.GetKeyDown(KeyCode.Mouse0);
-        }
-
-        if (readyToShoot && isShooting)
-        {
-            Shoot();
+            if (readyToShoot && activeShooter)
+            {
+                Shoot();
+                activeShooter = false;
+            }
         }
     }
 
@@ -83,5 +85,10 @@ public class PlayerShoot : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
+    }
+
+    public void SetShooting(bool state)
+    {
+        activeShooter = state;
     }
 }

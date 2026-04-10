@@ -1,17 +1,14 @@
 using UnityEngine;
 
-public class FirstPersonCamera : MonoBehaviour
+public class CameraSwitcher : MonoBehaviour
 {
-    public Transform cameraPivot; // assign the head or camera pivot in prefab
+    public Transform cameraPivot;
 
     void LateUpdate()
     {
         if (cameraPivot == null) return;
 
-        // Position matches camera pivot
         transform.position = cameraPivot.position;
-
-        // Rotation matches cameraPivot rotation (first-person)
         transform.rotation = cameraPivot.rotation;
     }
 }

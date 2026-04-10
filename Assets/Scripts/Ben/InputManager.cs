@@ -16,9 +16,6 @@ public class InputManager : MonoBehaviour
     {
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
-        mover = GetComponent<PlayerMovement>();
-        look = GetComponent<PlayerLook>();
-        shooter = GetComponent<PlayerShoot>();
 
         SetActiveCharacter(characters[0]);
 
@@ -26,8 +23,13 @@ public class InputManager : MonoBehaviour
         onFoot.Jump.performed += ctx => mover.Jump();
         onFoot.Sprint.started += ctx => mover.Sprint(true);
         onFoot.Sprint.canceled += ctx => mover.Sprint(false);
+        onFoot.Shoot.started += ctx =>
+        {
+            if (shooter != null)
+                shooter.SetShooting(true);
+        };
 
-        // Character switch callback (button-based)
+        // Character switch callback
         onFoot.SwitchCharacter.performed += ctx =>
         {
             switch (ctx.control.name)
@@ -45,6 +47,11 @@ public class InputManager : MonoBehaviour
         mover = character.GetComponent<PlayerMovement>();
         look = character.GetComponent<PlayerLook>();
         shooter = character.GetComponent<PlayerShoot>();
+        CameraSwitcher cam = Camera.main.GetComponent<CameraSwitcher>();
+        if (cam != null)
+        {
+            cam.cameraPivot = character.GetComponent<PlayerLook>().cameraPivot;
+        }
     }
 
     void FixedUpdate()

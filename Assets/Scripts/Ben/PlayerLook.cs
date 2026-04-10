@@ -10,32 +10,28 @@ public class PlayerLook : MonoBehaviour
     public float ySens = 50f;
 
     public float xClamp = 85f;
-
-    public bool isActive = false;
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ProcessLook(Vector2 input)
-{
-    if (!isActive) return;
+    {
 
-    float mouseX = input.x;
-    float mouseY = input.y;
+        float mouseX = input.x;
+        float mouseY = input.y;
 
-    // Rotation around the x axis (Look up and down)
-    xRotation -= mouseY * xSens * Time.deltaTime;
-    xRotation = Mathf.Clamp(xRotation, -xClamp, xClamp);
+        // Rotation around the x axis (Look up and down)
+        xRotation -= mouseY * xSens * Time.deltaTime;
+        xRotation = Mathf.Clamp(xRotation, -xClamp, xClamp);
 
-    // Rotation around the Y axis (Look left and right)
-    yRotation += mouseX * ySens * Time.deltaTime;
+        // Rotation around the Y axis (Look left and right)
+        yRotation += mouseX * ySens * Time.deltaTime;
 
-    // Apply Y axis rotation to player only
-    transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+        // Apply Y axis rotation to player only
+        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
 
-    // Apply X axis rotation to camera pivot only
-    cameraPivot.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-}
+        // Apply X axis rotation to camera pivot only
+        cameraPivot.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    }
 }
