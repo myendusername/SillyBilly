@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameState GameState;
+    [SerializeField] private EnemiesList enemies;
 
     private void Awake()
     {
@@ -31,9 +33,11 @@ public class GameManager : MonoBehaviour
                 // doesn't do anything for right now
                 break;
 
-            // lock the cursor when we activate this state
+            // lock the cursor when we activate this state.
+            // spawn the enemies in.
             case GameState.GamePlay:
                 Cursor.lockState = CursorLockMode.Locked;
+                SpawnEnemies();
                 break;
 
             default:
@@ -46,6 +50,16 @@ public class GameManager : MonoBehaviour
     {
         ChangeState(GameState.GamePlay);
         Debug.Log("The game has BEGUN!!!");
+    }
+
+    // Spawn each of the enemies in the enemies list.
+    public void SpawnEnemies() {
+        for (int i = 0; i < enemies.enemies.Length; i++) {
+            // randomizing the spawn position a little bit...
+            float spawnX = Random.Range(-30, 30);
+            float spawnZ = Random.Range(-30, 30);
+            Instantiate(enemies.enemies[i], new Vector3(spawnX, 0, spawnZ), Quaternion.identity);
+        }
     }
 }
 
