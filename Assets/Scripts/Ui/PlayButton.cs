@@ -13,14 +13,4 @@ public class PlayButton : MonoBehaviour
     {
         
     }
-
-    void OnMouseEnter()
-    {
-        Debug.Log("you're hovering over me!!!");
-    }
-
-    void OnMouseDown()
-    {
-        Debug.Log("YOU PRESSED ME");
-    }
 }
