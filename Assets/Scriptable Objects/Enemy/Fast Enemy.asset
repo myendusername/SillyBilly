@@ -14,26 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   health: 10
   meleeAttack: 1
-  meleeRange: 1.5
+  meleeRange: 1.4
   meleeRadiusSize: 0.5
-  meleeDelay: 0.3
-  meleeDamage: 3
-  damageVolumePrefab: {fileID: 0}
+  meleeDelay: 0.2
+  meleeDamage: 2
   projectileAttack: 0
   projectileMaxRange: 8
-  projectileMinRange: 0.2
+  projectileMinRange: 0.5
   projectileLifetime: 3
   projectileDelay: 0.3
   projectileDamage: 2
   projectileSpeed: 20
+  horizontalSpread: 0
+  verticalSpread: 0
+  projectileAmount: 1
+  constantFire: 0
+  constantFireDelay: 0.1
   projectilePrefab: {fileID: 0}
+  cardinalMoveChance: 0
+  diagonalMoveChance: 0.3
   updateRate: 0.2
-  speed: 7
-  angularSpeed: 180
-  acceleration: 5
+  speed: 8
+  angularSpeed: 270
+  acceleration: 14
   stoppingDistance: 1.2
   baseOffset: 1
   radius: 0.5
   height: 2
-  avoidancePriority: 50
+  avoidancePriority: 40
   areaMask: -1

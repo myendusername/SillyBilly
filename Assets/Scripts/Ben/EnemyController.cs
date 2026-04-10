@@ -92,7 +92,16 @@ public class EnemyController : MonoBehaviour, IDamageable
         attack.projectileDelay = data.projectileDelay;
         attack.projectileDamage = data.projectileDamage;
         attack.projectileSpeed = data.projectileSpeed;
+        attack.horizontalSpread = data.horizontalSpread;
+        attack.verticalSpread = data.verticalSpread;
+        attack.projectileAmount = data.projectileAmount;
+        attack.constantFire = data.constantFire;
+        attack.constantFireDelay = data.constantFireDelay;
         attack.projectilePrefab = data.projectilePrefab;
+
+
+        movement.cardinalMoveChance = data.cardinalMoveChance;
+        movement.diagonalMoveChance = data.diagonalMoveChance;
 
 
         updateRate = data.updateRate;
@@ -191,6 +200,7 @@ public class EnemyController : MonoBehaviour, IDamageable
                 break;
 
             case State.CHASE:
+                EnterChase();
                 break;
 
             case State.STUNNED:
@@ -220,10 +230,14 @@ public class EnemyController : MonoBehaviour, IDamageable
     private IEnumerator EnterSpawning()
     {
         WaitForSeconds wait = new WaitForSeconds(spawnTime);
-
         yield return wait;
 
         ChangeState(State.CHASE);
+    }
+
+    private void EnterChase()
+    {
+        closestPlayer = GetClosestTarget();
     }
 
     private void UpdateChase()
@@ -239,7 +253,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         }
         if (attack.projectileAttack)
         {
-            if (attack.canProjectile(closestPlayer))
+            if (attack.canProjectile(closestPlayer, true))
             {
                 ChangeState(State.PROJECTILEATTACK);
             }
@@ -249,7 +263,6 @@ public class EnemyController : MonoBehaviour, IDamageable
     private IEnumerator EnterStunned()
     {
         WaitForSeconds wait = new WaitForSeconds(stunTime);
-
         yield return wait;
 
         ChangeState(State.CHASE);
@@ -259,9 +272,9 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         agent.ResetPath();
 
-        yield return StartCoroutine(WaitAndLook(attack.projectileDelay / 3));
-        yield return StartCoroutine(WaitAndLook(attack.projectileDelay / 3));
-        yield return StartCoroutine(WaitAndLook(attack.projectileDelay / 3));
+        yield return StartCoroutine(WaitAndLook(attack.meleeDelay / 3));
+        yield return StartCoroutine(WaitAndLook(attack.meleeDelay / 3));
+        yield return StartCoroutine(WaitAndLook(attack.meleeDelay / 3));
 
         LookAtY(closestPlayer);
 
@@ -283,7 +296,30 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         attack.doProjectileAttack();
 
+
+        if (attack.constantFire)
+        {
+            StartCoroutine(ProjectileConstantFire());
+            attack.isFiring = true;
+        }
+        else
+        {
+            ChangeState(State.CHASE);
+        }
+    }
+
+    private IEnumerator ProjectileConstantFire()
+    {
+        while (attack.canProjectile(closestPlayer, false))
+        {
+            WaitForSeconds wait = new WaitForSeconds(attack.constantFireDelay);
+            yield return wait;
+            LookAtY(closestPlayer);
+            LookAtX(closestPlayer);
+            attack.doProjectileAttack();
+        }
         ChangeState(State.CHASE);
+        attack.isFiring = false;
     }
 
     private IEnumerator WaitAndLook(float delay)

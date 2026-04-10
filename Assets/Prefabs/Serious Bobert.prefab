@@ -156,7 +156,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.4, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4909743424127656120}
@@ -716,7 +716,7 @@ MonoBehaviour:
   horizontalSpread: 0
   verticalSpread: 0
   bulletAmount: 1
-  allowHold: 0
+  allowHold: 1
 --- !u!1 &9161918302309623105
 GameObject:
   m_ObjectHideFlags: 0
