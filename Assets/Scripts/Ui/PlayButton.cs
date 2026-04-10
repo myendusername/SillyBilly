@@ -11,10 +11,10 @@ public class PlayButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        StartPlaying();
     }
 
-    private void StartPlaying()
+    public void StartPlaying()
     {
         GameManager.Instance.ChangeState(GameState.GamePlay);
     }
