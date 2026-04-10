@@ -26,11 +26,14 @@ public class GameManager : MonoBehaviour
         GameState = newState;
         switch (newState)
         {
+            // the cursor shouldn't be locked in this state
             case GameState.TitleScreen:
                 // doesn't do anything for right now
                 break;
+
+            // lock the cursor when we activate this state
             case GameState.GamePlay:
-                // doesn't do anything for right now
+                Cursor.lockState = CursorLockMode.Locked;
                 break;
 
             default:
