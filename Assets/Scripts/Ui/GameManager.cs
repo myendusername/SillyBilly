@@ -40,6 +40,13 @@ public class GameManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
     }
+
+    // Change the gamemode to GamePlay
+    public void StartPlaying()
+    {
+        ChangeState(GameState.GamePlay);
+        Debug.Log("The game has BEGUN!!!");
+    }
 }
 
 // Serious Bobert's game states
