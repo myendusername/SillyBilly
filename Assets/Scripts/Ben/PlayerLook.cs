@@ -13,7 +13,9 @@ public class PlayerLook : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        // Casey: Turning this off for now to
+        // more easily test UI stuff
+        // Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ProcessLook(Vector2 input)
