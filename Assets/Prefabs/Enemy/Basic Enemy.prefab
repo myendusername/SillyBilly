@@ -262,8 +262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
   attackPoint: {fileID: 6848497738471556738}
-  meleeAttack: 0
-  meleeRange: 1.4
+  meleeAttack: 1
+  meleeRange: 1.5
   meleeRadiusSize: 0.5
   meleeDelay: 0.3
   meleeDamage: 4
@@ -275,11 +275,6 @@ MonoBehaviour:
   projectileDelay: 0.3
   projectileDamage: 2
   projectileSpeed: 20
-  horizontalSpread: 0
-  verticalSpread: 0
-  projectileAmount: 1
-  constantFire: 0
-  constantFireDelay: 0.1
   projectilePrefab: {fileID: 0}
 --- !u!1 &5684759090643758676
 GameObject:

@@ -11,15 +11,9 @@ public class PlayerLook : MonoBehaviour
 
     public float xClamp = 85f;
 
-    private void Start()
-    {
-        // Casey: Turning this off for now to
-        // more easily test UI stuff
-        // Cursor.lockState = CursorLockMode.Locked;
-    }
-
     public void ProcessLook(Vector2 input)
     {
+
         float mouseX = input.x;
         float mouseY = input.y;
 
