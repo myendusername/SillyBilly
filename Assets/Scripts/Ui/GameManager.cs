@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameState GameState;
+
+    public InputManager inputManager;
+    public CameraSwitcher cameraSwitcher;
     [SerializeField] private EnemiesList enemies;
 
     private void Awake()
@@ -37,6 +40,8 @@ public class GameManager : MonoBehaviour
             // spawn the enemies in.
             case GameState.GamePlay:
                 Cursor.lockState = CursorLockMode.Locked;
+                inputManager.enabled = true;
+                cameraSwitcher.enabled = true;
                 SpawnEnemies();
                 break;
 
