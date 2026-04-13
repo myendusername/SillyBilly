@@ -9,14 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Horizontal Movement")]
     public float walkSpeed = 5f;
     public float sprintSpeed = 1f;
-    // i wrote this
-    public float maxStamina = 100f;
-    // i wrote this
-    public float currentStamina = 100f;
-    // i wrote this
-    public float staminaDrainRate = 10f;
-    // i wrote this
-    public float staminaRegenRate = 40f;
+    public float stamina = 50.0f;
     public float movementSmoothing = 20f;
 
     [Header("Jumping")]
@@ -24,48 +17,18 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 3f;
     private bool isGrounded;
 
-    // i wrote this
-    private bool isSprinting;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         speed = walkSpeed;
         controller = GetComponent<CharacterController>();
-
-        // i wrote this
-        if (UIManager.instance != null)
-            UIManager.instance.SetStamina(currentStamina, maxStamina);
     }
 
     // Update is called once per frame
     void Update()
     {
         isGrounded = controller.isGrounded;
-
-        // i wrote this
-        if (isSprinting && currentStamina > 0)
-        {
-            currentStamina -= staminaDrainRate * Time.deltaTime;
-            currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
-
-            if (UIManager.instance != null)
-                UIManager.instance.SetStamina(currentStamina, maxStamina);
-
-            // stop sprinting if out of stamina
-            if (currentStamina <= 0)
-                speed = walkSpeed;
-        }
-        // i wrote this
-        else if (!isSprinting && currentStamina < maxStamina)
-        {
-            currentStamina += staminaRegenRate * Time.deltaTime;
-            currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
-
-            if (UIManager.instance != null)
-                UIManager.instance.SetStamina(currentStamina, maxStamina);
-        }
     }
 
     // Receive the inputs for our InputManager and apply them to our chracter controller.
@@ -100,10 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Sprint(bool sprintStatus)
     {
-        // i wrote this
-        isSprinting = sprintStatus;
-
-        if (sprintStatus && currentStamina > 0)
+        if (sprintStatus)
         {
             speed = sprintSpeed;
         }
