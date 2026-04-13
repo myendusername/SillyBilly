@@ -2,6 +2,6 @@
   <Project Path="AmplifyShaderEditor.csproj" />
   <Project Path="Kybernetik.UltEvents.Editor.csproj" />
   <Project Path="Kybernetik.UltEvents.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
 </Solution>
