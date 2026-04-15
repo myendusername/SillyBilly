@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public InputManager inputManager;
     public CameraSwitcher cameraSwitcher;
     [SerializeField] private EnemiesList enemies;
+    [SerializeField] private GameObject titleScreen;
 
     private void Awake()
     {
@@ -29,8 +30,13 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             // the cursor shouldn't be locked in this state
+            // The title screen should be active in this state.
             case GameState.TitleScreen:
-                // doesn't do anything for right now
+                Cursor.lockState = CursorLockMode.None;
+                titleScreen.SetActive(true);
+                inputManager.enabled = false;
+                cameraSwitcher.enabled = false;
+                DestroyEnemies();
                 break;
 
             // lock the cursor when we activate this state.
@@ -61,6 +67,15 @@ public class GameManager : MonoBehaviour
             float spawnX = Random.Range(-30, 30);
             float spawnZ = Random.Range(-30, 30);
             Instantiate(enemies.enemies[i], new Vector3(spawnX, 0, spawnZ), Quaternion.identity);
+        }
+    }
+
+    // Destroy each of the enemies in the enemies list.
+    public void DestroyEnemies()
+    {
+        for (int i = 0; i < enemies.enemies.Length; i++)
+        {
+            DestroyImmediate(enemies.enemies[i]);
         }
     }
 }

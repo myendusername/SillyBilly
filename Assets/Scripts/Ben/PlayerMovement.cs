@@ -82,5 +82,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     public void OnDead()
     {
         // Usused for now
+        Debug.Log("Game over!");
+        GameManager.Instance.ChangeState(GameState.TitleScreen);
     }
 }

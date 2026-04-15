@@ -1455,7 +1455,8 @@ MonoBehaviour:
   GameState: 0
   inputManager: {fileID: 2110220267}
   cameraSwitcher: {fileID: 841174559}
-  enemies: {fileID: 11400000, guid: d1401e14e73d7f640923f477261d39bd, type: 2}
+  enemies: {fileID: 11400000, guid: b1555ed3edcd2324fa706ba85722d214, type: 2}
+  titleScreen: {fileID: 1317821081}
 --- !u!1 &384721172
 GameObject:
   m_ObjectHideFlags: 0
