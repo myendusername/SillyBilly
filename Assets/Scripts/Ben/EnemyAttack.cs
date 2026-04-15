@@ -102,7 +102,8 @@ public class EnemyAttack : MonoBehaviour
 
         // Check line of sight
         RaycastHit hit;
-        if (Physics.Raycast(attackPoint.position, direction.normalized, out hit, projectileMaxRange))
+        int checkMask = LayerMask.GetMask("Default", "Player");
+        if (Physics.Raycast(attackPoint.position, direction.normalized, out hit, projectileMaxRange, checkMask))
         {
             if (hit.transform != target)
             {

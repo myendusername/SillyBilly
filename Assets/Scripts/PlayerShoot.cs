@@ -18,6 +18,7 @@ public class PlayerShoot : MonoBehaviour
     [Tooltip("In degrees, used for both up and down separately.")]
     public float verticalSpread = 0f;
     public int bulletAmount = 1;
+    public float firePointForwardOffset = 0f;
     public bool allowHold = false;
     public bool flamethrower = false;
 
@@ -83,14 +84,15 @@ public class PlayerShoot : MonoBehaviour
 
             Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(y, x, 0);
 
+            Vector3 spawnPosition = firePoint.position + (spreadRotation * Vector3.forward) * firePointForwardOffset;
             if (flamethrower)
             {
-                GameObject damageVolume = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
+                GameObject damageVolume = Instantiate(bulletPrefab, spawnPosition, spreadRotation);
                 damageVolume.GetComponent<DamageVolume>().Setup(false, bulletLifetime, bulletDamage, LayerMask.GetMask("Enemy"), 2);
             }
             else
             {
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
+                GameObject bullet = Instantiate(bulletPrefab, spawnPosition, spreadRotation);
 
                 Rigidbody rb = bullet.GetComponent<Rigidbody>();
                 rb.linearVelocity = bullet.transform.forward * bulletSpeed;

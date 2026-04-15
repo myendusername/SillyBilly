@@ -35,12 +35,9 @@ public class DamageVolume : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other + " entered!");
-
         // If gameObject is not in a valid layer to detect then stop.
         if (layersToDetect != (layersToDetect | (1 << other.gameObject.layer)))
         {
-            Debug.Log("case 2");
             return;
         }
 
@@ -49,22 +46,20 @@ public class DamageVolume : MonoBehaviour
         // If the collider has a damageable, then add it to the list of things that will be damaged.
         if (target != null)
         {
-            Debug.Log("case 3");
             if (oneShot)
             {
                 target.TakeDamage(damage);
-                Destroy(gameObject, 0.01f);
-                Debug.Log("case 4");
+                Destroy(gameObject);
             }
             else
             {
                 if (!targetList.Contains(target))
                 {
                     targetList.Add(target);
-                    Debug.Log("case 5");
                 }
             }
-        } else
+        }
+        else
         {
             Debug.LogWarning("TARGET IS NULL!");
         }
@@ -94,13 +89,26 @@ public class DamageVolume : MonoBehaviour
 
         if (!oneShot)
         {
+            // Remove all null entries.
+            targetList.RemoveAll(t => t == null);
+
             foreach (Health target in targetList)
             {
+                Debug.Log("Dealt damage to " + target);
                 target.TakeDamage(damage);
             }
         }
 
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (sphereCollider != null)
+        {
+            Gizmos.color = new Color(0.9f, 0.3f, 0.25f, 0.2f);
+            Gizmos.DrawSphere(transform.position, sphereCollider.radius);
+        }
     }
 
 }

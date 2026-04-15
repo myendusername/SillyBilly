@@ -34,7 +34,7 @@ MonoBehaviour:
   cardinalMoveChance: 0.2
   diagonalMoveChance: 0.45
   updateRate: 0.2
-  speed: 5
+  speed: 5.5
   angularSpeed: 180
   acceleration: 18
   stoppingDistance: 1.2
