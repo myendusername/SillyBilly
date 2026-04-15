@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
             if (shooter != null)
                 shooter.SetShooting(true);
         };
+
         onFoot.Shoot.canceled += ctx => shooter.SetShooting(false);
 
         // Character switch callback
@@ -44,10 +45,16 @@ public class InputManager : MonoBehaviour
 
     public void SetActiveCharacter(GameObject character)
     {
+        if (shooter)
+        {
+            shooter.gunArt.SetActive(false);
+            shooter.SetShooting(false);
+        }
         activeCharacter = character;
         mover = character.GetComponent<PlayerMovement>();
         look = character.GetComponent<PlayerLook>();
         shooter = character.GetComponent<PlayerShoot>();
+        shooter.gunArt.SetActive(true);
         CameraSwitcher cam = Camera.main.GetComponent<CameraSwitcher>();
         if (cam != null)
         {

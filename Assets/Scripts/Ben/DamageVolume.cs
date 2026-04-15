@@ -6,11 +6,10 @@ public class DamageVolume : MonoBehaviour
 {
     public SphereCollider sphereCollider;
 
-    public bool oneShot = true;
-    private bool alreadyEntered = false;
+    public bool oneShot = false;
     public float lifetime = 0.1f;
     public int damage = 1;
-    public LayerMask layersToDetect = -1;
+    public LayerMask layersToDetect;
 
     // The things that have health that are in the attack radius
     private List<Health> targetList = new List<Health>();
@@ -22,7 +21,6 @@ public class DamageVolume : MonoBehaviour
 
     private void Start()
     {
-        alreadyEntered = false;
         StartCoroutine(RemoveAfterLifetime());
     }
 
@@ -32,36 +30,43 @@ public class DamageVolume : MonoBehaviour
         this.lifetime = lifetime;
         this.damage = damage;
         this.layersToDetect = layersToDetect;
-        this.GetComponent<SphereCollider>().radius = radius;
+        sphereCollider.radius = radius;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // If the damage volume is a one shot and already entered before then stop.
-        if (oneShot && alreadyEntered)
-        {
-            return;
-        }
+        Debug.Log(other + " entered!");
 
         // If gameObject is not in a valid layer to detect then stop.
         if (layersToDetect != (layersToDetect | (1 << other.gameObject.layer)))
         {
+            Debug.Log("case 2");
             return;
         }
 
         Health target = other.GetComponent<Health>();
+
         // If the collider has a damageable, then add it to the list of things that will be damaged.
         if (target != null)
         {
+            Debug.Log("case 3");
             if (oneShot)
             {
                 target.TakeDamage(damage);
-                Destroy(gameObject);
+                Destroy(gameObject, 0.01f);
+                Debug.Log("case 4");
             }
             else
             {
-                targetList.Add(target);
+                if (!targetList.Contains(target))
+                {
+                    targetList.Add(target);
+                    Debug.Log("case 5");
+                }
             }
+        } else
+        {
+            Debug.LogWarning("TARGET IS NULL!");
         }
     }
 
@@ -85,11 +90,17 @@ public class DamageVolume : MonoBehaviour
     private IEnumerator RemoveAfterLifetime()
     {
         WaitForSeconds wait = new WaitForSeconds(lifetime);
-
         yield return wait;
+
+        if (!oneShot)
+        {
+            foreach (Health target in targetList)
+            {
+                target.TakeDamage(damage);
+            }
+        }
 
         Destroy(gameObject);
     }
-
 
 }

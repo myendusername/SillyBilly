@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 11400000, guid: c7e9611b558982a419e05f47e0a12b10, type: 2}
+    - target: {fileID: 4046326818346180379, guid: 32498da6c080e8e4f89b6db41ec42dcf, type: 3}
+      propertyPath: m_AgentTypeID
+      value: -334000983
+      objectReference: {fileID: 0}
     - target: {fileID: 4355766181447322612, guid: 32498da6c080e8e4f89b6db41ec42dcf, type: 3}
       propertyPath: m_Height
       value: 4

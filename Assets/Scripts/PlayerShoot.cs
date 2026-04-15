@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Data.SqlTypes;
 using UnityEngine;
 using TMPro;
 
 public class PlayerShoot : MonoBehaviour
 {
     public Transform firePoint;
+    public GameObject gunArt;
     public GameObject bulletPrefab;
     public GameObject muzzleFlarePrefab;
-    public GameObject flameBulletPrefab;
-    public AudioSource FiringAudio;
+    public AudioSource firingAudio;
 
     public float bulletLifetime = 3f;
     public float bulletSpeed = 30f;
@@ -21,6 +19,7 @@ public class PlayerShoot : MonoBehaviour
     public float verticalSpread = 0f;
     public int bulletAmount = 1;
     public bool allowHold = false;
+    public bool flamethrower = false;
 
     // bad Ui cause i don't know how to do it
     public TextMeshProUGUI ammoText;
@@ -29,72 +28,23 @@ public class PlayerShoot : MonoBehaviour
 
     private bool activeShooter;
     private bool readyToShoot;
-    // each gun fire rate
-    public int currentGun;
 
     private GameObject muzzleFlareObject;
     private ParticleSystem muzzleFlare;
-
-
-    // flamethrower setting (new fire rate changes)
-    public float flameSpeed = 15f;
-    public float flameLifetime = 0.5f;
-    public ParticleSystem flameEffect; // bruh, flame is hard to make.
-
-    private float currentShootingDelay;
 
 
     private void Awake()
     {
         muzzleFlareObject = Instantiate(muzzleFlarePrefab, firePoint.position, firePoint.rotation, firePoint);
         muzzleFlare = muzzleFlareObject.GetComponent<ParticleSystem>();
+        gunArt.SetActive(false);
         SetWeaponStats();
     }
 
     void SetWeaponStats()
     {
-        // Normal gun
-        if (currentGun == 1)
-        {
-            allowHold = true;
-            currentShootingDelay = 0.2f;
-            bulletAmount = 1;
-            horizontalSpread = 0f;
-            verticalSpread = 0f;
-        }
-
-        // Shotgun
-        if (currentGun == 2)
-        {
-            allowHold = false;
-            currentShootingDelay = 0.6f;
-            bulletAmount = 8;
-            horizontalSpread = 10f;
-            verticalSpread = 5f;
-        }
-
-        // Flamethrower (change to liking cause i never made this before)
-        if (currentGun == 3)
-        {
-            allowHold = true;
-            currentShootingDelay = 0.05f;
-            bulletAmount = 1;
-            horizontalSpread = 15f;
-            verticalSpread = 15f;
-        }
-
         readyToShoot = true;
         if (ammoText != null) ammoText.text = "∞";
-        UpdateWeaponText();
-    }
-
-    void UpdateWeaponText()
-    {
-        if (weaponText == null) return;
-
-        if (currentGun == 1) weaponText.text = "Rifle";
-        if (currentGun == 2) weaponText.text = "Shotgun";
-        if (currentGun == 3) weaponText.text = "Flamethrower";
     }
 
     private void Start()
@@ -119,22 +69,6 @@ public class PlayerShoot : MonoBehaviour
                 activeShooter = false;
             }
         }
-
-        // flame visuals but it not bad now.
-        if (currentGun == 3 && activeShooter)
-        {
-            if (flameEffect != null && !flameEffect.isPlaying)
-            {
-                flameEffect.Play();
-            }
-        }
-        else
-        {
-            if (flameEffect != null && flameEffect.isPlaying)
-            {
-                flameEffect.Stop();
-            }
-        }
     }
 
     void Shoot()
@@ -149,7 +83,12 @@ public class PlayerShoot : MonoBehaviour
 
             Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(y, x, 0);
 
-            if (currentGun == 1 || currentGun == 2)
+            if (flamethrower)
+            {
+                GameObject damageVolume = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
+                damageVolume.GetComponent<DamageVolume>().Setup(false, bulletLifetime, bulletDamage, LayerMask.GetMask("Enemy"), 2);
+            }
+            else
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, spreadRotation);
 
@@ -158,28 +97,27 @@ public class PlayerShoot : MonoBehaviour
 
                 Projectile projectile = bullet.GetComponent<Projectile>();
                 projectile.Setup(bulletLifetime, bulletDamage, "Enemy");
-
-                StartCoroutine(DestroyBullet(bullet, bulletLifetime));
-            }
-            else if (currentGun == 3)
-            {
-                GameObject flame = Instantiate(flameBulletPrefab, firePoint.position, spreadRotation);
-
-                Rigidbody rb = flame.GetComponent<Rigidbody>();
-                rb.linearVelocity = spreadRotation * Vector3.forward * flameSpeed;
-
-                Projectile projectile = flame.GetComponent<Projectile>();
-                projectile.Setup(bulletLifetime, bulletDamage, "Enemy");
-
-
-                StartCoroutine(DestroyBullet(flame, flameLifetime));
             }
         }
 
-        muzzleFlare.Play(true);
-        FiringAudio.Play();
+        if (!flamethrower)
+        {
+            muzzleFlare.Play(true);
+            firingAudio.Play();
+        }
+        else
+        {
+            if (!muzzleFlare.isPlaying)
+            {
+                muzzleFlare.Play(true);
+            }
+            if (!firingAudio.isPlaying)
+            {
+                firingAudio.Play();
+            }
+        }
 
-        Invoke("ResetShot", currentShootingDelay);
+        Invoke("ResetShot", shootingDelay);
     }
 
     private void ResetShot()
@@ -189,12 +127,12 @@ public class PlayerShoot : MonoBehaviour
 
     public void SetShooting(bool state)
     {
-        activeShooter = state;
-    }
+        if (flamethrower && state == false)
+        {
+            muzzleFlare.Stop(true);
+            firingAudio.Stop();
+        }
 
-    IEnumerator DestroyBullet(GameObject bullet, float time)
-    {
-        yield return new WaitForSeconds(time);
-        Destroy(bullet);
+        activeShooter = state;
     }
 }

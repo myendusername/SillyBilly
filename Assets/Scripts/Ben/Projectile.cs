@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag(tagToDetect))
         {
             collision.gameObject.GetComponent<Health>().TakeDamage(damage);
-            print("Hit " + collision.gameObject.name);
+            // print("Hit " + collision.gameObject.name);
         }
         GameObject impact = Instantiate(impactPrefab, this.transform.position, this.transform.rotation);
 
@@ -23,7 +23,6 @@ public class Projectile : MonoBehaviour
     private IEnumerator RemoveAfterLifetime(float lifetime)
     {
         WaitForSeconds wait = new WaitForSeconds(lifetime);
-
         yield return wait;
 
         Destroy(gameObject);
