@@ -84,5 +84,6 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         // Usused for now
         Debug.Log("Game over!");
         GameManager.Instance.ChangeState(GameState.TitleScreen);
+        GameManager.Instance.DestroyEnemies();
     }
 }
