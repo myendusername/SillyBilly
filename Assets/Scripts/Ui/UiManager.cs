@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
+    public static UiManager Instance;
+
     // We drag and drop the canvas's text objects into these fields
     // to connect them with this script
     [SerializeField] private TextMeshProUGUI healthText, staminaText;
@@ -13,7 +15,7 @@ public class UiManager : MonoBehaviour
 
     private void Awake()
     {
-
+        Instance = this;
         playerMovement = player.GetComponent<PlayerMovement>();
     }
 
@@ -35,5 +37,9 @@ public class UiManager : MonoBehaviour
         // a bunch of unneeded decimal places for our stats
         healthText.text = "Health: " + playerHealth;
         staminaText.text = "Stamina: " + (int)playerMovement.stamina;
+    }
+
+    public void RespawnPlayer() {
+        player.GetComponent<Health>().SetHealth();
     }
 }

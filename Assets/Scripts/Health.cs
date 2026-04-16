@@ -19,10 +19,13 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void SetHealth() {
+        health = 100;
+    }
+
     public Transform GetTransform()
     {
         return transform;
     }
-
 }
 
