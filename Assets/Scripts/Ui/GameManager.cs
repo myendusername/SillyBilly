@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public CameraSwitcher cameraSwitcher;
     [SerializeField] private EnemiesList enemies;
     [SerializeField] private GameObject titleScreen;
+    [SerializeField] private GameObject enemyKiller;
 
     private void Awake()
     {
@@ -36,7 +38,6 @@ public class GameManager : MonoBehaviour
                 titleScreen.SetActive(true);
                 inputManager.enabled = false;
                 cameraSwitcher.enabled = false;
-                // DestroyEnemies();
                 break;
 
             // lock the cursor when we activate this state.
@@ -71,13 +72,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Destroy each of the enemies in the enemies list.
-    //public void DestroyEnemies()
-    //{
+    // Destroy each of the enemies in the enemies list,
+    // by getting each enemy's x,y,z position in their Transform component
+    // and then spawning a damage volume in each enemy to make them bust everywhere
+    // and thus not be able to hurt the player after they're already dead.
+    public void DestroyEnemies()
+    {
+        Debug.Log("I'm trying to kill enemies.");
+        for (int i = 0; i < enemies.enemies.Length; i++)
+        {
+            float enemyX = enemies.enemies[i].transform.position.x;
+            Debug.Log(enemies.enemies[i].name + " " + i + " x = " + enemyX);
+            float enemyY = enemies.enemies[i].transform.position.y;
+            Debug.Log(enemies.enemies[i].name + " " + i + " y = " + enemyY);
+            float enemyZ = enemies.enemies[i].transform.position.z;
+            Debug.Log("enemy " + i + " z = " + enemyZ);
+            Instantiate(enemyKiller, new Vector3(enemyX, enemyY, enemyZ), Quaternion.identity);
+            Debug.Log(enemies.enemies[i].name + " " + i + " killed by the GameManager!");
+        }
+    }
+
+    // Finds each enemy in the game,
+    // if there are any.
+    //public bool FindEnemies() {
     //    for (int i = 0; i < enemies.enemies.Length; i++)
     //    {
-    //        DestroyImmediate(enemies.enemies[i]);
+    //        if (GameObject.Find(enemies.enemies[i].name) != true) {
+    //            Debug.Log("no enemies found.");
+    //            return false;
+    //        }
+    //        Debug.Log("Enemy " + i + " found!");
     //    }
+
+    //    return true;
     //}
 }
 
