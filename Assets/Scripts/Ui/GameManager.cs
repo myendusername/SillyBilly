@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
                 titleScreen.SetActive(true);
                 inputManager.enabled = false;
                 cameraSwitcher.enabled = false;
-                DestroyEnemies();
+                // DestroyEnemies();
                 break;
 
             // lock the cursor when we activate this state.
@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 inputManager.enabled = true;
                 cameraSwitcher.enabled = true;
+                UiManager.Instance.RespawnPlayer();
                 SpawnEnemies();
                 break;
 
@@ -71,13 +72,13 @@ public class GameManager : MonoBehaviour
     }
 
     // Destroy each of the enemies in the enemies list.
-    public void DestroyEnemies()
-    {
-        for (int i = 0; i < enemies.enemies.Length; i++)
-        {
-            DestroyImmediate(enemies.enemies[i]);
-        }
-    }
+    //public void DestroyEnemies()
+    //{
+    //    for (int i = 0; i < enemies.enemies.Length; i++)
+    //    {
+    //        DestroyImmediate(enemies.enemies[i]);
+    //    }
+    //}
 }
 
 // Serious Bobert's game states
