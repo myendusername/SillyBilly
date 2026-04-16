@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     public float walkSpeed = 5f;
     public float sprintSpeed = 1f;
     public float stamina = 50.0f;
+    public float maxStamina = 50f;
+    public float currentStamina = 50f;
     public float movementSmoothing = 20f;
 
     [Header("Jumping")]

@@ -53,6 +53,15 @@ public class InputManager : MonoBehaviour
         {
             cam.cameraPivot = character.GetComponent<PlayerLook>().cameraPivot;
         }
+        
+        // update health and stamina bars when switching characters
+        if (ActiveCharacterUI.instance != null)
+        {
+            ActiveCharacterUI.instance.SetActiveCharacter(
+            character.GetComponent<Health>(),
+            character.GetComponent<PlayerMovement>()
+        );
+        }
     }
 
     void FixedUpdate()
