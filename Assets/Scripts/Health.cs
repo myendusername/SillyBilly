@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int health = 20;
+    [SerializeField] public int health;
     private IDamageable damageable;
 
     public void Awake()

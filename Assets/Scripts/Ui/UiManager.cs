@@ -8,18 +8,22 @@ public class UiManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText, staminaText;
 
     public GameObject player;
-    private Health playerHealth;
+    private int playerHealth;
     private PlayerMovement playerMovement;
 
     private void Awake()
     {
-        playerHealth = player.GetComponent<Health>();
+
         playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
+    // Placing the player health assignment in update allows
+    // the health to change as the Health and IDamageable scripts
+    // do their work(?)
     void Update()
     {
+        playerHealth = player.GetComponent<Health>().health;
         TrackPlayer();
     }
 
@@ -29,7 +33,7 @@ public class UiManager : MonoBehaviour
         // to the player's current health and stamina stats.
         // Casting the numbers as ints so that we don't see
         // a bunch of unneeded decimal places for our stats
-        healthText.text = "Health: " + playerHealth.health;
+        healthText.text = "Health: " + playerHealth;
         staminaText.text = "Stamina: " + (int)playerMovement.stamina;
     }
 }
