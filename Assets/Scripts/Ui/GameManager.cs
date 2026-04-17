@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
                 titleScreen.SetActive(true);
                 inputManager.enabled = false;
                 cameraSwitcher.enabled = false;
-                DestroyEnemies();
                 break;
 
             // lock the cursor when we activate this state.
@@ -87,7 +86,7 @@ public class GameManager : MonoBehaviour
             float enemyY = GameObject.Find(enemies.enemies[i].name + "(Clone)").transform.position.y;
             Debug.Log(enemies.enemies[i].name + " y = " + enemyY);
             float enemyZ = GameObject.Find(enemies.enemies[i].name + "(Clone)").transform.position.z;
-            Debug.Log("enemy " + i + " z = " + enemyZ);
+            Debug.Log(enemies.enemies[i].name + " z = " + enemyZ);
             // This doesn't properly do its job yet and causes a dangerous crash
             // when the GameManager has a damage volume prefab in its enemyKiller field.
             // Instantiate(enemyKiller, new Vector3(enemyX, enemyY, enemyZ), Quaternion.identity);

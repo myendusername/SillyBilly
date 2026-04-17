@@ -23,6 +23,11 @@ public class Health : MonoBehaviour
         health = 100;
     }
 
+    public void SetDead()
+    {
+        health = 0;
+    }
+
     public Transform GetTransform()
     {
         return transform;
