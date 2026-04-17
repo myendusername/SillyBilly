@@ -72,25 +72,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Destroy each of the enemies in the enemies list,
-    // by getting each enemy's x,y,z position in their Transform component
-    // and then spawning a damage volume in each enemy to make them bust everywhere
-    // and thus not be able to hurt the player after they're already dead.
+    // Finds the enemy by its GameObject's name in the heirarchy,
+    // then destroys it. ACTUALLY WORKS NOW!!! Yippee!!!
     public void DestroyEnemies()
     {
         Debug.Log("I'm trying to kill enemies.");
         for (int i = 0; i < enemies.enemies.Length; i++)
         {
-            float enemyX = GameObject.Find(enemies.enemies[i].name + "(Clone)").transform.position.x;
-            Debug.Log(enemies.enemies[i].name + " x = " + enemyX);
-            float enemyY = GameObject.Find(enemies.enemies[i].name + "(Clone)").transform.position.y;
-            Debug.Log(enemies.enemies[i].name + " y = " + enemyY);
-            float enemyZ = GameObject.Find(enemies.enemies[i].name + "(Clone)").transform.position.z;
-            Debug.Log(enemies.enemies[i].name + " z = " + enemyZ);
-            // This doesn't properly do its job yet and causes a dangerous crash
-            // when the GameManager has a damage volume prefab in its enemyKiller field.
-            Instantiate(enemyKiller, new Vector3(enemyX, enemyY, enemyZ), Quaternion.identity);
-            Debug.Log(enemies.enemies[i].name + " killed by the GameManager!");
+            GameObject toDestroy = GameObject.Find(enemies.enemies[i].name + "(Clone)");
+            Destroy(toDestroy);
         }
     }
 
