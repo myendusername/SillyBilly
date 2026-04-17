@@ -42,13 +42,18 @@ public class UiManager : MonoBehaviour
         staminaText.text = "Stamina: " + (int)playerMovement.stamina;
     }
 
+    // Resets the player's health back to its full value
     public void RespawnPlayer() {
         player.GetComponent<Health>().SetHealth();
     }
 
+    // Changes the game mode to the title screen
+    // And makes sure weird crap doesn't happen like the player's
+    // HP dropping into the negatives
     public void GameOver() {
-        Debug.Log("Game over!");
+        // Debug.Log("Game over!");
         GameManager.Instance.ChangeState(GameState.TitleScreen);
+        player.GetComponent<Health>().SetDead();
         GameManager.Instance.DestroyEnemies();
     }
 }
