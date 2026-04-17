@@ -89,8 +89,8 @@ public class GameManager : MonoBehaviour
             Debug.Log(enemies.enemies[i].name + " z = " + enemyZ);
             // This doesn't properly do its job yet and causes a dangerous crash
             // when the GameManager has a damage volume prefab in its enemyKiller field.
-            // Instantiate(enemyKiller, new Vector3(enemyX, enemyY, enemyZ), Quaternion.identity);
-            Debug.Log(enemies.enemies[i].name + " " + i + " killed by the GameManager!");
+            Instantiate(enemyKiller, new Vector3(enemyX, enemyY, enemyZ), Quaternion.identity);
+            Debug.Log(enemies.enemies[i].name + " killed by the GameManager!");
         }
     }
 
