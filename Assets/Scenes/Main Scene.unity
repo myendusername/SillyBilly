@@ -1457,6 +1457,7 @@ MonoBehaviour:
   cameraSwitcher: {fileID: 841174559}
   enemies: {fileID: 11400000, guid: b1555ed3edcd2324fa706ba85722d214, type: 2}
   titleScreen: {fileID: 1317821081}
+  enemyKiller: {fileID: 6823071679160614654, guid: e4f3dcada980a974287b94b3697cf90a, type: 3}
 --- !u!1 &384721172
 GameObject:
   m_ObjectHideFlags: 0
