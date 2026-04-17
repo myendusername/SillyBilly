@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             // This doesn't properly do its job yet and causes a dangerous crash
             // when the GameManager has a damage volume prefab in its enemyKiller field.
             // Instantiate(enemyKiller, new Vector3(enemyX, enemyY, enemyZ), Quaternion.identity);
-            Debug.Log(enemies.enemies[i].name + " " + i + " killed by the GameManager!");
+            Debug.Log(enemies.enemies[i].name + " killed by the GameManager!");
         }
     }
 
