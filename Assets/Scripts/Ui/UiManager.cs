@@ -27,6 +27,9 @@ public class UiManager : MonoBehaviour
     {
         playerHealth = player.GetComponent<Health>().health;
         TrackPlayer();
+        if (playerHealth <= 0) {
+            GameOver();
+        }
     }
 
     public void TrackPlayer()
@@ -41,5 +44,11 @@ public class UiManager : MonoBehaviour
 
     public void RespawnPlayer() {
         player.GetComponent<Health>().SetHealth();
+    }
+
+    public void GameOver() {
+        Debug.Log("Game over!");
+        GameManager.Instance.ChangeState(GameState.TitleScreen);
+        GameManager.Instance.DestroyEnemies();
     }
 }

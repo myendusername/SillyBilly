@@ -81,13 +81,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("I'm trying to kill enemies.");
         for (int i = 0; i < enemies.enemies.Length; i++)
         {
-            float enemyX = enemies.enemies[i].transform.position.x;
-            Debug.Log(enemies.enemies[i].name + " " + i + " x = " + enemyX);
-            float enemyY = enemies.enemies[i].transform.position.y;
-            Debug.Log(enemies.enemies[i].name + " " + i + " y = " + enemyY);
-            float enemyZ = enemies.enemies[i].transform.position.z;
-            Debug.Log("enemy " + i + " z = " + enemyZ);
-            Instantiate(enemyKiller, new Vector3(enemyX, enemyY, enemyZ), Quaternion.identity);
+            float enemyX = GameObject.Find(enemies.enemies[i].name + "(Clone)").transform.position.x;
+            Debug.Log(enemies.enemies[i].name + " x = " + enemyX);
+            float enemyY = GameObject.Find(enemies.enemies[i].name + "(Clone)").transform.position.y;
+            Debug.Log(enemies.enemies[i].name + " y = " + enemyY);
+            float enemyZ = GameObject.Find(enemies.enemies[i].name + "(Clone)").transform.position.z;
+            Debug.Log(enemies.enemies[i].name + " z = " + enemyZ);
+            // This doesn't properly do its job yet and causes a dangerous crash
+            // when the GameManager has a damage volume prefab in its enemyKiller field.
+            // Instantiate(enemyKiller, new Vector3(enemyX, enemyY, enemyZ), Quaternion.identity);
             Debug.Log(enemies.enemies[i].name + " " + i + " killed by the GameManager!");
         }
     }
