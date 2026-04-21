@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
             collision.gameObject.GetComponent<Health>().TakeDamage(damage);
             // print("Hit " + collision.gameObject.name);
         }
-        GameObject impact = Instantiate(impactPrefab, this.transform.position, this.transform.rotation);
+        Instantiate(impactPrefab, this.transform.position, this.transform.rotation);
 
         Destroy(gameObject);
     }

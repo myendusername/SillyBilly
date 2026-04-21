@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   impactPrefab: {fileID: 2777990026923898669, guid: 8dd3106d1c3133549a67c6f338f7f678, type: 3}
-  impactLifetime: 3
+  projectileLifetime: 1
   damage: 10
+  tagToDetect: Enemy
 --- !u!96 &1304996322484750926
 TrailRenderer:
   serializedVersion: 4

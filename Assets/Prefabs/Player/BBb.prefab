@@ -225,7 +225,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 507463207597594315}
-  - component: {fileID: 3914336258716500458}
   m_Layer: 0
   m_Name: firePoint
   m_TagString: Untagged
@@ -245,16 +244,49 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.6, z: 1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 856342991853347905}
   m_Father: {fileID: 8997089509296717321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &3914336258716500458
+--- !u!1 &6402799405304771328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 856342991853347905}
+  - component: {fileID: 8757356445604987019}
+  m_Layer: 0
+  m_Name: Fire SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &856342991853347905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402799405304771328}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 507463207597594315}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &8757356445604987019
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6250988290457670880}
+  m_GameObject: {fileID: 6402799405304771328}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -407,7 +439,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -523,7 +555,7 @@ MonoBehaviour:
   gunArt: {fileID: 8688159110793655948}
   bulletPrefab: {fileID: 6823071679160614654, guid: f19fd8c45d7ab8c4080d2710b254da2c, type: 3}
   muzzleFlarePrefab: {fileID: 8829451551789304542, guid: 244b1cc8940bd0844a05812855fbe45d, type: 3}
-  firingAudio: {fileID: 3914336258716500458}
+  firingAudio: {fileID: 8757356445604987019}
   bulletLifetime: 0.1
   bulletSpeed: 0
   bulletDamage: 3

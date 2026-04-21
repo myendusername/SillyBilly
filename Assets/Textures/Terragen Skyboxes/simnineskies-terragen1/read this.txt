@@ -1,0 +1,6 @@
+the skies in the folder are files for a skybox.
+
+for them to work, simply copy all of the files in the folder into a sky folder 
+in a marble blast game.
+
+enjoy.

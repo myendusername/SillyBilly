@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33122b6edf80394ba1ce75e1d0e3f4d, type: 3}
   m_Name: Fast Enemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  health: 10
+  health: 30
   meleeAttack: 1
   meleeRange: 1.4
   meleeRadiusSize: 0.5
@@ -34,7 +34,7 @@ MonoBehaviour:
   cardinalMoveChance: 0
   diagonalMoveChance: 0.3
   updateRate: 0.2
-  speed: 8
+  speed: 9
   angularSpeed: 270
   acceleration: 14
   stoppingDistance: 1.2

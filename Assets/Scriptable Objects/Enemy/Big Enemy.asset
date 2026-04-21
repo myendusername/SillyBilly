@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33122b6edf80394ba1ce75e1d0e3f4d, type: 3}
   m_Name: Big Enemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  health: 45
+  health: 150
   meleeAttack: 1
   meleeRange: 2
   meleeRadiusSize: 0.8

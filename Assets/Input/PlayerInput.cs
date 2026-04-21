@@ -145,6 +145,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondaryShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""97734e97-4178-4d83-ab3d-5dfcb5cdfd3c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -378,6 +387,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8db12aae-0af3-4620-b19b-c467c5986e45"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3757f4be-e1d5-4c01-8bc9-48328a564781"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -392,6 +423,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Shoot = m_OnFoot.FindAction("Shoot", throwIfNotFound: true);
         m_OnFoot_SwitchCharacter = m_OnFoot.FindAction("SwitchCharacter", throwIfNotFound: true);
+        m_OnFoot_SecondaryShoot = m_OnFoot.FindAction("SecondaryShoot", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -478,6 +510,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Look;
     private readonly InputAction m_OnFoot_Shoot;
     private readonly InputAction m_OnFoot_SwitchCharacter;
+    private readonly InputAction m_OnFoot_SecondaryShoot;
     /// <summary>
     /// Provides access to input actions defined in input action map "OnFoot".
     /// </summary>
@@ -513,6 +546,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OnFoot/SwitchCharacter".
         /// </summary>
         public InputAction @SwitchCharacter => m_Wrapper.m_OnFoot_SwitchCharacter;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/SecondaryShoot".
+        /// </summary>
+        public InputAction @SecondaryShoot => m_Wrapper.m_OnFoot_SecondaryShoot;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -557,6 +594,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SwitchCharacter.started += instance.OnSwitchCharacter;
             @SwitchCharacter.performed += instance.OnSwitchCharacter;
             @SwitchCharacter.canceled += instance.OnSwitchCharacter;
+            @SecondaryShoot.started += instance.OnSecondaryShoot;
+            @SecondaryShoot.performed += instance.OnSecondaryShoot;
+            @SecondaryShoot.canceled += instance.OnSecondaryShoot;
         }
 
         /// <summary>
@@ -586,6 +626,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SwitchCharacter.started -= instance.OnSwitchCharacter;
             @SwitchCharacter.performed -= instance.OnSwitchCharacter;
             @SwitchCharacter.canceled -= instance.OnSwitchCharacter;
+            @SecondaryShoot.started -= instance.OnSecondaryShoot;
+            @SecondaryShoot.performed -= instance.OnSecondaryShoot;
+            @SecondaryShoot.canceled -= instance.OnSecondaryShoot;
         }
 
         /// <summary>
@@ -668,5 +711,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwitchCharacter(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SecondaryShoot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSecondaryShoot(InputAction.CallbackContext context);
     }
 }
