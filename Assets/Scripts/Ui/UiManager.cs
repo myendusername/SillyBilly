@@ -1,21 +1,22 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
     public static UiManager Instance;
 
-    // We drag and drop the canvas's text objects into these fields
+    // We drag and drop the canvas's slider objects into these fields
     // to connect them with this script
-    [SerializeField] private TextMeshProUGUI healthText, staminaText;
+    [SerializeField] private Slider healthBar, staminaBar;
 
     public GameObject player;
-    private int playerHealth;
+    private Health playerHealth;
     private PlayerMovement playerMovement;
 
     private void Awake()
     {
         Instance = this;
+        playerHealth = player.GetComponent<Health>();
         playerMovement = player.GetComponent<PlayerMovement>();
     }
 
@@ -25,37 +26,47 @@ public class UiManager : MonoBehaviour
     // do their work(?)
     void Update()
     {
-        playerHealth = player.GetComponent<Health>().health;
         TrackPlayer();
-        /**
-        if (playerHealth <= 0 && GameManager.Instance.GameState != GameState.TitleScreen) {
-            GameOver();
-        }
-        */
     }
 
     public void TrackPlayer()
     {
         // these set the health and stamina stats in the UI
         // to the player's current health and stamina stats.
-        // Casting the numbers as ints so that we don't see
-        // a bunch of unneeded decimal places for our stats
-        healthText.text = "Health: " + playerHealth;
-        staminaText.text = "Stamina: " + (int)playerMovement.stamina;
+        if (healthBar != null && playerHealth != null)
+        {
+            healthBar.maxValue = 100;
+            healthBar.value = playerHealth.health;
+        }
+
+        if (staminaBar != null && playerMovement != null)
+        {
+            staminaBar.maxValue = 50;
+            staminaBar.value = playerMovement.stamina;
+        }
     }
 
     // Resets the player's health back to its full value
-    public void RespawnPlayer() {
+    public void RespawnPlayer()
+    {
         player.GetComponent<Health>().SetHealth();
     }
 
     // Changes the game mode to the title screen
     // And makes sure weird crap doesn't happen like the player's
     // HP dropping into the negatives
-    public void GameOver() {
+    public void GameOver()
+    {
         // Debug.Log("Game over!");
         GameManager.Instance.ChangeState(GameState.TitleScreen);
         player.GetComponent<Health>().SetDead();
         GameManager.Instance.DestroyEnemies();
+    }
+
+    public void SetPlayer(GameObject newPlayer)
+    {
+        player = newPlayer;
+        playerHealth = newPlayer.GetComponent<Health>();
+        playerMovement = newPlayer.GetComponent<PlayerMovement>();
     }
 }
