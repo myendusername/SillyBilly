@@ -9,12 +9,18 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     public float walkSpeed = 5f;
     public float sprintSpeed = 1f;
     public float stamina = 50.0f;
+    public float maxStamina = 50f;
+    public float staminaDrainRate = 15f;
+    public float staminaRegenRate = 3f;
     public float movementSmoothing = 20f;
 
     [Header("Jumping")]
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
     private bool isGrounded;
+
+    // i wrote this
+    private bool isSprinting;
 
 
     void Awake()
@@ -30,6 +36,23 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     void Update()
     {
         isGrounded = charController.isGrounded;
+
+        // drain stamina when sprinting
+        if (isSprinting && stamina > 0)
+        {
+            stamina -= staminaDrainRate * Time.deltaTime;
+            stamina = Mathf.Clamp(stamina, 0, maxStamina);
+
+            // stop sprinting if out of stamina
+            if (stamina <= 0)
+                speed = walkSpeed;
+        }
+        // regen stamina when not sprinting
+        else if (!isSprinting && stamina < maxStamina)
+        {
+            stamina += staminaRegenRate * Time.deltaTime;
+            stamina = Mathf.Clamp(stamina, 0, maxStamina);
+        }
     }
 
     // Receive the inputs for our InputManager and apply them to our chracter controller.
@@ -64,7 +87,9 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     public void Sprint(bool sprintStatus)
     {
-        if (sprintStatus)
+        isSprinting = sprintStatus;
+
+        if (sprintStatus && stamina > 0)
         {
             speed = sprintSpeed;
         }
