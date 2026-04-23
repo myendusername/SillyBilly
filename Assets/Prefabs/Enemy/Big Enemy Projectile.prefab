@@ -97,9 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   impactPrefab: {fileID: 2777990026923898669, guid: 8dd3106d1c3133549a67c6f338f7f678, type: 3}
-  projectileLifetime: 0
-  damage: 10
-  tagToDetect: Enemy
+  projectileLifetime: 3
+  damage: 2
+  tagToDetect: 
 --- !u!96 &1304996322484750926
 TrailRenderer:
   serializedVersion: 4
@@ -268,7 +268,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9033798013245023416}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4711208715938537054, guid: 5912dfefe0182b74395cd78eaf45d788, type: 3}
 --- !u!23 &5066770701212680052
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -27,9 +27,11 @@ public class UiManager : MonoBehaviour
     {
         playerHealth = player.GetComponent<Health>().health;
         TrackPlayer();
+        /**
         if (playerHealth <= 0 && GameManager.Instance.GameState != GameState.TitleScreen) {
             GameOver();
         }
+        */
     }
 
     public void TrackPlayer()

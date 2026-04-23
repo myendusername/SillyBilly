@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Sparker
+  - Enhancer
   layers:
   - Default
   - TransparentFX
