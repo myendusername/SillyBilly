@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     public float jumpHeight = 3f;
     private bool isGrounded;
 
-    // i wrote this
     private bool isSprinting;
 
 
