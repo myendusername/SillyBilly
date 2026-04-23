@@ -41,15 +41,18 @@ public class InputManager : MonoBehaviour
                 {
                     case "1":
                         SetActiveCharacter(characters[0]);
-                        UiManager.Instance.player = characters[0];
+
+                        UiManager.Instance.SetPlayer(characters[0]);
                         break;
                     case "2":
                         SetActiveCharacter(characters[1]);
-                        UiManager.Instance.player = characters[1];
+
+                        UiManager.Instance.SetPlayer(characters[1]);
                         break;
                     case "3":
                         SetActiveCharacter(characters[2]);
-                        UiManager.Instance.player = characters[2];
+
+                        UiManager.Instance.SetPlayer(characters[2]);
                         break;
                 }
             };

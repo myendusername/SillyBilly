@@ -63,6 +63,7 @@ public class UiManager : MonoBehaviour
         GameManager.Instance.DestroyEnemies();
     }
 
+    // updates which character the bars are tracking
     public void SetPlayer(GameObject newPlayer)
     {
         player = newPlayer;
