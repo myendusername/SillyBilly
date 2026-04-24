@@ -68,8 +68,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackRadius
   sphereCollider: {fileID: 761957958344710555}
   oneShot: 1
+  damageOverTime: 0
   lifetime: 0.1
   damage: 1
+  damageDelay: 0
   layersToDetect:
     serializedVersion: 2
     m_Bits: 64

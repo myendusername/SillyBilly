@@ -651,6 +651,9 @@ MonoBehaviour:
   walkSpeed: 5
   sprintSpeed: 12
   stamina: 50
+  maxStamina: 50
+  staminaDrainRate: 10
+  staminaRegenRate: 8
   movementSmoothing: 18
   gravity: -9.8
   jumpHeight: 1
@@ -694,7 +697,7 @@ MonoBehaviour:
   horizontalSpread: 0
   verticalSpread: 0
   bulletAmount: 1
-  firePointForwardOffset: 2
+  firePointForwardOffset: 3
   allowHold: 1
   flamethrower: 1
   ammoText: {fileID: 0}

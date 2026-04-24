@@ -156,8 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034cff6f38841f1428d55c23a99c5170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UiManager
-  healthText: {fileID: 384721174}
-  staminaText: {fileID: 1558233250}
+  healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
   player: {fileID: 1284006479}
 --- !u!114 &86398770
 MonoBehaviour:
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Health: 50
+  m_text: 'Health: 100
 
 '
   m_isRightToLeft: 0
