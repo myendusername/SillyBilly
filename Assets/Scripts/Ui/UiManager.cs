@@ -44,6 +44,12 @@ public class UiManager : MonoBehaviour
             staminaBar.maxValue = 50;
             staminaBar.value = playerMovement.stamina;
         }
+
+        if (healthBar.value <= 0)
+        {
+            Debug.Log("GAME OVER!!!!!");
+            GameOver();
+        }
     }
 
     // Resets the player's health back to its full value
