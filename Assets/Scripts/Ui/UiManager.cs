@@ -1,23 +1,23 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
     public static UiManager Instance;
 
-    // We drag and drop the canvas's slider objects into these fields
-    // to connect them with this script
-    [SerializeField] private Slider healthBar, staminaBar;
-
+    public GameObject mainMenu;
     public GameObject player;
+    [SerializeField] private Slider healthBar, staminaBar;
+    public GameObject hurtFlash;
+
     private Health playerHealth;
     private PlayerMovement playerMovement;
 
     private void Awake()
     {
         Instance = this;
-        playerHealth = player.GetComponent<Health>();
-        playerMovement = player.GetComponent<PlayerMovement>();
+        SetPlayer(player);
     }
 
     // Update is called once per frame
@@ -35,17 +35,15 @@ public class UiManager : MonoBehaviour
         // to the player's current health and stamina stats.
         if (healthBar != null && playerHealth != null)
         {
-            healthBar.maxValue = 100;
             healthBar.value = playerHealth.health;
         }
 
         if (staminaBar != null && playerMovement != null)
         {
-            staminaBar.maxValue = 50;
             staminaBar.value = playerMovement.stamina;
         }
 
-        if (healthBar.value <= 0)
+        if (playerHealth.health <= 0)
         {
             Debug.Log("GAME OVER!!!!!");
             GameOver();
@@ -64,9 +62,10 @@ public class UiManager : MonoBehaviour
     public void GameOver()
     {
         // Debug.Log("Game over!");
-        GameManager.Instance.ChangeState(GameState.TitleScreen);
         player.GetComponent<Health>().SetDead();
         GameManager.Instance.DestroyEnemies();
+        GameManager.Instance.ChangeState(GameState.TitleScreen);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // updates which character the bars are tracking
@@ -75,5 +74,22 @@ public class UiManager : MonoBehaviour
         player = newPlayer;
         playerHealth = newPlayer.GetComponent<Health>();
         playerMovement = newPlayer.GetComponent<PlayerMovement>();
+    }
+
+    public void SetPlayerUi(bool status)
+    {
+        healthBar.gameObject.SetActive(status);
+        staminaBar.gameObject.SetActive(status);
+    }
+
+    public void SetMainMenu(bool status)
+    {
+        mainMenu.SetActive(status);
+    }
+
+    public void HurtFlash()
+    {
+        Animator hurtAnimator = hurtFlash.GetComponent<Animator>();
+        hurtAnimator.Play("Restart");
     }
 }

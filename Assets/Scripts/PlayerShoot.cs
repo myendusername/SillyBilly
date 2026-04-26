@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerShoot : MonoBehaviour
     public float bulletSpeed = 30f;
     public int bulletDamage = 2;
     public float shootingDelay = 0.2f;
+    public float burstDelay = 0f;
     [Tooltip("In degrees, used for both left and right separately.")]
     public float horizontalSpread = 0f;
     [Tooltip("In degrees, used for both up and down separately.")]
@@ -59,22 +61,24 @@ public class PlayerShoot : MonoBehaviour
         {
             if (readyToShoot && activeShooter)
             {
-                Shoot();
+                StartCoroutine(Shoot());
             }
         }
         else
         {
             if (readyToShoot && activeShooter)
             {
-                Shoot();
+                StartCoroutine(Shoot());
                 activeShooter = false;
             }
         }
     }
 
-    void Shoot()
+    public IEnumerator Shoot()
     {
         readyToShoot = false;
+
+        PlayFireSFX();
 
         for (int i = 0; i < bulletAmount; i++)
         {
@@ -100,8 +104,19 @@ public class PlayerShoot : MonoBehaviour
                 Projectile projectile = bullet.GetComponent<Projectile>();
                 projectile.Setup(bulletLifetime, bulletDamage, "Enemy");
             }
+            if (burstDelay > 0)
+            {
+                WaitForSeconds wait = new WaitForSeconds(burstDelay);
+                yield return wait;
+            }
+
         }
 
+        Invoke("ResetShot", shootingDelay);
+    }
+
+    private void PlayFireSFX()
+    {
         if (!flamethrower)
         {
             muzzleFlare.Play(true);
@@ -118,8 +133,6 @@ public class PlayerShoot : MonoBehaviour
                 firingAudio.Play();
             }
         }
-
-        Invoke("ResetShot", shootingDelay);
     }
 
     private void ResetShot()

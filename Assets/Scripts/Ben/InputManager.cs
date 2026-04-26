@@ -20,8 +20,14 @@ public class InputManager : MonoBehaviour
 
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
-
         SetActiveCharacter(characters[0]);
+
+        for (int i = 1; i < characters.Length; i++)
+        {
+            PlayerNpcController npcController = characters[i].GetComponent<PlayerNpcController>();
+            npcController.enabled = true;
+            npcController.SetNpcMode(true);
+        }
 
         // Callback Context
         onFoot.Jump.performed += ctx => mover.Jump();
@@ -36,28 +42,23 @@ public class InputManager : MonoBehaviour
 
         // Character switch callback
         onFoot.SwitchCharacter.performed += ctx =>
-            {
-                switch (ctx.control.name)
                 {
-                    case "1":
-                        SetActiveCharacter(characters[0]);
-
-                        UiManager.Instance.SetPlayer(characters[0]);
-                        break;
-                    case "2":
-                        SetActiveCharacter(characters[1]);
-
-
-
-                        UiManager.Instance.SetPlayer(characters[1]);
-                        break;
-                    case "3":
-                        SetActiveCharacter(characters[2]);
-
-                        UiManager.Instance.SetPlayer(characters[2]);
-                        break;
-                }
-            };
+                    switch (ctx.control.name)
+                    {
+                        case "1":
+                            SetActiveCharacter(characters[0]);
+                            UiManager.Instance.SetPlayer(characters[0]);
+                            break;
+                        case "2":
+                            SetActiveCharacter(characters[1]);
+                            UiManager.Instance.SetPlayer(characters[1]);
+                            break;
+                        case "3":
+                            SetActiveCharacter(characters[2]);
+                            UiManager.Instance.SetPlayer(characters[2]);
+                            break;
+                    }
+                };
     }
 
     public void SetActiveCharacter(GameObject character)
@@ -66,23 +67,39 @@ public class InputManager : MonoBehaviour
         {
             shooter.gunArt.SetActive(false);
             shooter.SetShooting(false);
-
-            // TEMP NULL EXCEPTION
-            if (secondaryShooter != null)
-            {
-                secondaryShooter.SetShooting(false);
-            }
         }
+
+        if (secondaryShooter)
+        {
+            secondaryShooter.SetShooting(false);
+        }
+
+        if (mover)
+        {
+            mover.Sprint(false);
+        }
+        if (activeCharacter)
+        {
+            PlayerNpcController oldNpcController = activeCharacter.GetComponent<PlayerNpcController>();
+            oldNpcController.enabled = true;
+            oldNpcController.SetNpcMode(true);
+        }
+
         activeCharacter = character;
+        PlayerNpcController newNpcController = activeCharacter.GetComponent<PlayerNpcController>();
+        newNpcController.SetNpcMode(false);
+        newNpcController.enabled = false;
+
         mover = character.GetComponent<PlayerMovement>();
         look = character.GetComponent<PlayerLook>();
         shooter = character.GetComponent<PlayerShoot>();
         secondaryShooter = character.GetComponent<PlayerSecondaryShoot>();
         shooter.gunArt.SetActive(true);
-        CameraSwitcher cam = Camera.main.GetComponent<CameraSwitcher>();
+        CameraManager cam = Camera.main.GetComponent<CameraManager>();
         if (cam != null)
         {
             cam.cameraPivot = character.GetComponent<PlayerLook>().cameraPivot;
+            cam.SetDefaultFovInstant();
         }
     }
 
@@ -105,5 +122,10 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         onFoot.Disable();
+    }
+
+    public PlayerMovement GetMover()
+    {
+        return mover;
     }
 }

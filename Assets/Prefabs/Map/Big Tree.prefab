@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3081867753033633153}
   - component: {fileID: 2343085933019524048}
-  - component: {fileID: 2074769370525089023}
+  - component: {fileID: 2581861659527020552}
   m_Layer: 0
   m_Name: Big Tree
   m_TagString: Untagged
@@ -150,7 +150,7 @@ CapsuleCollider:
   m_Height: 7
   m_Direction: 1
   m_Center: {x: 0, y: -0.5, z: 0}
---- !u!114 &2074769370525089023
+--- !u!114 &2581861659527020552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     private bool isSprinting;
 
+    private float movementMulti = 1f;
+    private float smoothingMulti = 1f;
+
 
     void Awake()
     {
@@ -44,7 +47,9 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
             // stop sprinting if out of stamina
             if (stamina <= 0)
-                speed = walkSpeed;
+            {
+                Sprint(false);
+            }
         }
         // regen stamina when not sprinting
         else if (!isSprinting && stamina < maxStamina)
@@ -59,10 +64,10 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     {
         Vector3 moveDirection = new Vector3(input.x, 0, input.y).normalized;
 
-        Vector3 targetVelocity = transform.TransformDirection(moveDirection) * speed;
+        Vector3 targetVelocity = transform.TransformDirection(moveDirection) * speed * movementMulti;
         Vector3 currentVelocity = new Vector3(charController.velocity.x, 0, charController.velocity.z);
 
-        Vector3 horizontalVelocity = Vector3.Lerp(currentVelocity, targetVelocity, movementSmoothing * Time.deltaTime);
+        Vector3 horizontalVelocity = Vector3.Lerp(currentVelocity, targetVelocity, movementSmoothing * Time.deltaTime * smoothingMulti);
 
         playerVelocity.x = horizontalVelocity.x;
         playerVelocity.z = horizontalVelocity.z;
@@ -91,16 +96,31 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         if (sprintStatus && stamina > 0)
         {
             speed = sprintSpeed;
+            GameManager.Instance.cameraMan.SetSprintFov();
         }
         else
         {
             speed = walkSpeed;
+            GameManager.Instance.cameraMan.SetDefaultFov();
         }
+    }
+
+    public void SetMovementMulti(float value)
+    {
+        movementMulti = value;
+    }
+
+    public void SetSmoothingMulti(float value)
+    {
+        smoothingMulti = value;
     }
 
     public void OnHurt()
     {
-        // Unused for now
+        if(this == InputManager.Instance.GetMover())
+        {
+            UiManager.Instance.HurtFlash();
+        }
     }
 
     public void OnDead()

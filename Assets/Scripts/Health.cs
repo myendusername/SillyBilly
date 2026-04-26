@@ -3,6 +3,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] public int health;
+    private bool invincible = false;
     private IDamageable damageable;
 
     public void Awake()
@@ -12,20 +13,33 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        if (invincible == false)
         {
-            damageable.OnDead();
+            health -= damage;
+            if (health <= 0)
+            {
+                damageable.OnDead();
+            }
+            else
+            {
+                damageable.OnHurt();
+            }
         }
     }
 
-    public void SetHealth() {
+    public void SetHealth()
+    {
         health = 100;
     }
 
     public void SetDead()
     {
         health = 0;
+    }
+
+    public void SetInvincible(bool value)
+    {
+        invincible = value;
     }
 
     public Transform GetTransform()

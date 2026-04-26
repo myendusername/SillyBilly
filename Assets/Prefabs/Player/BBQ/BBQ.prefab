@@ -524,6 +524,10 @@ GameObject:
   - component: {fileID: 3509616580681786582}
   - component: {fileID: 8619096538599971388}
   - component: {fileID: 5502086366087851559}
+  - component: {fileID: 548400290063286004}
+  - component: {fileID: 3852139188186252828}
+  - component: {fileID: 4914825898084673713}
+  - component: {fileID: 6176627398620098984}
   m_Layer: 6
   m_Name: BBQ
   m_TagString: Player
@@ -653,7 +657,7 @@ MonoBehaviour:
   stamina: 50
   maxStamina: 50
   staminaDrainRate: 10
-  staminaRegenRate: 8
+  staminaRegenRate: 10
   movementSmoothing: 18
   gravity: -9.8
   jumpHeight: 1
@@ -694,6 +698,7 @@ MonoBehaviour:
   bulletSpeed: 0
   bulletDamage: 3
   shootingDelay: 0.1
+  burstDelay: 0
   horizontalSpread: 0
   verticalSpread: 0
   bulletAmount: 1
@@ -723,6 +728,7 @@ MonoBehaviour:
   bulletSpeed: 18
   bulletDamage: 0
   shootingDelay: 5
+  burstDelay: 0
   horizontalSpread: 0
   verticalSpread: 0
   bulletAmount: 1
@@ -731,6 +737,96 @@ MonoBehaviour:
   flamethrower: 0
   ammoText: {fileID: 0}
   weaponText: {fileID: 0}
+--- !u!195 &548400290063286004
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313401731372534767}
+  m_Enabled: 0
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.5
+  m_Speed: 3
+  m_Acceleration: 10
+  avoidancePriority: 50
+  m_AngularSpeed: 180
+  m_StoppingDistance: 1.2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &3852139188186252828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313401731372534767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c288f7a7b8738478ee253a37c3bbf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNpcController
+  movement: {fileID: 4914825898084673713}
+  agent: {fileID: 548400290063286004}
+  attack: {fileID: 6176627398620098984}
+  data: {fileID: 11400000, guid: f39d2d810f31b554d9f5462e6df537c3, type: 2}
+  health: {fileID: 2250537251999533950}
+  spawnTime: 0.1
+  updateRate: 0.2
+--- !u!114 &4914825898084673713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313401731372534767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109da0f3b62aa0446a0cfab90c3d9304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcMovement
+  cardinalMoveChance: 0.33
+  diagonalMoveChance: 0.33
+  tooCloseRange: 0
+--- !u!114 &6176627398620098984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313401731372534767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d21a8b0cc259f498a1462e96690ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcAttack
+  attackPoint: {fileID: 507463207597594315}
+  meleeAttack: 0
+  meleeRange: 1.4
+  meleeRadiusSize: 0.5
+  meleeDelay: 0.3
+  meleeDamage: 4
+  damageVolumePrefab: {fileID: 0}
+  projectileAttack: 0
+  projectileMaxRange: 8
+  projectileMinRange: 0.5
+  projectileLifetime: 3
+  projectileDelay: 0.3
+  projectileDamage: 2
+  projectileSpeed: 20
+  horizontalSpread: 0
+  verticalSpread: 0
+  projectileAmount: 1
+  constantFire: 0
+  constantFireDelay: 0.1
+  projectilePrefab: {fileID: 0}
+  isFiring: 0
+  tooCloseRange: 0
 --- !u!1 &8688159110793655948
 GameObject:
   m_ObjectHideFlags: 0

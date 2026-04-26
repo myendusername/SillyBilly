@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 4046326818346180379}
   - component: {fileID: 2784346207287250772}
   - component: {fileID: 7586428067444180166}
-  - component: {fileID: 1887753317055410233}
+  - component: {fileID: 1775573875605284644}
   - component: {fileID: 4267823780486265271}
   m_Layer: 10
   m_Name: Basic Enemy
@@ -305,10 +305,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adcb623b34fdedb4ca61f51b793f5f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  movement: {fileID: 1887753317055410233}
+  movement: {fileID: 1775573875605284644}
   agent: {fileID: 4046326818346180379}
-  data: {fileID: 11400000, guid: 32081ed08b64a844588f401c2b8e4ce3, type: 2}
   attack: {fileID: 4267823780486265271}
+  data: {fileID: 11400000, guid: 32081ed08b64a844588f401c2b8e4ce3, type: 2}
   health: {fileID: 7586428067444180166}
   spawnTime: 0.5
   updateRate: 0.2
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 20
---- !u!114 &1887753317055410233
+--- !u!114 &1775573875605284644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,11 +334,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5634713419898172051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a0358e55455b164797f8fc964f6bd18, type: 3}
+  m_Script: {fileID: 11500000, guid: 109da0f3b62aa0446a0cfab90c3d9304, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  m_EditorClassIdentifier: Assembly-CSharp::NpcMovement
   cardinalMoveChance: 0.33
   diagonalMoveChance: 0.33
+  tooCloseRange: 0
 --- !u!114 &4267823780486265271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +373,7 @@ MonoBehaviour:
   constantFireDelay: 0.1
   projectilePrefab: {fileID: 0}
   isFiring: 0
+  tooCloseRange: 0
 --- !u!1 &5684759090643758676
 GameObject:
   m_ObjectHideFlags: 0

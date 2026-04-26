@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1833550478588517406}
   - component: {fileID: 2832508079094651076}
   m_Layer: 0
-  m_Name: Shoot SFX
+  m_Name: Fire SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 6481344621883368730}
   - component: {fileID: 1331727486128495743}
   m_Layer: 0
-  m_Name: Secondary Shoot SFX
+  m_Name: Secondary Fire SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -524,6 +524,10 @@ GameObject:
   - component: {fileID: 3509616580681786582}
   - component: {fileID: 8619096538599971388}
   - component: {fileID: 955483848852934316}
+  - component: {fileID: 7619580897767193419}
+  - component: {fileID: 5647858118773503330}
+  - component: {fileID: 5544796914882027548}
+  - component: {fileID: 1882702627120563668}
   m_Layer: 6
   m_Name: Serious Bobert
   m_TagString: Player
@@ -653,7 +657,7 @@ MonoBehaviour:
   stamina: 50
   maxStamina: 50
   staminaDrainRate: 10
-  staminaRegenRate: 8
+  staminaRegenRate: 10
   movementSmoothing: 18
   gravity: -9.8
   jumpHeight: 1
@@ -694,6 +698,7 @@ MonoBehaviour:
   bulletSpeed: 30
   bulletDamage: 3
   shootingDelay: 0.1
+  burstDelay: 0
   horizontalSpread: 0
   verticalSpread: 0
   bulletAmount: 1
@@ -719,10 +724,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8100077576245143569, guid: 2cb8dc5ed1aa8974180b47634825957f, type: 3}
   muzzleFlarePrefab: {fileID: 2206460110862230408, guid: 7eb55ab5b97ae304081a027f4bca953d, type: 3}
   firingAudio: {fileID: 1331727486128495743}
-  bulletLifetime: 4
+  bulletLifetime: 3
   bulletSpeed: 18
   bulletDamage: 0
   shootingDelay: 5
+  burstDelay: 0
   horizontalSpread: 0
   verticalSpread: 0
   bulletAmount: 1
@@ -731,6 +737,96 @@ MonoBehaviour:
   flamethrower: 0
   ammoText: {fileID: 0}
   weaponText: {fileID: 0}
+--- !u!195 &7619580897767193419
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313401731372534767}
+  m_Enabled: 0
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.5
+  m_Speed: 3
+  m_Acceleration: 10
+  avoidancePriority: 50
+  m_AngularSpeed: 180
+  m_StoppingDistance: 1.2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &5647858118773503330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313401731372534767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c288f7a7b8738478ee253a37c3bbf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNpcController
+  movement: {fileID: 5544796914882027548}
+  agent: {fileID: 7619580897767193419}
+  attack: {fileID: 1882702627120563668}
+  data: {fileID: 11400000, guid: c6729c2c532bea14eb3aef919c83cd80, type: 2}
+  health: {fileID: 2250537251999533950}
+  spawnTime: 0.1
+  updateRate: 0.2
+--- !u!114 &5544796914882027548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313401731372534767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109da0f3b62aa0446a0cfab90c3d9304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcMovement
+  cardinalMoveChance: 0.33
+  diagonalMoveChance: 0.33
+  tooCloseRange: 0
+--- !u!114 &1882702627120563668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313401731372534767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d21a8b0cc259f498a1462e96690ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcAttack
+  attackPoint: {fileID: 4977998208495775690}
+  meleeAttack: 0
+  meleeRange: 1.4
+  meleeRadiusSize: 0.5
+  meleeDelay: 0.3
+  meleeDamage: 4
+  damageVolumePrefab: {fileID: 0}
+  projectileAttack: 0
+  projectileMaxRange: 8
+  projectileMinRange: 0.5
+  projectileLifetime: 3
+  projectileDelay: 0.3
+  projectileDamage: 2
+  projectileSpeed: 20
+  horizontalSpread: 0
+  verticalSpread: 0
+  projectileAmount: 1
+  constantFire: 0
+  constantFireDelay: 0.1
+  projectilePrefab: {fileID: 0}
+  isFiring: 0
+  tooCloseRange: 0
 --- !u!1 &9161918302309623105
 GameObject:
   m_ObjectHideFlags: 0
