@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
