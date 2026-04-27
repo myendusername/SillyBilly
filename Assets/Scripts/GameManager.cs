@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public CameraManager cameraMan;
     public UiManager uiManager;
     [SerializeField] private EnemiesList enemies;
+    // private IEnumerator spawnDelay;
 
     private void Awake()
     {
@@ -48,7 +49,9 @@ public class GameManager : MonoBehaviour
                 cameraMan.enabled = true;
                 uiManager.SetMainMenu(false);
                 uiManager.SetPlayerUi(true);
-                SpawnEnemies();
+                // Apparently all IEnumerators have to be called with
+                // StartCoroutine(), not just normally.
+                StartCoroutine(SpawnEnemies());
                 break;
 
             default:
@@ -69,27 +72,38 @@ public class GameManager : MonoBehaviour
     }
 
     // Spawn each of the enemies in the enemies list.
-    public void SpawnEnemies()
+    // Spawn each of the enemies in the enemies list.
+    public IEnumerator SpawnEnemies()
     {
-        for (int i = 0; i < enemies.enemies.Length; i++)
+        int wave = 1;
+        while (GameState == GameState.GamePlay)
         {
-            // randomizing the spawn position a little bit...
-            float spawnX = Random.Range(-30, 30);
-            float spawnZ = Random.Range(-30, 30);
-
-            Vector3 spawnPosition = new Vector3(spawnX, 0, spawnZ);
-
-            NavMeshHit navHit;
-
-            // Try to get valid point on NavMesh
-            if (NavMesh.SamplePosition(spawnPosition, out navHit, 5f, NavMesh.AllAreas))
+            Debug.Log("Spawn wave " + wave);
+            for (int i = 0; i < enemies.enemies.Length; i++)
             {
-                Instantiate(enemies.enemies[i], navHit.position, Quaternion.identity);
+                // randomizing the spawn position a little bit...
+                float spawnX = Random.Range(-30, 30);
+                float spawnZ = Random.Range(-30, 30);
+
+                Vector3 spawnPosition = new Vector3(spawnX, 0, spawnZ);
+
+                NavMeshHit navHit;
+
+                // Try to get valid point on NavMesh
+                if (NavMesh.SamplePosition(spawnPosition, out navHit, 5f, NavMesh.AllAreas))
+                {
+                    Instantiate(enemies.enemies[i], navHit.position, Quaternion.identity);
+                }
+                else
+                {
+                    Debug.Log("Error spawning " + enemies.enemies[i]);
+                }
             }
-            else
-            {
-                Debug.Log("Error spawning " + enemies.enemies[i]);
-            }
+
+            // spawns enemies again after a bit of time.
+            // (5 seconds)
+            wave++;
+            yield return new WaitForSeconds(5.0f);
         }
     }
 
