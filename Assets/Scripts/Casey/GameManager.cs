@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public CameraManager cameraMan;
     public UiManager uiManager;
     [SerializeField] private EnemiesList enemies;
+    public int currentEnemiesNumber = 0;
+    private const int maxEnemiesNumber = 30;
     // private IEnumerator spawnDelay;
 
     private void Awake()
@@ -137,14 +139,19 @@ public class GameManager : MonoBehaviour
 
                 NavMeshHit navHit;
 
-                // Try to get valid point on NavMesh
-                if (NavMesh.SamplePosition(spawnPosition, out navHit, 5f, NavMesh.AllAreas))
+                // Try to get valid point on NavMesh,
+                // and also make sure there aren't TOO many enemies in the game.
+                if (NavMesh.SamplePosition(spawnPosition, out navHit, 5f, NavMesh.AllAreas)
+                       && currentEnemiesNumber < maxEnemiesNumber)
                 {
                     Instantiate(enemies.enemies[i], navHit.position, Quaternion.identity);
+                    currentEnemiesNumber++;
+                    Debug.Log("There are currently " + currentEnemiesNumber + " enemies in the game.");
                 }
                 else
                 {
                     Debug.Log("Error spawning " + enemies.enemies[i]);
+                    Debug.Log("There are currently " + currentEnemiesNumber + " enemies in the game.");
                 }
             }
 
