@@ -14,7 +14,7 @@ public class UiManager : MonoBehaviour
     private Health playerHealth;
     private PlayerMovement playerMovement;
 
-    private string selectedCharacter;
+    private string selectedCharacter = "";
 
     private void Awake()
     {

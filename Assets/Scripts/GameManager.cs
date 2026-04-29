@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
             // lock the cursor when we activate this state.
             // spawn the enemies in.
             case GameState.GamePlay:
+                SpawnPlayer();
                 Cursor.lockState = CursorLockMode.Locked;
                 inputManager.enabled = true;
                 cameraMan.enabled = true;
@@ -51,7 +52,6 @@ public class GameManager : MonoBehaviour
                 uiManager.SetPlayerUi(true);
                 // Apparently all IEnumerators have to be called with
                 // StartCoroutine(), not just normally.
-                SpawnPlayer();
                 StartCoroutine(SpawnEnemies());
                 break;
 
@@ -64,8 +64,11 @@ public class GameManager : MonoBehaviour
     // according to the character that the player has selected
     // on the title screen.
     public void SpawnPlayer() {
+        // gets data for the character the player selects
         string firstCharacter = UiManager.Instance.getSelected();
         Debug.Log("Selected character: " + firstCharacter);
+
+        // uses that data to decide who to spawn in as the player character
         switch (firstCharacter)
         {
             case "Serious Bobert":
@@ -83,14 +86,29 @@ public class GameManager : MonoBehaviour
                 UiManager.Instance.SetPlayer(InputManager.Instance.characters[2]);
                 Debug.Log("You're BBQ!");
                 break;
+
+            // handles errors or something idk
+            default:
+                ChangeState(GameState.TitleScreen);
+                Debug.Log("Error in spawning the player in...");
+                break;
         }
     }
 
     // Change the gamemode to GamePlay
     public void StartGame()
     {
-        ChangeState(GameState.GamePlay);
-        Debug.Log("The game has BEGUN!!!");
+        string firstCharacter = UiManager.Instance.getSelected();
+        if (firstCharacter == "Serious Bobert" || firstCharacter == "Bobdi" || firstCharacter == "BBQ")
+        {
+            ChangeState(GameState.GamePlay);
+            Debug.Log("The game has BEGUN!!!");
+        }
+        else {
+            // handles cases in which the player is a devious mf
+            // and chooses not to select a character before pressing play
+            Debug.Log("Please select a character before playing.");
+        }
     }
 
     public void QuitGame()
