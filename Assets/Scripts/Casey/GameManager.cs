@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public CameraManager cameraMan;
     public UiManager uiManager;
     [SerializeField] private EnemiesList enemies;
-    public int currentEnemiesNumber;
-    private const int maxEnemiesNumber = 30;
+    //public int currentEnemiesNumber;
+    //private const int maxEnemiesNumber = 30;
     // private IEnumerator spawnDelay;
 
     private void Awake()
@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
                 cameraMan.enabled = false;
                 uiManager.SetMainMenu(true);
                 uiManager.SetPlayerUi(false);
-                currentEnemiesNumber = 0;
-                Debug.Log("We're at the title screen. There are currently " + currentEnemiesNumber + " enemies in the game.");
+                //currentEnemiesNumber = 0;
+                //Debug.Log("We're at the title screen. There are currently " + currentEnemiesNumber + " enemies in the game.");
                 break;
 
             // lock the cursor when we activate this state.
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
 
     // Spawn each of the enemies in the enemies list.
     // This method spawns in enemies in waves. Currently,
-    // enemies spawn in every 5 seconds.
+    // enemies spawn in every 15 seconds.
     public IEnumerator SpawnEnemies()
     {
         int wave = 1;
@@ -136,31 +136,28 @@ public class GameManager : MonoBehaviour
                 // randomizing the spawn position a little bit...
                 float spawnX = Random.Range(-30, 30);
                 float spawnZ = Random.Range(-30, 30);
-
                 Vector3 spawnPosition = new Vector3(spawnX, 0, spawnZ);
 
                 NavMeshHit navHit;
 
                 // Try to get valid point on NavMesh,
                 // and also make sure there aren't TOO many enemies in the game.
-                if (NavMesh.SamplePosition(spawnPosition, out navHit, 5f, NavMesh.AllAreas)
-                       && currentEnemiesNumber < maxEnemiesNumber)
+                if (NavMesh.SamplePosition(spawnPosition, out navHit, 5f, NavMesh.AllAreas))
                 {
                     Instantiate(enemies.enemies[i], navHit.position, Quaternion.identity);
-                    currentEnemiesNumber++;
-                    Debug.Log("There are currently " + currentEnemiesNumber + " enemies in the game.");
+                    //currentEnemiesNumber++;
                 }
                 else
                 {
                     Debug.Log("Error spawning " + enemies.enemies[i]);
-                    Debug.Log("There are currently " + currentEnemiesNumber + " enemies in the game.");
                 }
             }
 
             // spawns enemies again after a bit of time.
-            // (5 seconds)
+            // (20 seconds)
             wave++;
-            yield return new WaitForSeconds(5.0f);
+            //Debug.Log("There are currently " + currentEnemiesNumber + " enemies in the game.");
+            yield return new WaitForSeconds(15.0f);
         }
     }
 

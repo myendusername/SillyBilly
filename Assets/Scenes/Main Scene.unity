@@ -259,6 +259,7 @@ MonoBehaviour:
   player: {fileID: 1284006479}
   healthBar: {fileID: 1697984773}
   staminaBar: {fileID: 1966515493}
+  playerWeapon: {fileID: 1983239772}
   hurtFlash: {fileID: 17186786}
   characterBio: {fileID: 1993956622}
   characterSelectionPrompt: {fileID: 297917262}
@@ -7939,7 +7940,7 @@ GameObject:
   - component: {fileID: 1983239775}
   - component: {fileID: 1983239774}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Player's weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
