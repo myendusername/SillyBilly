@@ -260,9 +260,6 @@ MonoBehaviour:
   healthBar: {fileID: 1697984773}
   staminaBar: {fileID: 1966515493}
   hurtFlash: {fileID: 17186786}
-  seriousBobert: {fileID: 0}
-  bobdi: {fileID: 0}
-  bbq: {fileID: 0}
 --- !u!114 &86398770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6887,7 +6884,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 86398769}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: SelectBobdi
+        m_MethodName: SelectBBQ
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

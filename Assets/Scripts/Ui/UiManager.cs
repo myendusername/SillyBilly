@@ -14,12 +14,7 @@ public class UiManager : MonoBehaviour
     private Health playerHealth;
     private PlayerMovement playerMovement;
 
-    // Giving the UiManager awareness of the buttons
-    // for selecting each character
-    public Button seriousBobert;
-    public Button bobdi;
-    public Button bbq;
-    private Button selectedButton;
+    private string selectedCharacter;
 
     private void Awake()
     {
@@ -67,22 +62,22 @@ public class UiManager : MonoBehaviour
     // On Click() method to control which character is the
     // selected character.
     public void SelectSeriousBobert() {
-        selectedButton = seriousBobert;
+        selectedCharacter = "Serious Bobert";
         Debug.Log("You've selected Serious Bobert.");
     }
     public void SelectBobdi()
     {
-        selectedButton = bobdi;
+        selectedCharacter = "Bobdi";
         Debug.Log("You've selected Bobdi.");
     }
     public void SelectBBQ()
     {
-        selectedButton = bbq;
+        selectedCharacter = "BBQ";
         Debug.Log("You've selected BBQ.");
     }
     // Gets which button is currently selected
-    public Button getSelected() { 
-        return selectedButton;
+    public string getSelected() { 
+        return selectedCharacter;
     }
 
     // Changes the game mode to the title screen

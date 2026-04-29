@@ -20,13 +20,21 @@ public class InputManager : MonoBehaviour
 
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
-        SetActiveCharacter(characters[0]);
 
-        for (int i = 1; i < characters.Length; i++)
+        // SetActiveCharacter(characters[0]);
+
+        // modifying the for loop to suit cases where players 
+        // do not select characters[0] at first.
+        for (int i = 0; i < characters.Length; i++)
         {
-            PlayerNpcController npcController = characters[i].GetComponent<PlayerNpcController>();
-            npcController.enabled = true;
-            npcController.SetNpcMode(true);
+            if (characters[i] != UiManager.Instance.player) {
+                PlayerNpcController npcController = characters[i].GetComponent<PlayerNpcController>();
+                npcController.enabled = true;
+                npcController.SetNpcMode(true);
+            }     
+            //PlayerNpcController npcController = characters[i].GetComponent<PlayerNpcController>();
+            //npcController.enabled = true;
+            //npcController.SetNpcMode(true);
         }
 
         // Callback Context

@@ -51,11 +51,38 @@ public class GameManager : MonoBehaviour
                 uiManager.SetPlayerUi(true);
                 // Apparently all IEnumerators have to be called with
                 // StartCoroutine(), not just normally.
+                SpawnPlayer();
                 StartCoroutine(SpawnEnemies());
                 break;
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+        }
+    }
+
+    // Setting the character the player starts as in the game
+    // according to the character that the player has selected
+    // on the title screen.
+    public void SpawnPlayer() {
+        string firstCharacter = UiManager.Instance.getSelected();
+        Debug.Log("Selected character: " + firstCharacter);
+        switch (firstCharacter)
+        {
+            case "Serious Bobert":
+                InputManager.Instance.SetActiveCharacter(InputManager.Instance.characters[0]);
+                UiManager.Instance.SetPlayer(InputManager.Instance.characters[0]);
+                Debug.Log("You're Serious Bobert!");
+                break;
+            case "Bobdi":
+                InputManager.Instance.SetActiveCharacter(InputManager.Instance.characters[1]);
+                UiManager.Instance.SetPlayer(InputManager.Instance.characters[1]);
+                Debug.Log("You're Bobdi!");
+                break;
+            case "BBQ":
+                InputManager.Instance.SetActiveCharacter(InputManager.Instance.characters[2]);
+                UiManager.Instance.SetPlayer(InputManager.Instance.characters[2]);
+                Debug.Log("You're BBQ!");
+                break;
         }
     }
 
