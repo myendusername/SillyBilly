@@ -11,6 +11,10 @@ public class UiManager : MonoBehaviour
     public GameObject player;
     [SerializeField] private Slider healthBar, staminaBar;
     public GameObject hurtFlash;
+
+    // The UI's text fields
+    public const string characterBioBegin = "Bio: ";
+    public TextMeshProUGUI characterBio;
     public TextMeshProUGUI characterSelectionPrompt;
 
     private Health playerHealth;
@@ -22,6 +26,7 @@ public class UiManager : MonoBehaviour
     {
         Instance = this;
         SetPlayer(player);
+        characterBio.text = characterBioBegin;
     }
 
     // Update is called once per frame
@@ -62,19 +67,26 @@ public class UiManager : MonoBehaviour
 
     // These three buttons are called by each character's button's
     // On Click() method to control which character is the
-    // selected character.
+    // selected character. With each selection, the character bio
+    // changes to describe the selected character.
     public void SelectSeriousBobert() {
         selectedCharacter = "Serious Bobert";
+        characterBio.text = characterBioBegin;
+        characterBio.text += "This guy can rapid fire bullets at enemies to deal some SERIOUS dps!";
         Debug.Log("You've selected Serious Bobert.");
     }
     public void SelectBobdi()
     {
         selectedCharacter = "Bobdi";
+        characterBio.text = characterBioBegin;
+        characterBio.text += "Bobdi has a very powerful shotgun that can blow enemies away at point blank!";
         Debug.Log("You've selected Bobdi.");
     }
     public void SelectBBQ()
     {
         selectedCharacter = "BBQ";
+        characterBio.text = characterBioBegin;
+        characterBio.text += "BBQ can roast enemies over time by breathing out corrosive gasses!";
         Debug.Log("You've selected BBQ.");
     }
     // Gets which button is currently selected
