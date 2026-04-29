@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour
     }
 
     // Spawn each of the enemies in the enemies list.
-    // Spawn each of the enemies in the enemies list.
+    // This method spawns in enemies in waves. Currently,
+    // enemies spawn in every 5 seconds.
     public IEnumerator SpawnEnemies()
     {
         int wave = 1;

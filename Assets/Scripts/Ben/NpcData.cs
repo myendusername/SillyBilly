@@ -64,6 +64,9 @@ public class NpcData : ScriptableObject
     public float height = 2f;
     public int avoidancePriority = 50;
 
+    [Header("Enemy Spawning Weights")]
+    public float spawnChanceMultiplier = 1f;
+
     // -1 means everything
     public int areaMask = -1;
 

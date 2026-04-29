@@ -14,6 +14,13 @@ public class UiManager : MonoBehaviour
     private Health playerHealth;
     private PlayerMovement playerMovement;
 
+    // Giving the UiManager awareness of the buttons
+    // for selecting each character
+    public Button seriousBobert;
+    public Button bobdi;
+    public Button bbq;
+    private Button selectedButton;
+
     private void Awake()
     {
         Instance = this;
@@ -54,6 +61,28 @@ public class UiManager : MonoBehaviour
     public void RespawnPlayer()
     {
         player.GetComponent<Health>().SetHealth();
+    }
+
+    // These three buttons are called by each character's button's
+    // On Click() method to control which character is the
+    // selected character.
+    public void SelectSeriousBobert() {
+        selectedButton = seriousBobert;
+        Debug.Log("You've selected Serious Bobert.");
+    }
+    public void SelectBobdi()
+    {
+        selectedButton = bobdi;
+        Debug.Log("You've selected Bobdi.");
+    }
+    public void SelectBBQ()
+    {
+        selectedButton = bbq;
+        Debug.Log("You've selected BBQ.");
+    }
+    // Gets which button is currently selected
+    public Button getSelected() { 
+        return selectedButton;
     }
 
     // Changes the game mode to the title screen
