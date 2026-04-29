@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class UiManager : MonoBehaviour
     public GameObject player;
     [SerializeField] private Slider healthBar, staminaBar;
     public GameObject hurtFlash;
+    public TextMeshProUGUI characterSelectionPrompt;
 
     private Health playerHealth;
     private PlayerMovement playerMovement;

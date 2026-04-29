@@ -260,6 +260,7 @@ MonoBehaviour:
   healthBar: {fileID: 1697984773}
   staminaBar: {fileID: 1966515493}
   hurtFlash: {fileID: 17186786}
+  characterSelectionPrompt: {fileID: 297917262}
 --- !u!114 &86398770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1231,15 +1232,15 @@ RectTransform:
   m_GameObject: {fileID: 297917260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8779099, y: 0.8779099, z: 0.43895495}
+  m_LocalScale: {x: 0.94515777, y: 0.94515777, z: 0.47257888}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1555853694}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 143}
-  m_SizeDelta: {x: 450, y: 80}
+  m_AnchoredPosition: {x: 0.9724, y: 143}
+  m_SizeDelta: {x: 1054.8341, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &297917262
 MonoBehaviour:

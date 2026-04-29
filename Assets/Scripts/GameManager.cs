@@ -106,7 +106,9 @@ public class GameManager : MonoBehaviour
         }
         else {
             // handles cases in which the player is a devious mf
-            // and chooses not to select a character before pressing play
+            // and chooses not to select a character before pressing play.
+            // Tells them (and us in the console) that they need to select a character
+            UiManager.Instance.characterSelectionPrompt.text = "Please select a character before playing.";
             Debug.Log("Please select a character before playing.");
         }
     }
