@@ -28,9 +28,10 @@ public class PlayerShoot : MonoBehaviour
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI weaponText;
 
-
     private bool activeShooter;
     private bool readyToShoot;
+    // i wrote this
+    private float cooldownTimer = 0f;
 
     private GameObject muzzleFlareObject;
     private ParticleSystem muzzleFlare;
@@ -57,6 +58,10 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
+        // count up while on cooldown
+        if (!readyToShoot)
+            cooldownTimer += Time.deltaTime;
+
         if (allowHold)
         {
             if (readyToShoot && activeShooter)
@@ -109,7 +114,6 @@ public class PlayerShoot : MonoBehaviour
                 WaitForSeconds wait = new WaitForSeconds(burstDelay);
                 yield return wait;
             }
-
         }
 
         Invoke("ResetShot", shootingDelay);
@@ -138,6 +142,8 @@ public class PlayerShoot : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
+        // new
+        cooldownTimer = 0f;
     }
 
     public void SetShooting(bool state)
@@ -149,5 +155,11 @@ public class PlayerShoot : MonoBehaviour
         }
 
         activeShooter = state;
+    }
+
+    // returns 0 to 1 for cooldown progress
+    public float GetCooldownProgress()
+    {
+        return readyToShoot ? 1f : Mathf.Clamp01(cooldownTimer / shootingDelay);
     }
 }

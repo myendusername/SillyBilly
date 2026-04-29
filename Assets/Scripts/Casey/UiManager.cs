@@ -10,6 +10,9 @@ public class UiManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject player;
     [SerializeField] private Slider healthBar, staminaBar;
+    //new
+    public Image secondaryCooldownImage;
+    private PlayerSecondaryShoot activeSecondaryShooter;
     [SerializeField] private GameObject playerWeapon;
     // [SerializeField] private TextMeshProUGUI healthText, staminaText;
     public GameObject hurtFlash;
@@ -38,6 +41,11 @@ public class UiManager : MonoBehaviour
     void Update()
     {
         TrackPlayer();
+        //new
+        if (secondaryCooldownImage != null && activeSecondaryShooter != null)
+{
+    secondaryCooldownImage.fillAmount = activeSecondaryShooter.GetCooldownProgress();
+}
     }
 
     public void TrackPlayer()
@@ -114,6 +122,8 @@ public class UiManager : MonoBehaviour
         player = newPlayer;
         playerHealth = newPlayer.GetComponent<Health>();
         playerMovement = newPlayer.GetComponent<PlayerMovement>();
+        //new
+        activeSecondaryShooter = newPlayer.GetComponent<PlayerSecondaryShoot>();
     }
 
     public void SetPlayerUi(bool status)
@@ -121,6 +131,9 @@ public class UiManager : MonoBehaviour
         healthBar.gameObject.SetActive(status);
         staminaBar.gameObject.SetActive(status);
         playerWeapon.SetActive(status);
+        //new
+        if (secondaryCooldownImage != null)
+        secondaryCooldownImage.gameObject.SetActive(status);
         //healthText.gameObject.SetActive(status);
         //staminaText.gameObject.SetActive(status);
     }
