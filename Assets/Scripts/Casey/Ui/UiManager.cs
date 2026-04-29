@@ -10,6 +10,7 @@ public class UiManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject player;
     [SerializeField] private Slider healthBar, staminaBar;
+    // [SerializeField] private TextMeshProUGUI healthText, staminaText;
     public GameObject hurtFlash;
 
     // The UI's text fields
@@ -118,6 +119,8 @@ public class UiManager : MonoBehaviour
     {
         healthBar.gameObject.SetActive(status);
         staminaBar.gameObject.SetActive(status);
+        //healthText.gameObject.SetActive(status);
+        //staminaText.gameObject.SetActive(status);
     }
 
     public void SetMainMenu(bool status)

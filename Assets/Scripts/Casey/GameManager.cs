@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public CameraManager cameraMan;
     public UiManager uiManager;
     [SerializeField] private EnemiesList enemies;
-    public int currentEnemiesNumber = 0;
+    public int currentEnemiesNumber;
     private const int maxEnemiesNumber = 30;
     // private IEnumerator spawnDelay;
 
@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
                 cameraMan.enabled = false;
                 uiManager.SetMainMenu(true);
                 uiManager.SetPlayerUi(false);
+                currentEnemiesNumber = 0;
+                Debug.Log("We're at the title screen. There are currently " + currentEnemiesNumber + " enemies in the game.");
                 break;
 
             // lock the cursor when we activate this state.
