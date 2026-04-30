@@ -82,21 +82,21 @@ public class UiManager : MonoBehaviour
     public void SelectSeriousBobert() {
         selectedCharacter = "Serious Bobert";
         characterBio.text = characterBioBegin;
-        characterBio.text += "This guy can rapid fire bullets at enemies to deal some SERIOUS dps!";
+        characterBio.text += "This guy can rapid fire bullets at enemies to deal some SERIOUS dps! He also has a very SMELLY secret power...";
         Debug.Log("You've selected Serious Bobert.");
     }
     public void SelectBobdi()
     {
         selectedCharacter = "Bobdi";
         characterBio.text = characterBioBegin;
-        characterBio.text += "Bobdi has a very powerful shotgun that can blow enemies away at point blank!";
+        characterBio.text += "Bobdi's shotgun is devastating up close. Ride his oil slicks to rushdown enemies and deal huge bursts of damage!";
         Debug.Log("You've selected Bobdi.");
     }
     public void SelectBBQ()
     {
         selectedCharacter = "BBQ";
         characterBio.text = characterBioBegin;
-        characterBio.text += "BBQ can roast enemies over time by breathing out corrosive gasses!";
+        characterBio.text += "He's a cunning fire elemental who can also cast walls of light. His flames may react violently with other substances...";
         Debug.Log("You've selected BBQ.");
     }
     // Gets which button is currently selected
