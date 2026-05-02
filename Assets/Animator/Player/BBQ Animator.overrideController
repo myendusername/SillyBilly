@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BBQ Animator
+  m_Controller: {fileID: 9100000, guid: 935885c44d28743f79addaf3e50a7630, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b045cf8cf8ced984c9df1fd3e0eae962, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: af60a13703bd84012a4a5388b70e3258, type: 2}

@@ -1,4 +1,3 @@
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -8,11 +7,11 @@ public class CameraManager : MonoBehaviour
     public float sprintFov = 70f;
     private float targetFov;
 
-    private Camera[] cameras;
+    private Camera cam;
 
     void Awake()
     {
-        cameras = GetComponentsInChildren<Camera>();
+        cam = GetComponent<Camera>();
         targetFov = defaultFov;
     }
 
@@ -26,10 +25,7 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        foreach (Camera cam in cameras)
-        {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFov, 10f * Time.deltaTime);
-        }
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFov, 10f * Time.deltaTime);
     }
 
     public void SetSprintFov()
@@ -44,9 +40,6 @@ public class CameraManager : MonoBehaviour
 
     public void SetDefaultFovInstant()
     {
-        foreach (Camera cam in cameras)
-        {
-            cam.fieldOfView = defaultFov;
-        }
+        cam.fieldOfView = defaultFov;
     }
 }

@@ -5,7 +5,7 @@ using System.Collections;
 public class PlayerShoot : MonoBehaviour
 {
     public Transform firePoint;
-    public GameObject gunArt;
+    public GameObject weaponArt;
     public GameObject bulletPrefab;
     public GameObject muzzleFlarePrefab;
     public AudioSource firingAudio;
@@ -25,7 +25,6 @@ public class PlayerShoot : MonoBehaviour
     public bool flamethrower = false;
 
     // bad Ui cause i don't know how to do it
-    public TextMeshProUGUI ammoText;
     public TextMeshProUGUI weaponText;
 
     private bool activeShooter;
@@ -41,14 +40,10 @@ public class PlayerShoot : MonoBehaviour
     {
         muzzleFlareObject = Instantiate(muzzleFlarePrefab, firePoint.position, firePoint.rotation, firePoint);
         muzzleFlare = muzzleFlareObject.GetComponent<ParticleSystem>();
-        gunArt.SetActive(false);
-        SetWeaponStats();
-    }
-
-    void SetWeaponStats()
-    {
-        readyToShoot = true;
-        if (ammoText != null) ammoText.text = "∞";
+        if (weaponArt)
+        {
+            weaponArt.SetActive(false);
+        }
     }
 
     private void Start()

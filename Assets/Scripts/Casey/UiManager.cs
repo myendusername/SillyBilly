@@ -43,9 +43,9 @@ public class UiManager : MonoBehaviour
         TrackPlayer();
         //new
         if (secondaryCooldownImage != null && activeSecondaryShooter != null)
-{
-    secondaryCooldownImage.fillAmount = activeSecondaryShooter.GetCooldownProgress();
-}
+        {
+            secondaryCooldownImage.fillAmount = activeSecondaryShooter.GetCooldownProgress();
+        }
     }
 
     public void TrackPlayer()
@@ -79,7 +79,8 @@ public class UiManager : MonoBehaviour
     // On Click() method to control which character is the
     // selected character. With each selection, the character bio
     // changes to describe the selected character.
-    public void SelectSeriousBobert() {
+    public void SelectSeriousBobert()
+    {
         selectedCharacter = "Serious Bobert";
         characterBio.text = characterBioBegin;
         characterBio.text += "This guy can rapid fire bullets at enemies to deal some SERIOUS dps! He also has a very SMELLY secret power...";
@@ -100,7 +101,8 @@ public class UiManager : MonoBehaviour
         Debug.Log("You've selected BBQ.");
     }
     // Gets which button is currently selected
-    public string getSelected() { 
+    public string getSelected()
+    {
         return selectedCharacter;
     }
 
@@ -130,10 +132,13 @@ public class UiManager : MonoBehaviour
     {
         healthBar.gameObject.SetActive(status);
         staminaBar.gameObject.SetActive(status);
-        playerWeapon.SetActive(status);
+        if (playerWeapon)
+        {
+            playerWeapon.SetActive(status);
+        }
         //new
         if (secondaryCooldownImage != null)
-        secondaryCooldownImage.gameObject.SetActive(status);
+            secondaryCooldownImage.gameObject.SetActive(status);
         //healthText.gameObject.SetActive(status);
         //staminaText.gameObject.SetActive(status);
     }

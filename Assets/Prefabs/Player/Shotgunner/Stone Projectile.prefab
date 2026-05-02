@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4049053521165149671}
   - component: {fileID: 1304996322484750926}
   m_Layer: 8
-  m_Name: Shotgun Bullet
+  m_Name: Stone Projectile
   m_TagString: Sparker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca45017275bcfa945bb5c30e02905efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  impactPrefab: {fileID: 2777990026923898669, guid: 8dd3106d1c3133549a67c6f338f7f678, type: 3}
+  impactPrefab: {fileID: 2777990026923898669, guid: deb60724625238c498ac84aa07c5bc34, type: 3}
   projectileLifetime: 3
   damage: 2
   tagToDetect: 
@@ -167,15 +167,6 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.05
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 1
         value: 0
         inSlope: 0
@@ -189,8 +180,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.54901963, b: 0.3137255, a: 1}
-      key1: {r: 1, g: 0.78431374, b: 0.3137255, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 0.627451}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -206,7 +197,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 6554
+      atime1: 65535
       atime2: 65535
       atime3: 65535
       atime4: 0
@@ -216,7 +207,7 @@ TrailRenderer:
       m_Mode: 0
       m_ColorSpace: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 3
+      m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0

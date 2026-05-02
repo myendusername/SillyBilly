@@ -73,7 +73,7 @@ public class InputManager : MonoBehaviour
     {
         if (shooter)
         {
-            shooter.gunArt.SetActive(false);
+            shooter.weaponArt.SetActive(false);
             shooter.SetShooting(false);
         }
 
@@ -102,7 +102,7 @@ public class InputManager : MonoBehaviour
         look = character.GetComponent<PlayerLook>();
         shooter = character.GetComponent<PlayerShoot>();
         secondaryShooter = character.GetComponent<PlayerSecondaryShoot>();
-        shooter.gunArt.SetActive(true);
+        shooter.weaponArt.SetActive(true);
         CameraManager cam = Camera.main.GetComponent<CameraManager>();
         if (cam != null)
         {
