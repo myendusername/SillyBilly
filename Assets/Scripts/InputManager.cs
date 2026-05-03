@@ -159,7 +159,7 @@ public class InputManager : MonoBehaviour
 
         int mask = LayerMask.GetMask("Player");
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, mask))
+        if (Physics.SphereCast(ray, 1f, out RaycastHit hit, 100f, mask))
         {
             return hit.collider.GetComponentInParent<MouseSwitching>();
         }
