@@ -5,6 +5,7 @@ public class NpcData : ScriptableObject
 {
     [Header("Npc Stats")]
     public int health = 20;
+    public AudioClip deathSound;
 
     [Header("Melee Attack")]
     [Tooltip("Whether the npc can do a melee attack.")]
@@ -16,6 +17,7 @@ public class NpcData : ScriptableObject
     [Tooltip("Delay before melee attack.")]
     public float meleeDelay = 0.3f;
     public int meleeDamage = 4;
+    public AudioClip meleeSound;
 
     [Header("Projectile Attack")]
     [Tooltip("Whether the npc can do a projectile attack.")]
@@ -40,6 +42,7 @@ public class NpcData : ScriptableObject
     [Tooltip("The cooldown before before an enemy can attack again.")]
     public float attackCooldown = 0.1f;
     public GameObject projectilePrefab;
+    public AudioClip projectileSound;
 
     [Header("Movement")]
     [Header("NOTE: NormalMoveChance is calculated from the \nremaining percent of adding these two chances.")]

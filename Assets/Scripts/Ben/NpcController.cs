@@ -10,6 +10,9 @@ public class NpcController : MonoBehaviour
     public NpcData data;
 
     public Health health;
+    public AudioClip deathSound;
+    public GameObject audioSourcePrefab;
+    private AudioSource deathAudioSource;
 
     public float spawnTime = 0.5f;
     public float updateRate = 0.2f;
@@ -34,6 +37,12 @@ public class NpcController : MonoBehaviour
         SetupAgentFromConfig();
         ChangeState(State.SPAWNING);
         StartCoroutine(StateMachine());
+
+        if (audioSourcePrefab)
+        {
+            GameObject audioObject = Instantiate(audioSourcePrefab, transform.position, transform.rotation, transform);
+            deathAudioSource = audioObject.GetComponent<AudioSource>();
+        }
     }
 
     public void SetupAgentFromConfig()

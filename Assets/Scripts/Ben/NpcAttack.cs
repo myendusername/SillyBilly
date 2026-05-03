@@ -11,6 +11,7 @@ public class NpcAttack : MonoBehaviour
     public float meleeRadiusSize = 0.5f;
     public float meleeDelay = 0.3f;
     public int meleeDamage = 4;
+    public AudioClip meleeSound;
     public GameObject damageVolumePrefab;
 
     [Header("Projectile Attack")]
@@ -29,6 +30,7 @@ public class NpcAttack : MonoBehaviour
     public bool constantFire = false;
     public float attackCooldown = 0.1f;
     public GameObject projectilePrefab;
+    public AudioClip projectileSound;
 
     public bool isFiring = false;
     private bool canAttack = true;
