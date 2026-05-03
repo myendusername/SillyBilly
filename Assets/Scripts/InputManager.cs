@@ -177,7 +177,7 @@ public class InputManager : MonoBehaviour
             MouseSwitching playerOverlay = obj.GetComponent<MouseSwitching>();
             if (playerOverlay != null)
             {
-                playerOverlay.SetTint(Color.red);
+                playerOverlay.SetTint(new Color(10000f, 0f, 0f));
             }
         }
 
@@ -185,7 +185,7 @@ public class InputManager : MonoBehaviour
 
         if (currentTarget != null && currentTarget.gameObject != activeCharacter)
         {
-            currentTarget.SetTint(Color.green);
+            currentTarget.SetTint(new Color(0f, 10000f, 0f));
         }
     }
 

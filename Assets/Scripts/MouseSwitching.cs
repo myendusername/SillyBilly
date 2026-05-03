@@ -14,7 +14,7 @@ public class MouseSwitching : MonoBehaviour
     public void SetTint(Color color)
     {
         overlayRenderer.enabled = true;
-        overlayMaterial.color = color;
+        overlayMaterial.SetColor("_EmissionColor", color);
     }
 
     public void ResetTint()

@@ -14,15 +14,15 @@ public class EnhancerShield : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.StartsWith("Bullet") || other.gameObject.name.StartsWith("Shotgun Bullet") || other.gameObject.name.StartsWith("Gas Ball"))
+        if (other.gameObject.CompareTag("Stunner") || other.gameObject.CompareTag("Sparker") || other.gameObject.name.StartsWith("Gas Ball"))
         {
             Transform trans = other.transform;
-            if (other.gameObject.name.StartsWith("Bullet"))
+            if (other.gameObject.CompareTag("Stunner"))
             {
                 Projectile projectile = other.GetComponent<Projectile>();
                 projectile.damage = projectile.damage * 3;
             }
-            else if (other.gameObject.name.StartsWith("Shotgun Bullet"))
+            else if (other.gameObject.CompareTag("Sparker"))
             {
                 Projectile projectile = other.GetComponent<Projectile>();
                 projectile.impactPrefab = explosionPrefab;

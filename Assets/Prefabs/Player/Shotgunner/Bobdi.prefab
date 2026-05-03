@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4909743424127656120}
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135770482399764658}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8372150999700366427
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 296af325c0b614056bcdef9dc8ef8254, type: 2}
+  - {fileID: 2100000, guid: 9259070795f802e4eb89186ef36ccbaf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +167,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: f6171be87febe46e8af92e6a44d0e5aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: 5f6043df8dceb8d41b48c3dfd141de77, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -897,8 +897,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
   firePoint: {fileID: 331162857216307690}
   weaponArt: {fileID: 5268709259205070962}
-  idleSprite: {fileID: 21300000, guid: caeb72a826125f54ba4371625fd84811, type: 3}
-  firingSprite: {fileID: 21300000, guid: caeb72a826125f54ba4371625fd84811, type: 3}
   bulletPrefab: {fileID: 8100077576245143569, guid: 54a44f3d6324d1c45bd3dca9f422a77d, type: 3}
   muzzleFlarePrefab: {fileID: 2206460110862230408, guid: 44179346dd09fb145806c353456f5d95, type: 3}
   firingAudio: {fileID: 1458762472129708498}
@@ -928,8 +926,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSecondaryShoot
   firePoint: {fileID: 331162857216307690}
   weaponArt: {fileID: 0}
-  idleSprite: {fileID: 0}
-  firingSprite: {fileID: 0}
   bulletPrefab: {fileID: 8100077576245143569, guid: 20d584d1e3dc52f4b8be138beecbe729, type: 3}
   muzzleFlarePrefab: {fileID: 2206460110862230408, guid: fce4fcd6f83ea45439e5b8f149ca53d7, type: 3}
   firingAudio: {fileID: 6242546453187368948}

@@ -21,7 +21,7 @@ public class OilSpill : MonoBehaviour
     {
         if (other.CompareTag("Stunner"))
         {
-            GameObject stunObject = Instantiate(stunPrefab, transform.position, transform.rotation, transform);
+            GameObject stunObject = Instantiate(stunPrefab, transform.position, transform.rotation);
             stunObject.GetComponent<StunVolume>().Setup(stunTime);
             Destroy(other);
             Destroy(gameObject);

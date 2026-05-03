@@ -6,9 +6,6 @@ public class PlayerShoot : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject weaponArt;
-    public Sprite idleSprite;
-    public Sprite firingSprite;
-    private SpriteRenderer weaponSpriteRenderer;
     public GameObject bulletPrefab;
     public GameObject muzzleFlarePrefab;
     public AudioSource firingAudio;
@@ -36,6 +33,7 @@ public class PlayerShoot : MonoBehaviour
 
     private GameObject muzzleFlareObject;
     private ParticleSystem muzzleFlare;
+    private Animator animator;
 
 
     private void Awake()
@@ -44,8 +42,8 @@ public class PlayerShoot : MonoBehaviour
         muzzleFlare = muzzleFlareObject.GetComponent<ParticleSystem>();
         if (weaponArt)
         {
-            weaponSpriteRenderer = weaponArt.GetComponentInChildren<SpriteRenderer>();
             weaponArt.SetActive(false);
+            animator = weaponArt.GetComponent<Animator>();
         }
     }
 
@@ -82,6 +80,10 @@ public class PlayerShoot : MonoBehaviour
         readyToShoot = false;
 
         PlayFireSFX();
+        if (animator)
+        {
+            PlayFireAnimation();
+        }
 
         for (int i = 0; i < bulletAmount; i++)
         {
@@ -117,13 +119,6 @@ public class PlayerShoot : MonoBehaviour
         Invoke("ResetShot", shootingDelay);
     }
 
-    private void UpdateWeaponSprite(bool firing)
-    {
-        if (weaponSpriteRenderer == null) return;
-
-        weaponSpriteRenderer.sprite = firing ? firingSprite : idleSprite;
-    }
-
     private void PlayFireSFX()
     {
         if (!flamethrower)
@@ -144,6 +139,16 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    private void PlayFireAnimation()
+    {
+        animator.Play("Shoot");
+    }
+
+    public void PlayIdleAnimation()
+    {
+        animator.Play("Idle");
+    }
+
     private void ResetShot()
     {
         readyToShoot = true;
@@ -153,12 +158,11 @@ public class PlayerShoot : MonoBehaviour
 
     public void SetShooting(bool state)
     {
-        UpdateWeaponSprite(state);
-        
         if (flamethrower && state == false)
         {
             muzzleFlare.Stop(true);
             firingAudio.Stop();
+            PlayIdleAnimation();
         }
 
         activeShooter = state;
