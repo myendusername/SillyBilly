@@ -154,6 +154,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""27806c33-0513-46c6-a5ce-be52a0a3b62a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -409,6 +418,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""SecondaryShoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fccf19b-e53e-485b-a3ba-fb6ca6fa9d80"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -424,6 +444,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Shoot = m_OnFoot.FindAction("Shoot", throwIfNotFound: true);
         m_OnFoot_SwitchCharacter = m_OnFoot.FindAction("SwitchCharacter", throwIfNotFound: true);
         m_OnFoot_SecondaryShoot = m_OnFoot.FindAction("SecondaryShoot", throwIfNotFound: true);
+        m_OnFoot_MouseSwitch = m_OnFoot.FindAction("MouseSwitch", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -511,6 +532,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Shoot;
     private readonly InputAction m_OnFoot_SwitchCharacter;
     private readonly InputAction m_OnFoot_SecondaryShoot;
+    private readonly InputAction m_OnFoot_MouseSwitch;
     /// <summary>
     /// Provides access to input actions defined in input action map "OnFoot".
     /// </summary>
@@ -550,6 +572,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OnFoot/SecondaryShoot".
         /// </summary>
         public InputAction @SecondaryShoot => m_Wrapper.m_OnFoot_SecondaryShoot;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/MouseSwitch".
+        /// </summary>
+        public InputAction @MouseSwitch => m_Wrapper.m_OnFoot_MouseSwitch;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -597,6 +623,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SecondaryShoot.started += instance.OnSecondaryShoot;
             @SecondaryShoot.performed += instance.OnSecondaryShoot;
             @SecondaryShoot.canceled += instance.OnSecondaryShoot;
+            @MouseSwitch.started += instance.OnMouseSwitch;
+            @MouseSwitch.performed += instance.OnMouseSwitch;
+            @MouseSwitch.canceled += instance.OnMouseSwitch;
         }
 
         /// <summary>
@@ -629,6 +658,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SecondaryShoot.started -= instance.OnSecondaryShoot;
             @SecondaryShoot.performed -= instance.OnSecondaryShoot;
             @SecondaryShoot.canceled -= instance.OnSecondaryShoot;
+            @MouseSwitch.started -= instance.OnMouseSwitch;
+            @MouseSwitch.performed -= instance.OnMouseSwitch;
+            @MouseSwitch.canceled -= instance.OnMouseSwitch;
         }
 
         /// <summary>
@@ -718,5 +750,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSecondaryShoot(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MouseSwitch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMouseSwitch(InputAction.CallbackContext context);
     }
 }

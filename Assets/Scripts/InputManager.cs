@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class InputManager : MonoBehaviour
     private PlayerShoot shooter;
     private PlayerSecondaryShoot secondaryShooter;
 
+    private bool isMouseSwitching = false;
+    private MouseSwitching currentTarget;
+
     void Awake()
     {
         Instance = this;
@@ -27,11 +31,12 @@ public class InputManager : MonoBehaviour
         // do not select characters[0] at first.
         for (int i = 0; i < characters.Length; i++)
         {
-            if (characters[i] != UiManager.Instance.player) {
+            if (characters[i] != UiManager.Instance.player)
+            {
                 PlayerNpcController npcController = characters[i].GetComponent<PlayerNpcController>();
                 npcController.enabled = true;
                 npcController.SetNpcMode(true);
-            }     
+            }
             //PlayerNpcController npcController = characters[i].GetComponent<PlayerNpcController>();
             //npcController.enabled = true;
             //npcController.SetNpcMode(true);
@@ -47,6 +52,9 @@ public class InputManager : MonoBehaviour
 
         onFoot.SecondaryShoot.started += ctx => secondaryShooter?.SetShooting(true);
         onFoot.SecondaryShoot.canceled += ctx => secondaryShooter?.SetShooting(false);
+
+        onFoot.MouseSwitch.started += ctx => StartMouseSwitch();
+        onFoot.MouseSwitch.canceled += ctx => EndMouseSwitch();
 
         // Character switch callback
         onFoot.SwitchCharacter.performed += ctx =>
@@ -108,6 +116,76 @@ public class InputManager : MonoBehaviour
         {
             cam.cameraPivot = character.GetComponent<PlayerLook>().cameraPivot;
             cam.SetDefaultFovInstant();
+        }
+    }
+
+    void StartMouseSwitch()
+    {
+        isMouseSwitching = true;
+        foreach (GameObject obj in characters)
+        {
+            MouseSwitching playerOverlay = obj.GetComponent<MouseSwitching>();
+            if (playerOverlay != null && obj != activeCharacter)
+            {
+                playerOverlay.SetTint(Color.red);
+            }
+        }
+    }
+    void EndMouseSwitch()
+    {
+        isMouseSwitching = false;
+
+        foreach (GameObject obj in characters)
+        {
+            MouseSwitching playerOverlay = obj.GetComponent<MouseSwitching>();
+            if (playerOverlay != null)
+            {
+                playerOverlay.ResetTint();
+            }
+        }
+
+        if (currentTarget != null)
+        {
+            SetActiveCharacter(currentTarget.gameObject);
+            UiManager.Instance.SetPlayer(currentTarget.gameObject);
+        }
+
+        currentTarget = null;
+    }
+
+    MouseSwitching GetTarget()
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
+        int mask = LayerMask.GetMask("Player");
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, mask))
+        {
+            return hit.collider.GetComponentInParent<MouseSwitching>();
+        }
+
+        return null;
+    }
+    void Update()
+    {
+        if (!isMouseSwitching) return;
+
+        foreach (GameObject obj in characters)
+        {
+            if (obj == activeCharacter) continue;
+
+            MouseSwitching playerOverlay = obj.GetComponent<MouseSwitching>();
+            if (playerOverlay != null)
+            {
+                playerOverlay.SetTint(Color.red);
+            }
+        }
+
+        currentTarget = GetTarget();
+
+        if (currentTarget != null && currentTarget.gameObject != activeCharacter)
+        {
+            currentTarget.SetTint(Color.green);
         }
     }
 
