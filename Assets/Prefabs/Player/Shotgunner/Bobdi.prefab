@@ -1,5 +1,95 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &135770482399764658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6778853414340669146}
+  - component: {fileID: 2386085433053421294}
+  - component: {fileID: 8372150999700366427}
+  m_Layer: 0
+  m_Name: Overlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6778853414340669146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135770482399764658}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4909743424127656120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2386085433053421294
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135770482399764658}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8372150999700366427
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135770482399764658}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 296af325c0b614056bcdef9dc8ef8254, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &234470686905840449
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +535,7 @@ Transform:
   m_Children:
   - {fileID: 2859041898589961371}
   - {fileID: 4345619343336162320}
+  - {fileID: 6778853414340669146}
   m_Father: {fileID: 5533633406683239585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4099174291162026221
@@ -642,6 +733,7 @@ GameObject:
   - component: {fileID: 5646877435709919850}
   - component: {fileID: 8686816635902076377}
   - component: {fileID: 5173711145971100690}
+  - component: {fileID: 7637879559744713082}
   m_Layer: 6
   m_Name: Bobdi
   m_TagString: Player
@@ -805,6 +897,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
   firePoint: {fileID: 331162857216307690}
   weaponArt: {fileID: 5268709259205070962}
+  idleSprite: {fileID: 21300000, guid: caeb72a826125f54ba4371625fd84811, type: 3}
+  firingSprite: {fileID: 21300000, guid: caeb72a826125f54ba4371625fd84811, type: 3}
   bulletPrefab: {fileID: 8100077576245143569, guid: 54a44f3d6324d1c45bd3dca9f422a77d, type: 3}
   muzzleFlarePrefab: {fileID: 2206460110862230408, guid: 44179346dd09fb145806c353456f5d95, type: 3}
   firingAudio: {fileID: 1458762472129708498}
@@ -834,6 +928,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSecondaryShoot
   firePoint: {fileID: 331162857216307690}
   weaponArt: {fileID: 0}
+  idleSprite: {fileID: 0}
+  firingSprite: {fileID: 0}
   bulletPrefab: {fileID: 8100077576245143569, guid: 20d584d1e3dc52f4b8be138beecbe729, type: 3}
   muzzleFlarePrefab: {fileID: 2206460110862230408, guid: fce4fcd6f83ea45439e5b8f149ca53d7, type: 3}
   firingAudio: {fileID: 6242546453187368948}
@@ -939,3 +1035,16 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   isFiring: 0
   tooCloseRange: 0
+--- !u!114 &7637879559744713082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313401731372534767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df3a2e535ede4ed6a2b91ab5bdc0553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MouseSwitching
+  overlayRenderer: {fileID: 8372150999700366427}

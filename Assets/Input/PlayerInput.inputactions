@@ -68,6 +68,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MouseSwitch",
+                    "type": "Button",
+                    "id": "9691efb3-9e1f-44dd-9a71-6895bf9a740a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -321,6 +330,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SecondaryShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a638a08-1eb3-4649-ae69-3e55978f22a9",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseSwitch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

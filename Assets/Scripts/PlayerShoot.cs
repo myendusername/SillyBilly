@@ -6,10 +6,12 @@ public class PlayerShoot : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject weaponArt;
+    public Sprite idleSprite;
+    public Sprite firingSprite;
+    private SpriteRenderer weaponSpriteRenderer;
     public GameObject bulletPrefab;
     public GameObject muzzleFlarePrefab;
     public AudioSource firingAudio;
-
     public float bulletLifetime = 3f;
     public float bulletSpeed = 30f;
     public int bulletDamage = 2;
@@ -42,6 +44,7 @@ public class PlayerShoot : MonoBehaviour
         muzzleFlare = muzzleFlareObject.GetComponent<ParticleSystem>();
         if (weaponArt)
         {
+            weaponSpriteRenderer = weaponArt.GetComponentInChildren<SpriteRenderer>();
             weaponArt.SetActive(false);
         }
     }
@@ -114,6 +117,13 @@ public class PlayerShoot : MonoBehaviour
         Invoke("ResetShot", shootingDelay);
     }
 
+    private void UpdateWeaponSprite(bool firing)
+    {
+        if (weaponSpriteRenderer == null) return;
+
+        weaponSpriteRenderer.sprite = firing ? firingSprite : idleSprite;
+    }
+
     private void PlayFireSFX()
     {
         if (!flamethrower)
@@ -143,6 +153,8 @@ public class PlayerShoot : MonoBehaviour
 
     public void SetShooting(bool state)
     {
+        UpdateWeaponSprite(state);
+        
         if (flamethrower && state == false)
         {
             muzzleFlare.Stop(true);
