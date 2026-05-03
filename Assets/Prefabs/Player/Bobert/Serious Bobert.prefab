@@ -783,6 +783,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
   firePoint: {fileID: 4977998208495775690}
   weaponArt: {fileID: 8696224663066818063}
+  idleSprite: {fileID: 0}
+  firingSprite: {fileID: 0}
   bulletPrefab: {fileID: 8100077576245143569, guid: 3ab063938aa4d1e44aa0e3107a890fc1, type: 3}
   muzzleFlarePrefab: {fileID: 2206460110862230408, guid: 44179346dd09fb145806c353456f5d95, type: 3}
   firingAudio: {fileID: 2832508079094651076}
@@ -812,6 +814,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSecondaryShoot
   firePoint: {fileID: 4977998208495775690}
   weaponArt: {fileID: 0}
+  idleSprite: {fileID: 21300000, guid: 6875bba688a927043bbfcb6522ccfa75, type: 3}
+  firingSprite: {fileID: 21300000, guid: 6875bba688a927043bbfcb6522ccfa75, type: 3}
   bulletPrefab: {fileID: 8100077576245143569, guid: 2cb8dc5ed1aa8974180b47634825957f, type: 3}
   muzzleFlarePrefab: {fileID: 2206460110862230408, guid: 7eb55ab5b97ae304081a027f4bca953d, type: 3}
   firingAudio: {fileID: 1331727486128495743}
