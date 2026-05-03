@@ -449,7 +449,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8313401731372534767, guid: 4bb2d1967a8694010aeba534881f1dc8, type: 3}
   m_PrefabInstance: {fileID: 864522359}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!1 &21777341
+=======
+--- !u!1 &48766031
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -457,6 +461,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 21777342}
   - component: {fileID: 21777345}
   - component: {fileID: 21777344}
@@ -574,32 +579,60 @@ GameObject:
   - component: {fileID: 43562628}
   m_Layer: 0
   m_Name: NavMeshUndersideRemover
+=======
+  - component: {fileID: 48766032}
+  - component: {fileID: 48766034}
+  - component: {fileID: 48766033}
+  m_Layer: 5
+  m_Name: Crosshair
+>>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream
 --- !u!4 &43562627
 Transform:
+=======
+--- !u!224 &48766032
+RectTransform:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 43562626}
   serializedVersion: 2
+=======
+  m_GameObject: {fileID: 48766031}
+>>>>>>> Stashed changes
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+<<<<<<< Updated upstream
   m_Father: {fileID: 1111675940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &43562628
+=======
+  m_Father: {fileID: 86398773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &48766033
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 43562626}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -637,10 +670,39 @@ BoxCollider:
   m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &55429886
 GameObject:
+=======
+  m_GameObject: {fileID: 48766031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c912d370c2ac3426098c7e07b32b2e65, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &48766034
+CanvasRenderer:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   serializedVersion: 6
   m_Component:
   - component: {fileID: 55429887}
@@ -1232,6 +1294,10 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82601787}
   m_Mesh: {fileID: -4935806232130447104, guid: c9f7e2ced0c2b6b4cb34521a46095066, type: 3}
+=======
+  m_GameObject: {fileID: 48766031}
+  m_CullTransparentMesh: 1
+>>>>>>> Stashed changes
 --- !u!1 &86398768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,6 +1420,7 @@ RectTransform:
   - {fileID: 1966515492}
   - {fileID: 1555853694}
   - {fileID: 372878497}
+  - {fileID: 48766032}
   m_Father: {fileID: 2097169414}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5755,7 +5822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &383795095
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24321,6 +24388,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Serious Bobert
       objectReference: {fileID: 0}
+    - target: {fileID: 8619096538599971388, guid: 27467983c68a5b14888cfa97ba81a259, type: 3}
+      propertyPath: idleSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6875bba688a927043bbfcb6522ccfa75, type: 3}
+    - target: {fileID: 8619096538599971388, guid: 27467983c68a5b14888cfa97ba81a259, type: 3}
+      propertyPath: firingSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6875bba688a927043bbfcb6522ccfa75, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
