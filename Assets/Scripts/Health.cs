@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] public int health;
+    public int health;
+    private int maxHealth;
     private bool invincible = false;
     private IDamageable damageable;
 
     public void Awake()
     {
         damageable = GetComponent<IDamageable>();
+        maxHealth = health;
     }
 
     public void TakeDamage(int damage)
@@ -16,9 +18,14 @@ public class Health : MonoBehaviour
         if (invincible == false)
         {
             health -= damage;
+            health = Mathf.Clamp(health, 0, maxHealth);
             if (health <= 0)
             {
                 damageable.OnDead();
+            }
+            else if (damage < 0)
+            {
+                damageable.OnHeal();
             }
             else
             {

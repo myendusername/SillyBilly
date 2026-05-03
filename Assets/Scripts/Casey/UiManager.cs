@@ -13,9 +13,8 @@ public class UiManager : MonoBehaviour
     //new
     public Image secondaryCooldownImage;
     private PlayerSecondaryShoot activeSecondaryShooter;
-    [SerializeField] private GameObject playerWeapon;
     // [SerializeField] private TextMeshProUGUI healthText, staminaText;
-    public GameObject hurtFlash;
+    public GameObject flash;
 
     // The UI's text fields
     public const string characterBioBegin = "Bio: ";
@@ -132,10 +131,6 @@ public class UiManager : MonoBehaviour
     {
         healthBar.gameObject.SetActive(status);
         staminaBar.gameObject.SetActive(status);
-        if (playerWeapon)
-        {
-            playerWeapon.SetActive(status);
-        }
         //new
         if (secondaryCooldownImage != null)
             secondaryCooldownImage.gameObject.SetActive(status);
@@ -150,7 +145,13 @@ public class UiManager : MonoBehaviour
 
     public void HurtFlash()
     {
-        Animator hurtAnimator = hurtFlash.GetComponent<Animator>();
-        hurtAnimator.Play("Restart");
+        Animator animator = flash.GetComponent<Animator>();
+        animator.Play("Restart Hurt");
+    }
+
+    public void HealFlash()
+    {
+        Animator animator = flash.GetComponent<Animator>();
+        animator.Play("Restart Heal");
     }
 }

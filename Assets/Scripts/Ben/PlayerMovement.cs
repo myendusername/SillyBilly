@@ -105,6 +105,10 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         }
     }
 
+    public float GetMovementMulti()
+    {
+        return movementMulti;
+    }
     public void SetMovementMulti(float value)
     {
         movementMulti = value;
@@ -120,6 +124,14 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         if(this == InputManager.Instance.GetMover())
         {
             UiManager.Instance.HurtFlash();
+        }
+    }
+
+    public void OnHeal()
+    {
+        if (this == InputManager.Instance.GetMover())
+        {
+            UiManager.Instance.HealFlash();
         }
     }
 

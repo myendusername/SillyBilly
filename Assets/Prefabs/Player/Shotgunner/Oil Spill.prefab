@@ -224,7 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OilSpill
   playerSpeedMulti: 2.6
+  playerSpeedOnFireMulti: 3.2
   playerSmoothingMulti: 0.5
   delayUntilNormal: 0.2
-  enemySpeedMulti: 0.5
   oilFireArea: {fileID: 7104622928487476593, guid: f12e779df5e086a45a83f7236be94fca, type: 3}
+  stunTime: 6
+  stunPrefab: {fileID: 6823071679160614654, guid: bba21721455dfd043adbedd7c07ad6de, type: 3}

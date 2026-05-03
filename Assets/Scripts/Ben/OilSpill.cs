@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OilSpill : MonoBehaviour
@@ -8,13 +7,26 @@ public class OilSpill : MonoBehaviour
     public float playerSpeedOnFireMulti = 3.2f;
     public float playerSmoothingMulti = 0.5f;
     public float delayUntilNormal = 0.2f;
-    public float enemySpeedMulti = 0.5f;
     private bool onFire = false;
     public GameObject oilFireArea;
+    public float stunTime = 4f;
+    public GameObject stunPrefab;
 
     private Coroutine resetCoroutine;
 
     private bool isPlayerInside = false;
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Stunner"))
+        {
+            GameObject stunObject = Instantiate(stunPrefab, transform.position, transform.rotation, transform);
+            stunObject.GetComponent<StunVolume>().Setup(stunTime);
+            Destroy(other);
+            Destroy(gameObject);
+        }
+    }
 
     // THIS LOGIC IS JANK, NEEDS WORK
     private void OnTriggerStay(Collider other)

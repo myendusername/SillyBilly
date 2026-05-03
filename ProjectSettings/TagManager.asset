@@ -8,6 +8,7 @@ TagManager:
   - Sparker
   - Enhancer
   - Fire
+  - Stunner
   layers:
   - Default
   - TransparentFX

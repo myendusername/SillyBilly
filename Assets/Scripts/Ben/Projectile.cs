@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
             collision.gameObject.GetComponent<Health>().TakeDamage(damage);
             // print("Hit " + collision.gameObject.name);
         }
-        Instantiate(impactPrefab, this.transform.position, this.transform.rotation);
+        Instantiate(impactPrefab, transform.position, transform.rotation);
 
         Destroy(gameObject);
     }
@@ -30,9 +30,9 @@ public class Projectile : MonoBehaviour
 
     public void Setup(float lifetime, int damage, string tag)
     {
-        this.projectileLifetime = lifetime;
+        projectileLifetime = lifetime;
         this.damage = damage;
-        this.tagToDetect = tag;
+        tagToDetect = tag;
         StartCoroutine(RemoveAfterLifetime(projectileLifetime));
     }
 }

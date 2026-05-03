@@ -13,7 +13,7 @@ public class NpcController : MonoBehaviour
 
     public float spawnTime = 0.5f;
     public float updateRate = 0.2f;
-    protected float stunTime = 0.5f;
+    private float stunTime;
 
     protected Transform closestTarget;
     protected string layerToTarget;
@@ -321,5 +321,11 @@ public class NpcController : MonoBehaviour
         LookAtY(closestTarget);
         WaitForSeconds wait = new WaitForSeconds(delay);
         yield return wait;
+    }
+
+    public void SetStun(float time)
+    {
+        stunTime = time;
+        ChangeState(State.STUNNED);
     }
 }

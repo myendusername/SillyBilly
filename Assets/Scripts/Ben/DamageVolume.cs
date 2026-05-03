@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageVolume : MonoBehaviour
 {
-    public SphereCollider sphereCollider;
+    private SphereCollider sphereCollider;
 
     public bool oneShot = false;
     public bool damageOverTime = false;

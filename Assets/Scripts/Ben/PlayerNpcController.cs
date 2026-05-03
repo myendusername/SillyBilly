@@ -8,6 +8,11 @@ public class PlayerNpcController : NpcController, IDamageable
         // Unused for now
     }
 
+    public void OnHeal()
+    {
+        // Unused
+    }
+
     public void OnDead()
     {
         Debug.Log(gameObject + " is dead!");

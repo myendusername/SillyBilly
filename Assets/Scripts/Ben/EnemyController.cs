@@ -7,6 +7,11 @@ public class EnemyController : NpcController, IDamageable
         // Unused for now
     }
 
+    public void OnHeal()
+    {
+        // Unused
+    }
+
     public void OnDead()
     {
         // Adding something to this that subtracts enemies
