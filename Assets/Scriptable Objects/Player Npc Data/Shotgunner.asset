@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Shotgunner
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   health: 100
+  deathSound: {fileID: 0}
   meleeAttack: 0
   meleeRange: 1.4
   meleeRadiusSize: 0.5
   meleeDelay: 0.3
   meleeDamage: 4
+  meleeSound: {fileID: 0}
   projectileAttack: 1
   projectileMaxRange: 6
   projectileMinRange: 0.5
@@ -31,6 +33,7 @@ MonoBehaviour:
   constantFire: 0
   attackCooldown: 0.8
   projectilePrefab: {fileID: 8100077576245143569, guid: 54a44f3d6324d1c45bd3dca9f422a77d, type: 3}
+  projectileSound: {fileID: 8300000, guid: 5f6043df8dceb8d41b48c3dfd141de77, type: 3}
   cardinalMoveChance: 0.2
   diagonalMoveChance: 0.3
   tooCloseRange: 3
@@ -43,5 +46,6 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   avoidancePriority: 50
+  spawnChanceMultiplier: 1
   areaMask: -1
   layerToTarget: Enemy

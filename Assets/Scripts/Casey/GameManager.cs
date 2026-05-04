@@ -13,9 +13,12 @@ public class GameManager : MonoBehaviour
     public CameraManager cameraMan;
     public UiManager uiManager;
     [SerializeField] private EnemiesList enemies;
-    //public int currentEnemiesNumber;
-    //private const int maxEnemiesNumber = 30;
-    // private IEnumerator spawnDelay;
+    private int currentEnemyAmount;
+    public int enemiesInWave = 8;
+    public int enemyAmountIncrease = 2;
+    private int wave = 1;
+    public float spawnDelay = 6;
+    private bool waveStarting = false;
 
     private void Awake()
     {
@@ -54,9 +57,8 @@ public class GameManager : MonoBehaviour
                 cameraMan.enabled = true;
                 uiManager.SetMainMenu(false);
                 uiManager.SetPlayerUi(true);
-                // Apparently all IEnumerators have to be called with
-                // StartCoroutine(), not just normally.
-                StartCoroutine(SpawnEnemies());
+                SpawnEnemies();
+                UiManager.Instance.SetWaveText(wave);
                 break;
 
             default:
@@ -67,9 +69,10 @@ public class GameManager : MonoBehaviour
     // Setting the character the player starts as in the game
     // according to the character that the player has selected
     // on the title screen.
-    public void SpawnPlayer() {
+    public void SpawnPlayer()
+    {
         // gets data for the character the player selects
-        string firstCharacter = UiManager.Instance.getSelected();
+        string firstCharacter = UiManager.Instance.GetSelected();
         Debug.Log("Selected character: " + firstCharacter);
 
         // uses that data to decide who to spawn in as the player character
@@ -102,13 +105,14 @@ public class GameManager : MonoBehaviour
     // Change the gamemode to GamePlay
     public void StartGame()
     {
-        string firstCharacter = UiManager.Instance.getSelected();
+        string firstCharacter = UiManager.Instance.GetSelected();
         if (firstCharacter == "Serious Bobert" || firstCharacter == "Bobdi" || firstCharacter == "BBQ")
         {
             ChangeState(GameState.GamePlay);
             Debug.Log("The game has BEGUN!!!");
         }
-        else {
+        else
+        {
             // handles cases in which the player is a devious mf
             // and chooses not to select a character before pressing play.
             // Tells them (and us in the console) that they need to select a character
@@ -125,40 +129,53 @@ public class GameManager : MonoBehaviour
     // Spawn each of the enemies in the enemies list.
     // This method spawns in enemies in waves. Currently,
     // enemies spawn in every 15 seconds.
-    public IEnumerator SpawnEnemies()
+    public void SpawnEnemies()
     {
-        int wave = 1;
-        while (GameState == GameState.GamePlay)
+        if (GameState == GameState.GamePlay)
         {
             Debug.Log("Spawn wave " + wave);
-            for (int i = 0; i < enemies.enemies.Length; i++)
+            for (int i = 0; i < enemiesInWave; i++)
             {
                 // randomizing the spawn position a little bit...
-                float spawnX = Random.Range(-30, 30);
-                float spawnZ = Random.Range(-30, 30);
+                float spawnX = Random.Range(-75, 75);
+                float spawnZ = Random.Range(-75, 75);
                 Vector3 spawnPosition = new Vector3(spawnX, 0, spawnZ);
 
                 NavMeshHit navHit;
 
+                int enemyToSpawn = Random.Range(0, enemies.enemies.Length);
+
                 // Try to get valid point on NavMesh,
-                // and also make sure there aren't TOO many enemies in the game.
-                if (NavMesh.SamplePosition(spawnPosition, out navHit, 5f, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(spawnPosition, out navHit, 6f, NavMesh.AllAreas))
                 {
-                    Instantiate(enemies.enemies[i], navHit.position, Quaternion.identity);
-                    //currentEnemiesNumber++;
+                    Instantiate(enemies.enemies[enemyToSpawn], navHit.position, Quaternion.identity);
+                    currentEnemyAmount++;
                 }
                 else
                 {
-                    Debug.Log("Error spawning " + enemies.enemies[i]);
+                    Debug.Log("Error spawning " + enemies.enemies[enemyToSpawn]);
                 }
             }
-
-            // spawns enemies again after a bit of time.
-            // (20 seconds)
-            wave++;
-            //Debug.Log("There are currently " + currentEnemiesNumber + " enemies in the game.");
-            yield return new WaitForSeconds(15.0f);
         }
+    }
+
+    public IEnumerator WaveOver()
+    {
+        waveStarting = true;
+        Debug.Log("All enemies are dead, starting new wave after delay.");
+        UiManager.Instance.WaveOverAnimation();
+
+        WaitForSeconds wait = new WaitForSeconds(spawnDelay);
+        yield return wait;
+
+        wave++;
+        UiManager.Instance.SetWaveText(wave);
+        enemiesInWave += enemyAmountIncrease;
+        // Extra precaution
+        currentEnemyAmount = 0;
+        SpawnEnemies();
+
+        waveStarting = false;
     }
 
     // Finds the enemy by its GameObject's name in the heirarchy,
@@ -171,6 +188,14 @@ public class GameManager : MonoBehaviour
             GameObject toDestroy = GameObject.Find(enemies.enemies[i].name + "(Clone)");
             Destroy(toDestroy);
         }
+    }
+
+    public void ReportEnemyDeath()
+    {
+        currentEnemyAmount--;
+
+        if (currentEnemyAmount <= 0 && !waveStarting)
+            StartCoroutine(WaveOver());
     }
 }
 

@@ -210,7 +210,7 @@ MonoBehaviour:
         _Z: 0
         _W: 0
         _Object: {fileID: 6498893687230352146}
-  _Delay: 16
+  _Delay: 18
 --- !u!114 &899793531395222519
 MonoBehaviour:
   m_ObjectHideFlags: 0

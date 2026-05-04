@@ -220,6 +220,8 @@ MonoBehaviour:
   attack: {fileID: 4267823780486265271}
   data: {fileID: 11400000, guid: 32081ed08b64a844588f401c2b8e4ce3, type: 2}
   health: {fileID: 7586428067444180166}
+  deathSound: {fileID: 0}
+  audioSourcePrefab: {fileID: 1371620760309529053, guid: 0f47fc23bbe0244418c2c116c4a510a9, type: 3}
   spawnTime: 0.5
   updateRate: 0.2
 --- !u!114 &7586428067444180166
@@ -268,6 +270,7 @@ MonoBehaviour:
   meleeRadiusSize: 0.5
   meleeDelay: 0.3
   meleeDamage: 4
+  meleeSound: {fileID: 0}
   damageVolumePrefab: {fileID: 6823071679160614654, guid: e4f3dcada980a974287b94b3697cf90a, type: 3}
   projectileAttack: 0
   projectileMaxRange: 8
@@ -282,6 +285,7 @@ MonoBehaviour:
   constantFire: 0
   attackCooldown: 0.1
   projectilePrefab: {fileID: 0}
+  projectileSound: {fileID: 0}
   isFiring: 0
   tooCloseRange: 0
 --- !u!1 &6052796327770754044

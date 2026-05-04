@@ -30,4 +30,14 @@ public class PlayerLook : MonoBehaviour
         // Apply X axis rotation to camera pivot only
         cameraPivot.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
+
+    public void SetXRotation(float value)
+    {
+        xRotation = value;
+    }
+
+    public void SetYRotation(float value)
+    {
+        yRotation = value;
+    }
 }

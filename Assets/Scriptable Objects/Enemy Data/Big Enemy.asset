@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33122b6edf80394ba1ce75e1d0e3f4d, type: 3}
   m_Name: Big Enemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  health: 180
+  health: 200
+  deathSound: {fileID: 8300000, guid: 505297357242c7146abe2f7b46a6e768, type: 3}
   meleeAttack: 1
   meleeRange: 2
   meleeRadiusSize: 0.8
   meleeDelay: 0.4
   meleeDamage: 8
+  meleeSound: {fileID: 8300000, guid: ade645f7646396b4ab343051187e089a, type: 3}
   projectileAttack: 1
   projectileMaxRange: 14
   projectileMinRange: 1
@@ -31,6 +33,7 @@ MonoBehaviour:
   constantFire: 0
   attackCooldown: 0.1
   projectilePrefab: {fileID: 8100077576245143569, guid: 0668e159fe842c549ae040e7a022350d, type: 3}
+  projectileSound: {fileID: 8300000, guid: ec39271b10e19554eb70281f7ef5843c, type: 3}
   cardinalMoveChance: 0.1
   diagonalMoveChance: 0.3
   tooCloseRange: 0
@@ -43,5 +46,6 @@ MonoBehaviour:
   radius: 1
   height: 4
   avoidancePriority: 10
+  spawnChanceMultiplier: 1
   areaMask: -1
   layerToTarget: Player

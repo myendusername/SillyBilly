@@ -4,6 +4,7 @@ using UnityEngine;
 public class NpcAttack : MonoBehaviour
 {
     public Transform attackPoint;
+    private GameObject audioSourcePrefab;
 
     [Header("Melee Attack")]
     public bool meleeAttack = false;
@@ -12,6 +13,7 @@ public class NpcAttack : MonoBehaviour
     public float meleeDelay = 0.3f;
     public int meleeDamage = 4;
     public AudioClip meleeSound;
+    private AudioSource meleeAudioSource;
     public GameObject damageVolumePrefab;
 
     [Header("Projectile Attack")]
@@ -31,11 +33,31 @@ public class NpcAttack : MonoBehaviour
     public float attackCooldown = 0.1f;
     public GameObject projectilePrefab;
     public AudioClip projectileSound;
+    private AudioSource projectileAudioSource;
 
     public bool isFiring = false;
     private bool canAttack = true;
 
     public float tooCloseRange = 0f;
+
+    public void Start()
+    {
+        if (audioSourcePrefab)
+        {
+            if (meleeSound)
+            {
+                GameObject meleeAudioObject = Instantiate(audioSourcePrefab, transform.position, transform.rotation, transform);
+                meleeAudioSource = meleeAudioObject.GetComponent<AudioSource>();
+                meleeAudioSource.clip = meleeSound;
+            }
+            if (projectileSound)
+            {
+                GameObject projectileAudioObjecct = Instantiate(audioSourcePrefab, transform.position, transform.rotation, transform);
+                projectileAudioSource = projectileAudioObjecct.GetComponent<AudioSource>();
+                projectileAudioSource.clip = projectileSound;
+            }
+        }
+    }
 
     public bool CanMelee(Transform target, bool ignoreCanAttack)
     {
@@ -148,6 +170,10 @@ public class NpcAttack : MonoBehaviour
         GameObject damageVolume = Instantiate(damageVolumePrefab, attackPoint.position, attackPoint.rotation);
         damageVolume.GetComponent<DamageVolume>().Setup(true, 0.1f, meleeDamage, LayerMask.GetMask(layerToTarget), meleeRadiusSize);
 
+        if (audioSourcePrefab && meleeSound)
+        {
+            AudioHelper.PlayRandomPitch(meleeAudioSource);
+        }
         attackPoint.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
         canAttack = false;
@@ -167,10 +193,25 @@ public class NpcAttack : MonoBehaviour
             GameObject projectile = Instantiate(projectilePrefab, attackPoint.position, spreadRotation);
 
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.linearVelocity = projectile.transform.forward * projectileSpeed;
+            if (!rb.isKinematic)
+            {
+                rb.linearVelocity = projectile.transform.forward * projectileSpeed;
+            }
 
-            projectile.GetComponent<Projectile>().Setup(projectileLifetime, projectileDamage, layerToTarget);
+            if (projectile.GetComponent<Projectile>())
+            {
+                projectile.GetComponent<Projectile>().Setup(projectileLifetime, projectileDamage, layerToTarget);
+            }
+            // Horrible way of doing this to make exception for the flamethrower.
+            else if (projectile.CompareTag("Fire"))
+            {
+                projectile.GetComponent<DamageVolume>().Setup(false, projectileLifetime, projectileDamage, LayerMask.GetMask(layerToTarget), 2);
+            }
 
+        }
+        if (audioSourcePrefab && projectileSound)
+        {
+            AudioHelper.PlayRandomPitch(projectileAudioSource);
         }
         attackPoint.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
@@ -199,6 +240,11 @@ public class NpcAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
+    }
+
+    public void SetAudioSourcePrefab(GameObject gameObject)
+    {
+        audioSourcePrefab = gameObject;
     }
 
 }

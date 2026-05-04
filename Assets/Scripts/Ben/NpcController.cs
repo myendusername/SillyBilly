@@ -12,7 +12,7 @@ public class NpcController : MonoBehaviour
     public Health health;
     public AudioClip deathSound;
     public GameObject audioSourcePrefab;
-    private AudioSource deathAudioSource;
+    protected AudioSource deathAudioSource;
 
     public float spawnTime = 0.5f;
     public float updateRate = 0.2f;
@@ -20,6 +20,8 @@ public class NpcController : MonoBehaviour
 
     protected Transform closestTarget;
     protected string layerToTarget;
+
+    private Coroutine stateMachineRoutine;
 
     public enum State
     {
@@ -40,14 +42,23 @@ public class NpcController : MonoBehaviour
 
         if (audioSourcePrefab)
         {
-            GameObject audioObject = Instantiate(audioSourcePrefab, transform.position, transform.rotation, transform);
-            deathAudioSource = audioObject.GetComponent<AudioSource>();
+            GameObject deathAudioObject = Instantiate(audioSourcePrefab, transform.position, transform.rotation, transform);
+            deathAudioSource = deathAudioObject.GetComponent<AudioSource>();
+            deathAudioSource.clip = deathSound;
+
+            attack.SetAudioSourcePrefab(audioSourcePrefab);
         }
+    }
+
+    private void OnEnable()
+    {
+        stateMachineRoutine = StartCoroutine(StateMachine());
     }
 
     public void SetupAgentFromConfig()
     {
         health.health = data.health;
+        deathSound = data.deathSound;
 
 
         attack.meleeAttack = data.meleeAttack;
@@ -55,6 +66,7 @@ public class NpcController : MonoBehaviour
         attack.meleeRadiusSize = data.meleeRadiusSize;
         attack.meleeDelay = data.meleeDelay;
         attack.meleeDamage = data.meleeDamage;
+        attack.meleeSound = data.meleeSound;
 
 
         attack.projectileAttack = data.projectileAttack;
@@ -70,6 +82,7 @@ public class NpcController : MonoBehaviour
         attack.constantFire = data.constantFire;
         attack.attackCooldown = data.attackCooldown;
         attack.projectilePrefab = data.projectilePrefab;
+        attack.projectileSound = data.projectileSound;
         attack.tooCloseRange = data.tooCloseRange;
 
 
@@ -97,6 +110,12 @@ public class NpcController : MonoBehaviour
 
     protected void LookAtY(Transform target)
     {
+        if (!target)
+        {
+            Debug.Log(gameObject + "'s Look at Y target is null!");
+            return;
+        }
+
         Vector3 direction = target.position - transform.position;
         direction.y = 0f;
 
@@ -119,6 +138,12 @@ public class NpcController : MonoBehaviour
 
     protected void LookAtX(Transform target)
     {
+        if (!target)
+        {
+            Debug.Log(gameObject + "'s Look at X target is null!");
+            return;
+        }
+
         Vector3 direction = target.position - attack.attackPoint.position;
 
         if (direction == Vector3.zero)
@@ -152,7 +177,6 @@ public class NpcController : MonoBehaviour
 
         return closest;
     }
-
     protected IEnumerator StateMachine()
     {
         WaitForSeconds wait = new WaitForSeconds(updateRate);
@@ -241,6 +265,11 @@ public class NpcController : MonoBehaviour
 
     protected void UpdateChase()
     {
+        if (!closestTarget)
+        {
+            closestTarget = GetClosestTarget();
+        }
+
         if (closestTarget)
         {
             movement.FollowTarget(closestTarget);
@@ -250,6 +279,7 @@ public class NpcController : MonoBehaviour
                 if (attack.CanMelee(closestTarget, false))
                 {
                     ChangeState(State.MELEEATTACK);
+                    return;
                 }
             }
             if (attack.projectileAttack)
@@ -257,6 +287,7 @@ public class NpcController : MonoBehaviour
                 if (attack.CanProjectile(closestTarget, layerToTarget, true, false))
                 {
                     ChangeState(State.PROJECTILEATTACK);
+                    return;
                 }
             }
         }
@@ -336,5 +367,10 @@ public class NpcController : MonoBehaviour
     {
         stunTime = time;
         ChangeState(State.STUNNED);
+    }
+
+    public GameObject GetAudioSourcePrefab()
+    {
+        return audioSourcePrefab;
     }
 }

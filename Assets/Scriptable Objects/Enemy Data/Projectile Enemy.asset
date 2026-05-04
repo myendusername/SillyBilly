@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33122b6edf80394ba1ce75e1d0e3f4d, type: 3}
   m_Name: Projectile Enemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  health: 60
+  health: 70
+  deathSound: {fileID: 8300000, guid: 7680968f8ff7a6e4093ca6889d0cfc4e, type: 3}
   meleeAttack: 0
   meleeRange: 1.4
   meleeRadiusSize: 0.5
   meleeDelay: 0.3
   meleeDamage: 4
+  meleeSound: {fileID: 0}
   projectileAttack: 1
   projectileMaxRange: 16
   projectileMinRange: 0.5
@@ -31,9 +33,10 @@ MonoBehaviour:
   constantFire: 0
   attackCooldown: 0.1
   projectilePrefab: {fileID: 8100077576245143569, guid: 857adb3505e90c24eb0b5f21937350dc, type: 3}
+  projectileSound: {fileID: 8300000, guid: ec39271b10e19554eb70281f7ef5843c, type: 3}
   cardinalMoveChance: 0.5
   diagonalMoveChance: 0.3
-  tooCloseRange: 0
+  tooCloseRange: 1
   updateRate: 0.2
   speed: 4
   angularSpeed: 180
@@ -43,5 +46,6 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   avoidancePriority: 55
+  spawnChanceMultiplier: 1
   areaMask: -1
   layerToTarget: Player

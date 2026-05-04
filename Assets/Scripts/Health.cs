@@ -4,8 +4,9 @@ public class Health : MonoBehaviour
 {
     public int health;
     private int maxHealth;
-    private bool invincible = false;
+    public bool invincible = false;
     private IDamageable damageable;
+    private bool isDead = false;
 
     public void Awake()
     {
@@ -19,29 +20,20 @@ public class Health : MonoBehaviour
         {
             health -= damage;
             health = Mathf.Clamp(health, 0, maxHealth);
-            if (health <= 0)
+            if (health <= 0 && !isDead)
             {
+                isDead = true;
                 damageable.OnDead();
             }
             else if (damage < 0)
             {
                 damageable.OnHeal();
             }
-            else
+            else if (!isDead)
             {
                 damageable.OnHurt();
             }
         }
-    }
-
-    public void SetHealth()
-    {
-        health = 100;
-    }
-
-    public void SetDead()
-    {
-        health = 0;
     }
 
     public void SetInvincible(bool value)

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -79,6 +78,7 @@ public class InputManager : MonoBehaviour
 
     public void SetActiveCharacter(GameObject character)
     {
+
         if (shooter)
         {
             shooter.weaponArt.SetActive(false);
@@ -101,6 +101,8 @@ public class InputManager : MonoBehaviour
             oldNpcController.SetNpcMode(true);
         }
 
+        CameraManager cam = Camera.main.GetComponent<CameraManager>();
+
         activeCharacter = character;
         PlayerNpcController newNpcController = activeCharacter.GetComponent<PlayerNpcController>();
         newNpcController.SetNpcMode(false);
@@ -111,10 +113,22 @@ public class InputManager : MonoBehaviour
         shooter = character.GetComponent<PlayerShoot>();
         secondaryShooter = character.GetComponent<PlayerSecondaryShoot>();
         shooter.weaponArt.SetActive(true);
-        CameraManager cam = Camera.main.GetComponent<CameraManager>();
         if (cam != null)
         {
+            // This is so fucking jank.
+            float newYAngle = 0f;
+
+            if (character != null)
+            {
+                Transform newPivotParent = character.GetComponent<PlayerLook>().cameraPivot.transform.parent;
+                newYAngle = newPivotParent.localEulerAngles.y;
+            }
+
             cam.cameraPivot = character.GetComponent<PlayerLook>().cameraPivot;
+
+            look.SetXRotation(0f);
+            look.SetYRotation(newYAngle);
+
             cam.SetDefaultFovInstant();
         }
     }
@@ -158,10 +172,14 @@ public class InputManager : MonoBehaviour
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
         int mask = LayerMask.GetMask("Player");
-
-        if (Physics.SphereCast(ray, 1f, out RaycastHit hit, 100f, mask))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, mask))
         {
             return hit.collider.GetComponentInParent<MouseSwitching>();
+        }
+
+        if (Physics.SphereCast(ray, 1.2f, out RaycastHit hit2, 100f, mask))
+        {
+            return hit2.collider.GetComponentInParent<MouseSwitching>();
         }
 
         return null;

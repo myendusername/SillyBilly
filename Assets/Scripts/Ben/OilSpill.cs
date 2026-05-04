@@ -16,6 +16,24 @@ public class OilSpill : MonoBehaviour
 
     private bool isPlayerInside = false;
 
+    private void OnDestroy()
+    {
+        // To prevent player from keeping oil awesomeness forever
+        float radius = 4.5f;
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, radius);
+
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Player"))
+            {
+                PlayerMovement playerMove = hit.GetComponent<PlayerMovement>();
+                playerMove.SetMovementMulti(1f);
+                playerMove.SetSmoothingMulti(1f);
+            }
+        }
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {

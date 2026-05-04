@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Bobert
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   health: 100
+  deathSound: {fileID: 0}
   meleeAttack: 0
   meleeRange: 1.4
   meleeRadiusSize: 0.5
   meleeDelay: 0.3
   meleeDamage: 4
+  meleeSound: {fileID: 0}
   projectileAttack: 1
   projectileMaxRange: 8
   projectileMinRange: 0.5
@@ -31,6 +33,7 @@ MonoBehaviour:
   constantFire: 0
   attackCooldown: 0.2
   projectilePrefab: {fileID: 8100077576245143569, guid: 3ab063938aa4d1e44aa0e3107a890fc1, type: 3}
+  projectileSound: {fileID: 8300000, guid: 5b982c1a2b4b23d4099a22b11a29cf82, type: 3}
   cardinalMoveChance: 0.26
   diagonalMoveChance: 0.35
   tooCloseRange: 4.5
@@ -43,5 +46,6 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   avoidancePriority: 50
+  spawnChanceMultiplier: 1
   areaMask: -1
   layerToTarget: Enemy

@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject player;
     [SerializeField] private Slider healthBar, staminaBar;
-    //new
+
     public Image secondaryCooldownImage;
     private PlayerSecondaryShoot activeSecondaryShooter;
     // [SerializeField] private TextMeshProUGUI healthText, staminaText;
@@ -26,6 +26,8 @@ public class UiManager : MonoBehaviour
 
     private string selectedCharacter = "";
 
+    public TextMeshProUGUI waveText;
+
     private void Awake()
     {
         Instance = this;
@@ -40,7 +42,7 @@ public class UiManager : MonoBehaviour
     void Update()
     {
         TrackPlayer();
-        //new
+
         if (secondaryCooldownImage != null && activeSecondaryShooter != null)
         {
             secondaryCooldownImage.fillAmount = activeSecondaryShooter.GetCooldownProgress();
@@ -68,12 +70,6 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    // Resets the player's health back to its full value
-    public void RespawnPlayer()
-    {
-        player.GetComponent<Health>().SetHealth();
-    }
-
     // These three buttons are called by each character's button's
     // On Click() method to control which character is the
     // selected character. With each selection, the character bio
@@ -82,25 +78,26 @@ public class UiManager : MonoBehaviour
     {
         selectedCharacter = "Serious Bobert";
         characterBio.text = characterBioBegin;
-        characterBio.text += "This guy can rapid fire bullets at enemies to deal some SERIOUS dps! He also has a very SMELLY secret power...";
+        characterBio.text += "This guy can rapid fire bullets at enemies to deal some SERIOUS damage!  He also has a very SMELLY ability, enemies are hurt by the stench!  Shoot his gas cloud with Bobdi to explode it, or shoot it with BBQ to set it ablaze!";
         Debug.Log("You've selected Serious Bobert.");
     }
     public void SelectBobdi()
     {
         selectedCharacter = "Bobdi";
         characterBio.text = characterBioBegin;
-        characterBio.text += "Bobdi's shotgun is devastating up close. Ride his oil slicks to rushdown enemies and deal huge bursts of damage!";
+        characterBio.text += "Bobdi's shotgun is devastating up close.  Ride his oil slicks to rushdown enemies!  Shoot it with Bobert to make a stunning area blast, or shoot it with BBQ to set it on fire, making the oil even faster along with hurting enemies!";
         Debug.Log("You've selected Bobdi.");
     }
     public void SelectBBQ()
     {
         selectedCharacter = "BBQ";
         characterBio.text = characterBioBegin;
-        characterBio.text += "He's a cunning fire elemental who can also cast walls of light. His flames may react violently with other substances...";
+        characterBio.text += "He's a cunning fire elemental who can also cast enhancing walls of light.  Shoot through his wall with Bobert to TRIPLE his damage (stacking of course), or shoot it with Bobdi to make his stones explode upon impact!";
         Debug.Log("You've selected BBQ.");
     }
+
     // Gets which button is currently selected
-    public string getSelected()
+    public string GetSelected()
     {
         return selectedCharacter;
     }
@@ -110,8 +107,6 @@ public class UiManager : MonoBehaviour
     // HP dropping into the negatives
     public void GameOver()
     {
-        // Debug.Log("Game over!");
-        player.GetComponent<Health>().SetDead();
         GameManager.Instance.DestroyEnemies();
         GameManager.Instance.ChangeState(GameState.TitleScreen);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -123,7 +118,7 @@ public class UiManager : MonoBehaviour
         player = newPlayer;
         playerHealth = newPlayer.GetComponent<Health>();
         playerMovement = newPlayer.GetComponent<PlayerMovement>();
-        //new
+
         activeSecondaryShooter = newPlayer.GetComponent<PlayerSecondaryShoot>();
     }
 
@@ -131,11 +126,12 @@ public class UiManager : MonoBehaviour
     {
         healthBar.gameObject.SetActive(status);
         staminaBar.gameObject.SetActive(status);
-        //new
+        waveText.gameObject.SetActive(status);
+
         if (secondaryCooldownImage != null)
+        {
             secondaryCooldownImage.gameObject.SetActive(status);
-        //healthText.gameObject.SetActive(status);
-        //staminaText.gameObject.SetActive(status);
+        }
     }
 
     public void SetMainMenu(bool status)
@@ -153,5 +149,16 @@ public class UiManager : MonoBehaviour
     {
         Animator animator = flash.GetComponent<Animator>();
         animator.Play("Restart Heal");
+    }
+
+    public void WaveOverAnimation()
+    {
+        waveText.gameObject.GetComponent<Animator>().Play("Wave Over");
+    }
+
+    public void SetWaveText(int wave)
+    {
+        waveText.SetText("Wave " + wave);
+        waveText.gameObject.GetComponent<Animator>().Play("Wave");
     }
 }

@@ -124,7 +124,7 @@ public class PlayerShoot : MonoBehaviour
         if (!flamethrower)
         {
             muzzleFlare.Play(true);
-            firingAudio.Play();
+            AudioHelper.PlayRandomPitch(firingAudio);
         }
         else
         {
@@ -134,19 +134,25 @@ public class PlayerShoot : MonoBehaviour
             }
             if (!firingAudio.isPlaying)
             {
-                firingAudio.Play();
+                AudioHelper.PlayRandomPitch(firingAudio);
             }
         }
     }
 
     private void PlayFireAnimation()
     {
-        animator.Play("Shoot");
+        if(animator.gameObject.activeSelf)
+        {
+            animator.Play("Shoot");
+        }
     }
 
     public void PlayIdleAnimation()
     {
-        animator.Play("Idle");
+        if (animator.gameObject.activeSelf)
+        {
+            animator.Play("Idle");
+        }
     }
 
     private void ResetShot()

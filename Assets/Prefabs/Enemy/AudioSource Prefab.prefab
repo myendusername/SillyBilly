@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4945041559451100010}
   - component: {fileID: 8805338915967845789}
+  - component: {fileID: 6437026889381914522}
   m_Layer: 0
   m_Name: AudioSource Prefab
   m_TagString: Untagged
@@ -53,7 +54,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 4
+  MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -89,7 +90,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -129,3 +130,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6437026889381914522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371620760309529053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f574d8b2153a0d4fa15f5de878f680c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Kybernetik.UltEvents::UltEvents.DelayedUltEventHolder
+  _Event:
+    _PersistentCalls:
+    - _Target: {fileID: 0}
+      _MemberName: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null.Destroy
+      _PersistentArguments:
+      - _Type: 13
+        _Int: 0
+        _String: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 1371620760309529053}
+  _Delay: 1
